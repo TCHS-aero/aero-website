@@ -1,0 +1,155 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHeader from "../components/Sections/PageHeader.astro";
+import StaffList from "../components/Sections/StaffList.astro";
+---
+
+<BaseLayout
+  title="About Us - Name"
+  description="Learn about."
+>
+  <PageHeader 
+    title="About Us" 
+    subtitle="Why did we found TCHS Aero?"
+    backgroundImage="/uploads/about/2about-us.png"
+  />
+  
+  <section class="not-prose mt-16">
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="grid gap-12 md:grid-cols-[220px_1fr]">
+        {/* LEFT COLUMN */}
+        <div>
+          <p class="font-sans text-sm font-extrabold tracking-widest text-gray-900">
+            WHAT WE DO
+          </p>
+        </div>
+
+        {/* RIGHT COLUMN */}
+        <div class="space-y-12">
+          <div>
+            <h2 class="font-sans text-3xl font-extrabold tracking-tight text-gray-900">
+              Hands-On Innovation
+            </h2>
+            <p class="font-sans mt-4 max-w-2xl text-lg leading-8 text-gray-800">
+              Our sub teams: Programming, Mechanical/Electrical, and Operations work together to
+              create fully integrated systems. Students work with artificial intelligence, robotics,
+              and engineering design in a competitive and fun environment!
+            </p>
+          </div>
+
+          <div>
+            <h2 class="font-sans text-3xl font-extrabold tracking-tight text-gray-900">
+              Competing at the Collegiate Level
+            </h2>
+            <p class="mt-4 max-w-2xl text-lg leading-8 text-gray-800">
+              We are preparing for the national SUAS competition, where our high school team will face
+              off against university engineering programs from across the country.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="not-prose mt-16">
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="grid gap-12 md:grid-cols-[220px_1fr]">
+        {/* LEFT COLUMN */}
+        <div>
+          <p class="font-sans text-sm font-extrabold tracking-widest text-gray-900">
+            SPEAK TO US
+          </p>
+        </div>
+
+        {/* RIGHT COLUMN */}
+        <div class="space-y-12">
+          <div>
+            <h2 class="font-sans text-3xl font-extrabold tracking-tight text-gray-900">
+              Want to find out more about us?
+            </h2>
+            <p class="mt-4 max-w-2xl text-lg leading-8 text-gray-800">
+              If you’d like to learn more about our mission, our work in AI-powered flight, or opportunities to support the team, we’d be happy to connect.
+              <a href="/contact" class="text-primary-600 font-medium hover:text-primary-700">
+                Contact Us →
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- 
+  <section class="py-16 bg-gray-50">
+    <div class="container">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Meet Our Leadership</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          Our dedicated staff and leadership team serve our congregation with passion and commitment
+        </p>
+      </div>
+      
+       Show limited staff preview 
+      <StaffList showAll={false} limit={3} />
+      
+      <div class="mt-12 text-center">
+        <a 
+          href="/staff" 
+          class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-white bg-primary-600 rounded-md shadow-sm hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+        >
+          Meet All Our Staff
+        </a>
+      </div>
+    </div>
+  </section>
+  
+   Statement of Faith 
+  <section class="py-16">
+    <div class="container">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">What We Believe</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          Our church adheres to these fundamental Christian beliefs
+        </p>
+      </div>
+      
+      <div class="max-w-4xl mx-auto prose prose-lg">
+        <h3>The Bible</h3>
+        <p>
+          We believe the Bible is God's Word, inspired by the Holy Spirit, without error in the original manuscripts, and the final authority for all Christian faith and life.
+        </p>
+        
+        <h3>God</h3>
+        <p>
+          We believe in one God who exists eternally in three persons: Father, Son, and Holy Spirit. Each person is fully God, yet there is one God.
+        </p>
+        
+        <h3>Jesus Christ</h3>
+        <p>
+          We believe Jesus Christ is fully God and fully human. He was born of a virgin, lived a sinless life, died on the cross as the substitute for sinners, rose bodily from the grave, and ascended to heaven where He now serves as our High Priest and Advocate.
+        </p>
+        
+        <h3>Holy Spirit</h3>
+        <p>
+          We believe the Holy Spirit convicts the world of sin, regenerates believers, indwells them, and empowers them for godly living and service.
+        </p>
+        
+        <h3>Salvation</h3>
+        <p>
+          We believe salvation is by grace alone, through faith alone, in Christ alone. Good works are the necessary fruit of true faith but are not the basis of our right standing before God.
+        </p>
+        
+        <h3>The Church</h3>
+        <p>
+          We believe the church is the body of Christ, consisting of all true believers. Its mission is to worship God, build up believers in their faith, and share the gospel with the world.
+        </p>
+        
+        <h3>The Future</h3>
+        <p>
+          We believe in the personal, visible return of Jesus Christ, the resurrection of the dead, the final judgment, and the eternal state of blessing for the righteous and punishment for the unrighteous.
+        </p>
+      </div>
+    </div>
+  </section>
+-->
+</BaseLayout>
