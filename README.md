@@ -1,4 +1,4 @@
-# maucariapacom-church-starter [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
+# maucariapacom-website-starter [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
 
 An open-source starter template for building high-performance, content-driven church websites with Astro. Pure SSG, SEO-ready, built with Tailwind CSS, Markdown content, ready to integrate with any CMS
 
@@ -25,12 +25,8 @@ Demo URL: [https://maucariapacom-church-starter.pages.dev](https://maucariapacom
 ```
 maucariapacom-church-starter/
 ├── public/
-│   ├── uploads/          # Images directories (staff, events, sermons, etc.)
-│   │   ├── staff/        # Staff profile images
-│   │   ├── events/       # Event images
-│   │   ├── sermons/      # Sermon thumbnail images
-│   │   ├── ministries/   # Ministry logo images
-│   │   └── blog/         # Blog post images
+│   ├── uploads/          # Images directories (staff, events, , etc.)
+│   │   ├──
 │   ├── favicon.svg
 │   ├── robots.txt
 │   └── site.webmanifest
@@ -43,9 +39,6 @@ maucariapacom-church-starter/
 │   ├── content/          # Astro Content Collections
 │   │   ├── config.ts     # Collection schemas
 │   │   ├── staff/        # Staff member profiles
-│   │   ├── events/       # Church events
-│   │   ├── sermons/      # Sermon content
-│   │   ├── ministries/   # Ministry descriptions
 │   │   ├── blog/         # Blog posts
 │   │   └── siteInfo/     # Site configuration content
 │   ├── layouts/          # Page layouts
@@ -82,6 +75,10 @@ maucariapacom-church-starter/
    ```
 
 4. Open your browser and navigate to `http://localhost:4321`
+  ```go to command prompt
+      cd tchsaero-site
+      Npm run dev
+```
 
 ## Content Management
 
@@ -97,67 +94,17 @@ All content is stored in Markdown (`.md`) files in the `src/content/` directory.
 ```markdown
 ---
 name: "John Smith"
-title: "Youth Pastor"
+title: "blablabla"
 image: "/uploads/staff/john-smith.webp"
 email: "john@example.com"
 phone: "+1-555-1234"
-bio: "John has been serving in youth ministry for 10 years."
+bio: "."
 order: 3
 draft: false
 ---
 
 Detailed biography and information about John goes here...
-```
 
-#### Creating a New Event
-
-1. Create a new file in `src/content/events/` with a `.md` extension
-2. Add the required frontmatter fields:
-
-```markdown
----
-title: "Youth Summer Camp"
-date: 2025-07-15
-endDate: 2025-07-20
-time: "9:00 AM - 5:00 PM"
-location: "Camp Wilderness"
-image: "/uploads/events/summer-camp.webp"
-summary: "A week-long adventure for teens to grow in faith and have fun!"
-tags: ["youth", "summer", "camp"]
-registrationRequired: true
-registrationLink: "https://example.com/register"
-draft: false
----
-
-## About Summer Camp
-
-Join us for an exciting week of activities, worship, and spiritual growth...
-```
-
-#### Creating a New Sermon
-
-1. Create a new file in `src/content/sermons/` with a `.md` extension
-2. Add the required frontmatter fields:
-
-```markdown
----
-title: "Walking in Faith"
-date: 2025-02-02
-speaker: "Rev. Dr. John Smith"
-series: "Faith Foundations"
-scripture: "Proverbs 3:5-6"
-audioUrl: "https://example.com/sermons/walking-in-faith.mp3"
-videoUrl: "https://www.youtube.com/embed/example789"
-image: "/uploads/sermons/walking-in-faith.webp"
-summary: "Learn how to trust God completely and walk confidently in His plan."
-tags: ["faith", "trust", "guidance"]
-draft: false
----
-
-## Sermon Overview
-
-Content of your sermon goes here...
-```
 
 ### Content Schema
 
@@ -169,13 +116,9 @@ See `src/content/config.ts` for the complete schema definitions for all content 
 - **Homepage** (`/`): Hero section, service times, about preview, recent events/sermons
 - **About Us** (`/about-us`): Mission, values, history, staff preview
 - **Staff** (`/staff`): Complete staff directory with contact information
-- **Ministries** (`/ministries`): All church ministries with detailed pages
-- **Sermons** (`/sermons`): Sermon archive with audio/video support and filtering
-- **Events** (`/events`): Upcoming and past events with registration support
 - **Blog** (`/blog`): Church blog with filtering and search
-- **I'm New** (`/im-new`): First-time visitor information
 - **Contact** (`/contact`): Contact forms, location, staff contacts
-- **Giving** (`/giving`): Online giving information and financial transparency
+- **Sponsor** (`/giving`): Online giving information and financial transparency
 
 ### Special Features
 - **Responsive Design**: Mobile-first approach with proper breakpoints
@@ -206,7 +149,7 @@ This template uses Tailwind CSS for styling:
 
 ### Logo & Branding
 
-The template includes a built-in church SVG icon that's used throughout the site. To customize:
+The template includes a built-in SVG icon that's used throughout the site. To customize:
 
 1. Replace the SVG icon in `src/components/Global/Header.astro` and `src/components/Global/Footer.astro`
 2. Update favicon in `public/favicon.svg`
@@ -216,9 +159,6 @@ The template includes a built-in church SVG icon that's used throughout the site
 
 Images are organized in the `/public/uploads/` directory:
 - `/uploads/staff/` - Staff profile images
-- `/uploads/events/` - Event images
-- `/uploads/sermons/` - Sermon thumbnails
-- `/uploads/ministries/` - Ministry logos
 - `/uploads/blog/` - Blog post images
 
 The template includes fallback handling for missing images and uses external Unsplash images for some sections.
