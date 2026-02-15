@@ -1,0 +1,83 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHeader from "../components/Sections/PageHeader.astro";
+import StaffList from "../components/Sections/StaffList.astro";
+---
+
+<BaseLayout
+  title="About Us - Name"
+  description="Learn about."
+>
+  <PageHeader 
+    title="About Us" 
+    subtitle="Why did we found TCHS Aero?"
+    backgroundImage="/uploads/about/2about-us.png"
+  />
+  
+  <section class="not-prose mt-16">
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="grid gap-12 md:grid-cols-[220px_1fr]">
+        {/* LEFT COLUMN */}
+        <div>
+          <p class="font-sans text-sm font-extrabold tracking-widest text-gray-900">
+            WHAT WE DO
+          </p>
+        </div>
+
+        {/* RIGHT COLUMN */}
+        <div class="space-y-12">
+          <div>
+            <h2 class="font-sans text-3xl font-extrabold tracking-tight text-gray-900">
+              Hands-On Innovation
+            </h2>
+            <p class="font-sans mt-4 max-w-2xl text-lg leading-8 text-gray-800">
+              Our sub teams: Programming, Mechanical/Electrical, and Operations work together to
+              create fully integrated systems. Students work with artificial intelligence, robotics,
+              and engineering design in a competitive and fun environment!
+            </p>
+          </div>
+
+          <div>
+            <h2 class="font-sans text-3xl font-extrabold tracking-tight text-gray-900">
+              Competing at the Collegiate Level
+            </h2>
+            <p class="mt-4 max-w-2xl text-lg leading-8 text-gray-800">
+              We are preparing for the national SUAS competition, where our high school team will face
+              off against university engineering programs from across the country.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="not-prose mt-16">
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="grid gap-12 md:grid-cols-[220px_1fr]">
+        {/* LEFT COLUMN */}
+        <div>
+          <p class="font-sans text-sm font-extrabold tracking-widest text-gray-900">
+            SPEAK TO US
+          </p>
+        </div>
+
+        {/* RIGHT COLUMN */}
+        <div class="py-16 bg-gray-50 pb-20">
+          <div>
+            <h2 class="font-sans text-3xl font-extrabold tracking-tight text-gray-900">
+              Want to find out more about us?
+            </h2>
+            <p class="mt-4 max-w-2xl text-lg leading-8 text-gray-800">
+              If you’d like to learn more about our mission, our work in AI-powered flight, or opportunities to support the team, we’d be happy to connect.
+              <a href="/contact" class="text-primary-600 font-medium hover:text-primary-700">
+                Contact Us →
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+</BaseLayout>
