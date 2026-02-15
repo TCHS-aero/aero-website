@@ -1,11 +1,11 @@
 # maucariapacom-website-starter [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
 
-An open-source starter template for building high-performance, content-driven church websites with Astro. Pure SSG, SEO-ready, built with Tailwind CSS, Markdown content, ready to integrate with any CMS
+An open-source starter template for building high-performance, content-driven websites with Astro. Pure SSG, SEO-ready, built with Tailwind CSS, Markdown content, ready to integrate with any CMS
 
 ## Demo and Screenshot
 ![Home Page](https://imgs.maucariapa.com/uploads/452546054-84337aa6-eea8-4879-9461-d2e7d3665aee.png)
 
-Demo URL: [https://maucariapacom-church-starter.pages.dev](https://maucariapacom-church-starter.pages.dev/)
+Demo URL: [https://maucariapacom-starter.pages.dev](https://maucariapacom-church-starter.pages.dev/)
 
 ## Features
 
@@ -14,16 +14,16 @@ Demo URL: [https://maucariapacom-church-starter.pages.dev](https://maucariapacom
 - **Mobile-First Responsive Design**: Tailwind CSS for beautiful, responsive layouts
 - **SEO Optimized**: Complete meta tags, JSON-LD Schema, and sitemap.xml
 - **CMS-Ready Structure**: Easily integrate with headless CMS solutions
-- **Comprehensive Church Website Sections**: All essential pages for a complete church website
+- **Comprehensive  Website Sections**: All essential pages for a complete website
 - **Accessibility Focus**: WCAG compliant design and markup
 - **Modern UI Components**: Reusable components with hover states and micro-interactions
-- **Integrated Church Icon**: Custom SVG church icon used throughout the site
+- **Integrated Icon**: Custom SVG icon used throughout the site
 - **Image Optimization**: Proper image organization and fallback handling
 
 ## Project Structure
 
 ```
-maucariapacom-church-starter/
+maucariapacom-website-starter/
 ├── public/
 │   ├── uploads/          # Images directories (staff, events, , etc.)
 │   │   ├──
@@ -60,8 +60,8 @@ maucariapacom-church-starter/
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/MauCariApa-com/maucariapacom-church-starter.git
-   cd maucariapacom-church-starter
+   git clone https://github.com/MauCariApa-com/maucariapacom-website-starter.git
+   cd maucariapacom-website-starter
    ```
 
 2. Install dependencies:
@@ -116,7 +116,7 @@ See `src/content/config.ts` for the complete schema definitions for all content 
 - **Homepage** (`/`): Hero section, service times, about preview, recent events/sermons
 - **About Us** (`/about-us`): Mission, values, history, staff preview
 - **Staff** (`/staff`): Complete staff directory with contact information
-- **Blog** (`/blog`): Church blog with filtering and search
+- **Blog** (`/blog`):  blog with filtering and search
 - **Contact** (`/contact`): Contact forms, location, staff contacts
 - **Sponsor** (`/giving`): Online giving information and financial transparency
 
@@ -132,12 +132,12 @@ See `src/content/config.ts` for the complete schema definitions for all content 
 
 ### Site Information
 
-Update your church information in the following files:
+Update your  information in the following files:
 
 - Site metadata in `astro.config.mjs`
 - SEO defaults in `src/layouts/BaseLayout.astro`
 - Contact information in `src/components/Global/Footer.astro`
-- Church details throughout the content files
+- details throughout the content files
 
 ### Styling
 
