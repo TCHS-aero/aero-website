@@ -2,9 +2,6 @@
 
 An open-source starter template for building high-performance, content-driven websites with Astro. Pure SSG, SEO-ready, built with Tailwind CSS, Markdown content, ready to integrate with any CMS
 
-## Demo and Screenshot
-![Home Page](https://imgs.maucariapa.com/uploads/452546054-84337aa6-eea8-4879-9461-d2e7d3665aee.png)
-
 Demo URL: [https://maucariapacom-starter.pages.dev](https://maucariapacom-church-starter.pages.dev/)
 
 ## Features
