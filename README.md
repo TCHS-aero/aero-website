@@ -238,8 +238,6 @@ on our GitHub repository.
 
 For questions, issues, or contributions, please visit our GitHub repository or contact the development team.
 
-Demo URL: [https://maucariapacom-starter.pages.dev](https://maucariapacom-church-starter.pages.dev/)
-
 ## Donate
 
 Love our work? 
