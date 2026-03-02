@@ -1,69 +1,88 @@
 ---
-import "../assets/styles/global.css";
-import Seo from "../components/UI/Seo.astro";
-import Header from "../components/Global/Header.astro";
-import Footer from "../components/Global/Footer.astro";
+/**
+ * BaseLayout.astro
+ * ─────────────────
+ * The root layout for every page. Handles:
+ *  - <head> with SEO meta tags and font imports
+ *  - Fixed header + main content area + footer
+ *  - Scroll-reveal IntersectionObserver (no library needed)
+ */
+import Header from '../components/Global/Header.astro';
+import Footer from '../components/Global/Footer.astro';
+import '../assets/styles/global.css';
 
-export interface Props {
-  title?: string;
+interface Props {
+  title?:       string;
   description?: string;
-  image?: {
-    url: string;
-    alt: string;
-  };
-  type?: "website" | "article";
-  canonicalUrl?: string;
+  image?:       string;
 }
 
 const {
-  title = "TCHS Aero ",
-  image = {
-    url: "/uploads/home/1home.png",
-    alt: "TCHS Aero",
-  },
-  type = "website",
-  canonicalUrl,
+  title       = 'TCHS Aero — Temple City High School Aeronautics',
+  description = 'TCHS Aero is Temple City High School\'s competitive aeronautics and drone engineering club. We build, fly, and compete.',
+  image       = '/uploads/home/1home.png',
 } = Astro.props;
----
 
-<!doctype html>
+const siteUrl    = Astro.site ?? 'https://tchsaero.org';
+const canonical  = new URL(Astro.url.pathname, siteUrl).toString();
+const ogImage    = new URL(image, siteUrl).toString();
+---
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="public\drone-svgrepo-com.svg" />
-    <meta name="generator" content={Astro.generator} />
-<!--     
-    <Seo
-      title={title}
-      description={description}
-      image={image}
-      type={type}
-      canonicalUrl={canonicalUrl}
-    /> -->
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    
-    <link rel="sitemap" href="/sitemap-index.xml" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-  </head>
-  <body>
-    <div class="flex flex-col min-h-screen">
-      <Header />
-      
-      <main class="flex-grow">
-        <slot />
-      </main>
-      
-      <Footer />
-    </div>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#650207" />
+
+  <link rel="icon" type="image/png" href="/uploads/aero logo.PNG" />
+  <link rel="canonical" href={canonical} />
+
+  <title>{title}</title>
+  <meta name="description" content={description} />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content={canonical} />
+  <meta property="og:title"       content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image"       content={ogImage} />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image"       content={ogImage} />
+
+  <!-- Google Fonts preconnect (speeds up font load) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <slot name="head" />
+</head>
+
+<body>
+  <Header />
+  <main>
+    <slot />
+  </main>
+  <Footer />
+
+  <!--
+    Scroll Reveal
+    ─────────────
+    Finds every .reveal element and adds .in-view when it enters
+    the viewport, triggering the CSS fade-up transition in global.css.
+    No library needed — IntersectionObserver is built into every browser.
+  -->
+  <script>
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('in-view');
+      }),
+      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
 </html>

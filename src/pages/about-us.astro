@@ -1,83 +1,286 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import PageHeader from "../components/Sections/PageHeader.astro";
-import StaffList from "../components/Sections/StaffList.astro";
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const values = [
+  {
+    title: 'Innovation',
+    desc: 'Every design decision, from frame geometry to flight path logic, is interrogated.',
+  },
+  {
+    title: 'Excellence',
+    desc: 'Our drone maps terrain, detects objects, and completes precision drops under competition conditions.',
+  },
+  {
+    title: 'Community',
+    desc: 'Twenty-seven students, engineer mentors, and parents who show up. TCHS Aero is one of the few places in school where all of that sits in the same room.',
+  },
+  {
+    title: 'Integrity',
+    desc: 'Hardware either flies or it doesn\'t. We hold ourselves accountable to real outcomes.',
+  },
+];
+
+const timeline = [
+  { period: 'The Beginning', desc: 'TCHS Aero was founded in 2024 by a small group of Temple City students who wanted to combine their love of engineering and passion for flight.' },
+  { period: 'Today', desc: 'As word spread, membership grew alongside our ambitions. Now, 2026 is our inaugural year competing at SUAS.' }
+];
 ---
 
 <BaseLayout
-  title="About Us - Name"
-  description="Learn about."
+  title="About Us — TCHS Aero"
+  description="Learn about TCHS Aero's mission, team, and history as Temple City High School's competitive aeronautics club."
+  image="/uploads/about/2about-us.png"
 >
-  <PageHeader 
-    title="About Us" 
-    subtitle="Why did we found TCHS Aero?"
-    backgroundImage="/uploads/about/2about-us.png"
-  />
-  
-  <section class="not-prose mt-16">
-    <div class="mx-auto max-w-6xl px-6">
-      <div class="grid gap-12 md:grid-cols-[220px_1fr]">
-        {/* LEFT COLUMN */}
-        <div>
-          <p class="font-sans text-sm font-extrabold tracking-widest text-gray-900">
-            WHAT WE DO
-          </p>
-        </div>
 
-        {/* RIGHT COLUMN */}
-        <div class="space-y-12">
-          <div>
-            <h2 class="font-sans text-3xl font-extrabold tracking-tight text-gray-900">
-              Hands-On Innovation
-            </h2>
-            <p class="font-sans mt-4 max-w-2xl text-lg leading-8 text-gray-800">
-              Our sub teams: Programming, Mechanical/Electrical, and Operations work together to
-              create fully integrated systems. Students work with artificial intelligence, robotics,
-              and engineering design in a competitive and fun environment!
-            </p>
-          </div>
+  <!-- Page hero -->
+  <section class="page-hero">
+    <img src="/uploads/about/2about-us.png" alt="About TCHS Aero" class="page-hero__img" />
+    <div class="page-hero__overlay"></div>
+    <div class="page-hero__content">
+      <div class="container">
+        <span class="section-label section-label--light">TCHS Aero</span>
+        <h1>About Us</h1>
+      </div>
+    </div>
+    <div class="page-hero__bar"></div>
+  </section>
 
-          <div>
-            <h2 class="font-sans text-3xl font-extrabold tracking-tight text-gray-900">
-              Competing at the Collegiate Level
-            </h2>
-            <p class="mt-4 max-w-2xl text-lg leading-8 text-gray-800">
-              We are preparing for the national SUAS competition, where our high school team will face
-              off against university engineering programs from across the country.
-            </p>
+  <!-- Mission -->
+  <section class="mission">
+    <div class="container mission__grid">
+
+      <div class="reveal">
+        <span class="section-label">Our Mission</span>
+        <h2>
+          Engineering the Future,<br/>
+          <em>One Flight at a Time</em>
+        </h2>
+        <span class="accent-line"></span>
+        <p class="body-text">
+          TCHS Aero builds heavy-lift VTOL drones from the ground up — 
+          designing the frame, wiring the electronics, writing the flight software, 
+          and training the computer vision systems that power autonomous search and rescue missions.
+        </p>
+        <p class="body-text">
+          We compete at Student Unmanned Aerial Systems competition, one of the most demanding collegiate and high school 
+          aeronautics competitions in the world. Our work is organized across three 
+          teams — Mechatronics, Software, and Operations — just like our drone, we're built on speed and precision.
+        </p>
+      </div>
+
+      <!-- Values -->
+      <div class="values bg-cream reveal reveal--delay-1">
+        {values.map(v => (
+          <div class="values__item">
+            <div class="values__line" aria-hidden="true"></div>
+            <div>
+              <h4 class="values__title">{v.title}</h4>
+              <p class="values__desc">{v.desc}</p>
+            </div>
           </div>
-        </div>
+        ))}
       </div>
     </div>
   </section>
 
-  <section class="not-prose mt-16">
-    <div class="mx-auto max-w-6xl px-6">
-      <div class="grid gap-12 md:grid-cols-[220px_1fr]">
-        {/* LEFT COLUMN */}
-        <div>
-          <p class="font-sans text-sm font-extrabold tracking-widest text-gray-900">
-            SPEAK TO US
-          </p>
-        </div>
+  <!-- History timeline -->
+  <section class="timeline bg-cream">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Background</span>
+        <h2>Our History</h2>
+      </div>
 
-        {/* RIGHT COLUMN */}
-        <div class="py-16 bg-gray-50 pb-20">
-          <div>
-            <h2 class="font-sans text-3xl font-extrabold tracking-tight text-gray-900">
-              Want to find out more about us?
-            </h2>
-            <p class="mt-4 max-w-2xl text-lg leading-8 text-gray-800">
-              If you’d like to learn more about our mission, our work in AI-powered flight, or opportunities to support the team, we’d be happy to connect.
-              <a href="/contact" class="text-primary-600 font-medium hover:text-primary-700">
-                Contact Us →
-              </a>
-            </p>
+      <div class="timeline__track">
+        {timeline.map((item, i) => (
+          <div class={`timeline__entry reveal reveal--delay-${(i % 3) + 1}`}>
+            <div class="timeline__marker">
+              <div class="timeline__dot" aria-hidden="true"></div>
+              <div class="timeline__connector" aria-hidden="true"></div>
+            </div>
+            <div class="timeline__body">
+              <span class="timeline__period">{item.period}</span>
+              <p class="timeline__desc">{item.desc}</p>
+            </div>
           </div>
-        </div>
+        ))}
       </div>
     </div>
   </section>
-  
-  
+
+  <!-- CTA -->
+  <section class="about-cta">
+    <div class="container about-cta__inner">
+      <h2 class="reveal">Want to Know More?</h2>
+      <p class="reveal reveal--delay-1">
+        Get in touch — we're always happy to connect with students, families, and supporters.
+      </p>
+      <div class="about-cta__actions reveal reveal--delay-2">
+        <a href="/contact" class="btn btn--ghost">Contact Us</a>
+        <a href="/giving"  class="btn btn--primary">Sponsor Us</a>
+      </div>
+    </div>
+  </section>
+
 </BaseLayout>
+
+<style>
+  /* ── Mission ── */
+  .mission { padding-block: var(--space-20) var(--space-28); }
+
+  .mission__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-16);
+  }
+
+  @media (min-width: 1024px) {
+    .mission__grid {
+      grid-template-columns: 1fr 1fr;
+      align-items: start;
+    }
+  }
+
+  .mission h2 em {
+    font-style: italic;
+    color: var(--color-red);
+  }
+
+  .body-text {
+    font-family: var(--font-sans);
+    color: var(--color-gray);
+    margin-bottom: var(--space-6);
+  }
+
+  /* Values card */
+  .values {
+    padding: var(--space-10) var(--space-12);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  .values__item {
+    display: flex;
+    gap: var(--space-5);
+    align-items: flex-start;
+  }
+
+  .values__line {
+    flex-shrink: 0;
+    width: 1px;
+    align-self: stretch;
+    background: var(--color-red);
+    margin-top: 0.25rem;
+  }
+
+  .values__title {
+    font-family: var(--font-serif);
+    font-size: var(--text-lg);
+    font-weight: 400;
+    margin-bottom: var(--space-1);
+  }
+
+  .values__desc {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    color: var(--color-gray);
+    line-height: 1.75;
+  }
+
+  /* ── Timeline ── */
+  .timeline {
+    padding-block: var(--space-20) var(--space-24);
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: var(--space-14);
+  }
+
+  .timeline__track {
+    max-width: 48rem;
+    margin-inline: auto;
+  }
+
+  .timeline__entry {
+    display: flex;
+    gap: var(--space-6);
+  }
+
+  .timeline__marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .timeline__dot {
+    width: 0.75rem;
+    height: 0.75rem;
+    background: var(--color-red);
+    flex-shrink: 0;
+    margin-top: 0.3rem;
+  }
+
+  .timeline__connector {
+    width: 1px;
+    flex: 1;
+    background: rgba(101, 2, 7, 0.18);
+    margin-top: var(--space-2);
+  }
+
+  .timeline__body {
+    padding-bottom: var(--space-10);
+  }
+
+  .timeline__period {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--color-red);
+    margin-bottom: var(--space-2);
+  }
+
+  .timeline__desc {
+    font-family: var(--font-sans);
+    color: var(--color-gray);
+    line-height: 1.75;
+  }
+
+  /* ── About CTA ── */
+  .about-cta {
+    background: var(--color-charcoal);
+    padding-block: var(--space-16);
+    color: var(--color-white);
+    text-align: center;
+  }
+
+  .about-cta h2 {
+    color: var(--color-white);
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-4);
+  }
+
+  @media (min-width: 768px) { .about-cta h2 { font-size: var(--text-4xl); } }
+
+  .about-cta p {
+    color: rgba(255, 255, 255, 0.6);
+    max-width: 30rem;
+    margin-inline: auto;
+    margin-bottom: var(--space-8);
+  }
+
+  .about-cta__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  @media (min-width: 480px) {
+    .about-cta__actions { flex-direction: row; justify-content: center; }
+  }
+</style>

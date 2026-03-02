@@ -1,0 +1,378 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const stats = [
+  { value: '100%',      label: 'Student-Run'       },
+  { value: '501(c)(3)', label: 'Tax Deductible'     },
+  { value: 'International',  label: 'Competition Level'  },
+  { value: 'STEM',      label: 'Education Focus'    },
+];
+
+const tiers = [
+  {
+    name:      'Aviator',
+    amount:    '$250',
+    highlight: false,
+    perks: [
+      'Name listed on our website',
+      'Shoutout on social media',
+      'Certificate of appreciation',
+    ],
+  },
+  {
+    name:      'Pilot',
+    amount:    '$500',
+    highlight: false,
+    perks: [
+      'Everything in Aviator',
+      'Logo on team equipment',
+      'Invitation to competitions',
+      'Annual impact report',
+    ],
+  },
+  {
+    name:      'Commander',
+    amount:    '$1,000+',
+    highlight: false,
+    perks: [
+      'Everything in Pilot',
+      'Logo on team banner',
+      'Featured in all materials',
+      'Direct team liaison',
+      'Custom partnership options',
+    ],
+  },
+];
+
+const sponsors = [
+  { src: '/uploads/sponsor/tcsf-logo-transparent.png', alt: 'Temple City Schools Foundation' },
+  { src: '/uploads/sponsor/frsky.png',                 alt: 'FrSky' },
+  { src: '/uploads/sponsor/hitec.png',                 alt: 'Hitec' },
+];
+---
+
+<BaseLayout
+  title="Sponsor TCHS Aero — Support Student Aviation"
+  description="Partner with TCHS Aero and invest in the next generation of aerospace engineers at Temple City High School."
+  image="/uploads/sponsor/5sponsor.png"
+>
+
+  <section class="page-hero giving-hero">
+    <img src="/uploads/sponsor/5sponsor.png" alt="" class="page-hero__img" />
+    <div class="giving-hero__overlay"></div>
+    <div class="page-hero__content">
+      <div class="container">
+        <span class="section-label section-label--light">Partnership</span>
+        <h1>Sponsor the Team</h1>
+      </div>
+    </div>
+    <div class="page-hero__bar giving-hero__bar"></div>
+  </section>
+
+  <!-- Why sponsor -->
+  <section class="why-sponsor">
+    <div class="container why-sponsor__grid">
+
+      <div class="reveal">
+        <span class="section-label">Why Partner With Us</span>
+        <h2>
+          Invest in the<br/>
+          <em>Next Generation</em>
+        </h2>
+        <span class="accent-line"></span>
+        <p class="body-text">
+          Sponsoring TCHS Aero is more than supporting a school club — it's investing in students
+          who will go on to work in aerospace, engineering, and technology. Your contribution
+          directly funds the equipment, competitions, and travel that make our program possible.
+        </p>
+        <p class="body-text">
+          All donations are tax-deductible through the Temple City Unified School District, a
+          501(c)(3) non-profit organization.
+        </p>
+      </div>
+
+      <div class="stats-grid reveal reveal--delay-1">
+        {stats.map(s => (
+          <div class="stat-box">
+            <span class="stat-box__value">{s.value}</span>
+            <span class="stat-box__label">{s.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Tiers -->
+  <section class="tiers-section bg-cream">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Sponsorship Tiers</span>
+        <h2>Choose Your Level</h2>
+      </div>
+
+      <div class="tiers-grid">
+        {tiers.map((tier, i) => (
+          <div class={`tier-card ${tier.highlight ? 'tier-card--featured' : ''} reveal reveal--delay-${i + 1}`}>
+            <div class="tier-card__name">{tier.name}</div>
+            <div class="tier-card__amount">{tier.amount}</div>
+            <span class="accent-line"></span>
+            <ul class="tier-card__perks">
+              {tier.perks.map(perk => (
+                <li class="tier-card__perk">
+                  <span class="tier-card__check" aria-hidden="true">✓</span>
+                  {perk}
+                </li>
+              ))}
+            </ul>
+            <a
+              href="/contact"
+              class={`btn ${tier.highlight ? 'btn--primary' : 'btn--outline'} tier-card__cta`}
+            >
+              Get Started
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Current sponsors -->
+  <section class="current-sponsors">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Our Partners</span>
+        <h2>Current Sponsors</h2>
+      </div>
+      <div class="sponsors-logos">
+        {sponsors.map((s, i) => (
+          <div class={`reveal reveal--delay-${i + 1}`}>
+            <img src={s.src} alt={s.alt} class="sponsor-logo" loading="lazy" />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="giving-cta">
+    <div class="container giving-cta__inner">
+      <h2 class="reveal">Ready to Partner With Us?</h2>
+      <p class="reveal reveal--delay-1">
+        Reach out to discuss sponsorship opportunities, custom packages, or to make a direct donation.
+      </p>
+      <a href="/contact" class="btn btn--ghost reveal reveal--delay-2">Contact Us Today</a>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  /* ── Hero variant ── */
+  .giving-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(101, 2, 7, 0.8);
+  }
+  .giving-hero__bar {
+    background: rgba(255, 255, 255, 0.25) !important;
+  }
+
+  /* ── Why sponsor ── */
+  .why-sponsor { padding-block: var(--space-20) var(--space-28); }
+
+  .why-sponsor__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-16);
+    align-items: center;
+  }
+
+  @media (min-width: 1024px) {
+    .why-sponsor__grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  .why-sponsor h2 em { font-style: italic; color: var(--color-red); }
+
+  .body-text {
+    font-family: var(--font-sans);
+    color: var(--color-gray);
+    margin-bottom: var(--space-6);
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+  }
+
+  .stat-box {
+    background: var(--color-cream);
+    padding: var(--space-8);
+    text-align: center;
+  }
+
+  .stat-box__value {
+    display: block;
+    font-family: var(--font-serif);
+    font-size: var(--text-3xl);
+    color: var(--color-red);
+    margin-bottom: var(--space-2);
+  }
+
+  .stat-box__label {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--color-gray);
+  }
+
+  /* ── Tiers ── */
+  .tiers-section { padding-block: var(--space-20) var(--space-24); }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: var(--space-14);
+  }
+
+  .tiers-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    max-width: 62rem;
+    margin-inline: auto;
+  }
+
+  @media (min-width: 768px) {
+    .tiers-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .tier-card {
+    background: var(--color-white);
+    border-top: 4px solid var(--color-gray-light);
+    padding: var(--space-8) var(--space-10);
+    display: flex;
+    flex-direction: column;
+    transition: transform var(--duration-slow) var(--ease-expo), box-shadow var(--duration-slow) ease;
+  }
+
+  .tier-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.1);
+  }
+
+  .tier-card--featured {
+    border-top-color: var(--color-red);
+    transform: scale(1.03);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    z-index: 1;
+    position: relative;
+  }
+
+  .tier-card--featured:hover {
+    transform: scale(1.03) translateY(-4px);
+  }
+
+  .tier-card__badge {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    background: var(--color-red);
+    color: var(--color-white);
+    padding: 0.25rem 0.75rem;
+    align-self: flex-start;
+    margin-bottom: var(--space-4);
+  }
+
+  .tier-card__name {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--color-red);
+    margin-bottom: var(--space-2);
+  }
+
+  .tier-card__amount {
+    font-family: var(--font-serif);
+    font-size: var(--text-4xl);
+    font-weight: 300;
+    color: var(--color-charcoal);
+  }
+
+  .tier-card__perks {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-bottom: var(--space-8);
+  }
+
+  .tier-card__perk {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    color: var(--color-gray);
+  }
+
+  .tier-card__check {
+    color: var(--color-red);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    margin-top: 0.2rem;
+    flex-shrink: 0;
+  }
+
+  .tier-card__cta { width: 100%; text-align: center; }
+
+  /* ── Current sponsors ── */
+  .current-sponsors {
+    padding-block: var(--space-16) var(--space-20);
+  }
+
+  .sponsors-logos {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-10);
+    margin-top: var(--space-16);
+    margin-bottom: var(--space-12);
+  }
+
+  .sponsor-logo {
+    height: 8rem;
+    width: auto;
+    max-width: 14rem;
+    object-fit: contain;
+    filter: grayscale(0);
+    opacity: 1;
+    transition: filter var(--duration-slow) ease, opacity var(--duration-slow) ease;
+  }
+
+  /* ── Giving CTA ── */
+  .giving-cta {
+    background: var(--color-charcoal);
+    padding-block: var(--space-16);
+    text-align: center;
+    color: var(--color-white);
+  }
+
+  .giving-cta h2 {
+    color: var(--color-white);
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-4);
+  }
+
+  @media (min-width: 768px) { .giving-cta h2 { font-size: var(--text-4xl); } }
+
+  .giving-cta p {
+    color: rgba(255, 255, 255, 0.6);
+    max-width: 30rem;
+    margin-inline: auto;
+    margin-bottom: var(--space-8);
+  }
+</style>
