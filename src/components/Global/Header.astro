@@ -30,6 +30,8 @@ const currentPath = Astro.url.pathname;
           src="/uploads/aero logo.svg"
           alt="TCHS Aero logo"
           class="logo__img"
+          width="80"
+          height="32"
           onerror="this.style.display='none'"
         />
       </a>
@@ -60,7 +62,7 @@ const currentPath = Astro.url.pathname;
       <button
         id="mobile-toggle"
         class="mobile-toggle"
-        aria-label="Toggle navigation"
+        aria-label="Open navigation menu"
         aria-expanded="false"
         aria-controls="mobile-nav"
       >
@@ -90,7 +92,7 @@ const currentPath = Astro.url.pathname;
             );
           })}
         </ul>
-        <a href="/giving" class="btn btn--ghost mobile-nav__cta">Support Us</a>
+        <a href="/sponsor" class="btn btn--ghost mobile-nav__cta">Support Us</a>
       </div>
     </nav>
   </div>
@@ -305,6 +307,7 @@ const currentPath = Astro.url.pathname;
     isOpen = value;
     nav.classList.toggle('is-open', isOpen);
     toggle.setAttribute('aria-expanded', String(isOpen));
+    toggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
   }
 
   toggle.addEventListener('click', e => { e.stopPropagation(); setOpen(!isOpen); });

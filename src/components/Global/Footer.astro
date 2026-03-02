@@ -164,7 +164,7 @@ const year = new Date().getFullYear();
   .footer-tagline {
     font-family: var(--font-sans);
     font-size: var(--text-sm);
-    color: rgba(255, 255, 255, 0.55);
+    color: rgba(255, 255, 255, 0.72); /* was 0.55 — bumped for WCAG AA */
     line-height: 1.7;
     max-width: 22rem;
     margin-bottom: var(--space-6);
@@ -176,7 +176,7 @@ const year = new Date().getFullYear();
     flex-direction: column;
     gap: 0.25rem;
     font-size: var(--text-sm);
-    color: rgba(255, 255, 255, 0.45);
+    color: rgba(255, 255, 255, 0.65); /* was 0.45 — bumped for WCAG AA */
     margin-bottom: var(--space-8);
   }
 
@@ -219,20 +219,14 @@ const year = new Date().getFullYear();
     font-size: 0.65rem;
     letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.35);
+    color: rgba(255, 255, 255, 0.55); /* was 0.35 */
     margin-bottom: var(--space-5);
-  }
-
-  .footer-nav-group__list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
   }
 
   .footer-nav-group__link {
     font-family: var(--font-sans);
     font-size: var(--text-sm);
-    color: rgba(255, 255, 255, 0.55);
+    color: rgba(255, 255, 255, 0.72); /* was 0.55 */
     transition: color var(--duration-fast) ease;
   }
   .footer-nav-group__link:hover {
@@ -262,7 +256,7 @@ const year = new Date().getFullYear();
   .footer-bar__copy {
     font-family: var(--font-mono);
     font-size: 0.65rem;
-    color: rgba(255, 255, 255, 0.25);
+    color: rgba(255, 255, 255, 0.50); /* was 0.25 */
   }
 
   .footer-bar__links {

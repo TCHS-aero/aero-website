@@ -39,7 +39,7 @@ function fmt(date: Date) {
 
   <!-- Page hero -->
   <section class="page-hero">
-    <img src="/uploads/news/3news.png" alt="" class="page-hero__img" />
+    <picture><source srcset="/uploads/news/3news.webp" type="image/webp" /><img src="/uploads/news/3news.png" alt="" class="page-hero__img" role="presentation" width="1536" height="1024" fetchpriority="high" decoding="sync" /></picture>
     <div class="page-hero__overlay"></div>
     <div class="page-hero__content">
       <div class="container">
@@ -57,7 +57,7 @@ function fmt(date: Date) {
       {featured && (
         <article class="featured reveal">
           <div class="featured__img-wrap">
-            <img src={featured.data.image} alt={featured.data.title} class="featured__img" loading="eager" />
+            <img src={featured.data.image} alt={featured.data.title} class="featured__img" loading="eager" fetchpriority="high" width="800" height="600" decoding="async" />
           </div>
           <div class="featured__body bg-cream">
             <div class="featured__meta">
@@ -84,7 +84,7 @@ function fmt(date: Date) {
             <article class={`article-card reveal reveal--delay-${(i % 3) + 1}`}>
               {article.data.image && (
                 <div class="article-card__img-wrap">
-                  <img src={article.data.image} alt={article.data.title} class="article-card__img" loading="lazy" />
+                  <img src={article.data.image} alt={article.data.title} class="article-card__img" loading="lazy" decoding="async" width="800" height="450" />
                 </div>
               )}
               <div class="article-card__body">

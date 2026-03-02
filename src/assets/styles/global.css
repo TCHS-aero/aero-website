@@ -11,8 +11,7 @@
      7. Scroll Reveal   — .reveal animation system
    ================================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
-
+/* Fonts are loaded via <link> tags in BaseLayout.astro for better performance */
 
 /* ────────────────────────────────────────────────────────────────
    1. DESIGN TOKENS
@@ -250,7 +249,7 @@ p { line-height: 1.75; }
   margin-bottom: var(--space-4);
 }
 .section-label--light {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.82); /* bumped from 0.6 → 0.82 to pass WCAG AA on red bg */
 }
 
 /* Short red line used below headings as a visual accent */

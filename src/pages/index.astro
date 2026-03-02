@@ -38,21 +38,24 @@ const programs = [
 
 const articles = [
   {
-    img:     '/uploads/news/news 1.png',
+    img:     '/uploads/news/news 1.webp',
+    imgFallback: '/uploads/news/articles/news 1.png',
     label:   'Competition',
     date:    '2024',
     title:   'TCHS Aero Advances to Regional Finals',
     excerpt: 'The team put in an exceptional performance at the district qualifier, securing a spot at the regional championship.',
   },
   {
-    img:     '/uploads/news/news 2.png',
+    img:     '/uploads/news/news 2.webp',
+    imgFallback: '/uploads/news/news 2.png',
     label:   'Program Update',
     date:    '2024',
     title:   'New FPV Racing Division Launches',
     excerpt: 'We\'re excited to introduce our new FPV racing division for members interested in high-speed drone piloting.',
   },
   {
-    img:     '/uploads/news/news 3.png',
+    img:     '/uploads/news/news 3.webp',
+    imgFallback: '/uploads/news/news 3.png',
     label:   'Sponsors',
     date:    '2024',
     title:   'Welcoming Our New Partners',
@@ -61,9 +64,9 @@ const articles = [
 ];
 
 const sponsors = [
-  { src: '/uploads/sponsor/tcsf-logo-transparent.png', alt: 'Temple City Schools Foundation' },
-  { src: '/uploads/sponsor/frsky.png',                 alt: 'FrSky' },
-  { src: '/uploads/sponsor/hitec.png',                 alt: 'Hitec' },
+  { src: '/uploads/sponsor/tcsf-logo-transparent.webp', fallback: '/uploads/sponsor/tcsf-logo-transparent.png', alt: 'Temple City Schools Foundation' },
+  { src: '/uploads/sponsor/frsky.webp',                 fallback: '/uploads/sponsor/frsky.png',                 alt: 'FrSky' },
+  { src: '/uploads/sponsor/hitec.webp',                 fallback: '/uploads/sponsor/hitec.png',                 alt: 'Hitec' },
 ];
 ---
 
@@ -72,7 +75,18 @@ const sponsors = [
   <!-- ═══ HERO ═══════════════════════════════════════════════════ -->
   <section class="hero">
     <div class="hero__bg">
-      <img src="/uploads/home/1home.png" alt="TCHS Aero drone in flight" class="hero__photo" />
+      <picture>
+        <source srcset="/uploads/home/1home.webp" type="image/webp" />
+        <img
+          src="/uploads/home/1home.png"
+          alt="TCHS Aero drone in flight"
+          class="hero__photo"
+          width="1536"
+          height="1024"
+          fetchpriority="high"
+          decoding="sync"
+        />
+      </picture>
       <div class="hero__gradient"></div>
       <div class="hero__grid" aria-hidden="true"></div>
     </div>
@@ -91,7 +105,7 @@ const sponsors = [
         </p>
         <div class="hero__actions reveal reveal--delay-3">
           <a href="/about-us" class="btn btn--primary">Discover Our Story</a>
-          <a href="/giving"   class="btn btn--ghost">Support the Club</a>
+          <a href="/sponsor"   class="btn btn--ghost">Support the Club</a>
         </div>
       </div>
     </div>
@@ -116,11 +130,18 @@ const sponsors = [
     <div class="container about-preview__grid">
 
       <div class="about-preview__img-wrap reveal">
-        <img
-          src="/uploads/home/our story photo.jpeg"
-          alt="TCHS Aero team members"
-          class="about-preview__img"
-        />
+        <picture>
+          <source srcset="/uploads/home/our story photo.webp" type="image/webp" />
+          <img
+            src="/uploads/home/our story photo.jpeg"
+            alt="TCHS Aero team members"
+            class="about-preview__img"
+            width="1200"
+            height="900"
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
         <div class="about-preview__corner-h" aria-hidden="true"></div>
         <div class="about-preview__corner-v" aria-hidden="true"></div>
         <div class="about-preview__badge" aria-hidden="true">
@@ -181,12 +202,15 @@ const sponsors = [
       <div class="sponsors__logos">
         {sponsors.map(s => (
           <div class="reveal">
-            <img src={s.src} alt={s.alt} class="sponsor-logo" loading="lazy" />
+            <picture>
+              <source srcset={s.src} type="image/webp" />
+              <img src={s.fallback} alt={s.alt} class="sponsor-logo" loading="lazy" decoding="async" width="224" height="128" />
+            </picture>
           </div>
         ))}
       </div>
       <div class="sponsors__cta reveal">
-        <a href="/giving" class="btn btn--outline">Become a Sponsor</a>
+        <a href="/sponsor" class="btn btn--outline">Become a Sponsor</a>
       </div>
     </div>
   </section>
@@ -208,7 +232,7 @@ const sponsors = [
       </p>
       <div class="cta-banner__actions reveal reveal--delay-3">
         <a href="/contact" class="btn btn--ghost">Contact Us</a>
-        <a href="/giving"  class="btn btn--white">Sponsor the Team</a>
+        <a href="/sponsor"  class="btn btn--white">Sponsor the Team</a>
       </div>
     </div>
   </section>
@@ -286,7 +310,7 @@ const sponsors = [
 
   .hero__sub {
     font-family: var(--font-sans);
-    color: rgba(255, 255, 255, 0.75);
+    color: rgba(255, 255, 255, 0.88); /* was 0.75 — bumped for WCAG AA */
     font-size: var(--text-base);
     max-width: 28rem;
     margin-bottom: var(--space-10);
