@@ -8,7 +8,9 @@
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const stats = [
+interface Stat { value: string; label: string; }
+
+const stats: Stat[] = [
 /*
   { value: '2', label: 'Years of Flight'   },
   { value: '27', label: 'Club Members'      },

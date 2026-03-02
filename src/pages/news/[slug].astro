@@ -7,17 +7,20 @@
  * new .md file in that folder and this route handles it automatically.
  */
 import { getCollection, getEntry } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
+type Article = CollectionEntry<'news'>; // entry type from content config
+
 export async function getStaticPaths() {
-  const articles = await getCollection('news', ({ data }) => !data.draft);
-  return articles.map((article) => ({
+  const articles: Article[] = (await getCollection('news', (entry: Article) => !entry.data.draft)) as Article[];
+  return articles.map((article: Article) => ({
     params: { slug: article.slug },
     props: { article },
   }));
 }
 
-const { article } = Astro.props;
+const { article } = Astro.props as { article: Article };
 const { Content } = await article.render();
 
 function fmt(date: Date) {
