@@ -1,215 +1,241 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import PageHeader from "../components/Sections/PageHeader.astro";
-import Button from "../components/UI/Button.astro";
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout
-  title="Contact Us - TCHS Aero"
-  description="Get in touch with us. Find our contact information and location."
+  title="Contact — TCHS Aero"
+  description="Get in touch with TCHS Aero. We'd love to hear from students, families, sponsors, and community members."
+  image="/uploads/contact/4contact.png"
 >
-  <PageHeader 
-    title="Contact Us" 
-    subtitle="We'd love to hear from you"
-    backgroundImage="/uploads/contact/4contact.png"
-  />
-  <section class="not-prose mt-16">
-    <div class="mx-auto max-w-6xl px-6">
-      <div class="grid gap-12 md:grid-cols-[220px_1fr]">
-        {/* LEFT COLUMN */}
-        <div>
-          <p class="text-sm font-extrabold tracking-widest text-gray-900">
-            CONTACT US
-          </p>
-        </div>
 
-        {/* RIGHT COLUMN */}
-        <div class="space-y-12">
-          <div>
-            <h2 class="font-sans text-3xl font-extrabold tracking-tight text-gray-900">
-Getting in touch with us            </h2>
-            <p class="font-sans mt-4 max-w-2xl text-lg leading-8 text-gray-800">
-Have questions about joining the team, sponsoring our mission, or learning more about our projects? We’d love to hear from you.             </p>
+  <section class="page-hero">
+    <img src="/uploads/contact/4contact.png" alt="" class="page-hero__img" />
+    <div class="page-hero__overlay"></div>
+    <div class="page-hero__content">
+      <div class="container">
+        <span class="section-label section-label--light">Reach Out</span>
+        <h1>Get in Touch</h1>
+      </div>
+    </div>
+    <div class="page-hero__bar"></div>
+  </section>
 
+  <section class="contact-section">
+    <div class="container contact-grid">
 
-            <h2 class="font-sans text-3xl font-bold tracking-tight text-gray-900">
-              Location:
-            </h2>
-            <p class="font-sans mt-4 max-w-2xl text-lg leading-8 text-gray-800">
-9501 Lemon Ave, Temple City, CA 91780            </p>
-<h2 class="font-sans text-3xl font-bold tracking-tight text-gray-900">
-              Sponsorship & Support: 
-            </h2>
-            <p class="font-sans mt-4 max-w-2xl text-lg leading-8 text-gray-800">
-               tchsaero@tcusd.net
-          </p>
-          <h2 class="font-sans text-3xl font-bold tracking-tight text-gray-900">
-                        Instagram Updates:
-            </h2>
-            <p class="font-sans mt-4 max-w-2xl text-lg leading-8 text-gray-800">
-                @tchs.aero
-           </p>
+      <!-- Info column -->
+      <div class="contact-info reveal">
+        <span class="section-label">Contact</span>
+        <h2>
+          We'd love to<br/>
+          hear from you.
+        </h2>
+        <span class="accent-line"></span>
 
+        <div class="info-items">
+          <div class="info-item">
+            <span class="info-item__label">Email</span>
+            <a href="mailto:tchsaero@tcusd.net" class="info-item__value">tchsaero@tcusd.net</a>
+          </div>
+          <div class="info-item">
+            <span class="info-item__label">School</span>
+            <address class="info-item__value info-item__value--address">
+              Temple City High School<br/>
+              9501 Lemon Ave<br/>
+              Temple City, CA 91780
+            </address>
+          </div>
+          <div class="info-item">
+            <span class="info-item__label">Social</span>
+            <a
+              href="https://www.instagram.com/tchs.aero/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="info-item__social"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+              @tchs.aero on Instagram
+            </a>
           </div>
         </div>
       </div>
-    </div>
-  </section>
 
-        
-  
-  <!-- Map Section -->
-  <section class="py-16 bg-gray-50">
-    <div class="container">
-      <div class="text-center mb-12">
-        <h2 class="font-sans text-3xl md:text-4xl font-bold mb-4">Location & Directions</h2>
-        
-      </div>
-      
-      <div class="flex justify-center">
-        <div class="w-full max-w-4xl h-[400px] rounded-xl overflow-hidden shadow-md">
-          <iframe
-            class="w-full h-full border-0"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3303.05384708938!2d-118.06814462448038!3d34.11937117313184!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2dbaa1e9b37bf%3A0x91927c85cd304846!2sTemple%20City%20High%20School!5e0!3m2!1sen!2sus!4v1769902433850!5m2!1sen!2sus"
-            loading="lazy"
-            allowfullscreen
-            referrerpolicy="no-referrer-when-downgrade">
-          </iframe>
-        </div>
-      </div>
+      <!-- Form column -->
+      <div class="contact-form-wrap reveal reveal--delay-1">
+        <div class="contact-form-box">
+          <h3>Send a Message</h3>
 
-      <!-- </div>
-        <div>
-          <div class="bg-white p-8 rounded-lg shadow-md">
-            <h3 class="font-sans font-bold mb-4">Getting Here</h3>
-            
-            <div class="space-y-6">
-              <div>
-                <h4 class="font-sans font-bold mb-2">By Car</h4>
-                <p class="font-sans text-gray-700">
-                  We have a large parking lot with plenty of free parking spaces, including accessible parking near the main entrance.
-                </p>
-              </div>-->
-              
-            <div class="flex justify-center mt-6">
-              <a
-                href="https://www.google.com/maps/dir/?api=1&destination=Temple+City+High+School"
-                target="_blank"
-                class="inline-flex items-center rounded-lg bg-blue-600 px-6 py-3 text-white font-medium hover:bg-blue-700 transition"
-              >
-                Get Directions
-              </a>
+          <!--
+            Form note: the mailto: action works without a backend.
+            For production, replace with Formspree, Netlify Forms, etc.
+            See: https://formspree.io or https://docs.netlify.com/forms/setup/
+          -->
+          <form class="contact-form" action="mailto:tchsaero@tcusd.net" method="post" enctype="text/plain">
+            <div class="form-row">
+              <div class="form-field">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" id="name" name="name" required placeholder="Your name" class="form-input" />
+              </div>
+              <div class="form-field">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" name="email" required placeholder="your@email.com" class="form-input" />
+              </div>
             </div>
 
-            <!-- </div>
-          </div>
-        </div>
-      </div> -->
-    </div>
-  </section>
-  
-  <!--  Contact 
-  <section id="prayer" class="py-16">
-    <div class="container">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold mb-4">Ministry Contacts</h2>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-          Need to reach a specific ministry or staff member? Here's who to contact
-        </p>
-      </div>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
-        <div class="bg-white p-6 rounded-lg shadow-sm">
-          <h3 class="text-xl font-bold mb-2">Pastoral Care</h3>
-          <p class="text-gray-700 mb-4">
-            For spiritual counseling, hospital visits, or prayer requests
-          </p>
-          <div class="flex items-center text-gray-700">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
-            <a href="mailto:pastor@churchname.org" class="text-primary-600 hover:text-primary-700">
-              pastor@churchname.org
-            </a>
-          </div>
-        </div>
-        
-        <div class="bg-white p-6 rounded-lg shadow-sm">
-          <h3 class="text-xl font-bold mb-2">Children's Ministry</h3>
-          <p class="text-gray-700 mb-4">
-            For questions about programs for children from birth through 5th grade
-          </p>
-          <div class="flex items-center text-gray-700">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
-            <a href="mailto:children@churchname.org" class="text-primary-600 hover:text-primary-700">
-              children@churchname.org
-            </a>
-          </div>
-        </div>
-        
-        <div class="bg-white p-6 rounded-lg shadow-sm">
-          <h3 class="text-xl font-bold mb-2">Youth Ministry</h3>
-          <p class="text-gray-700 mb-4">
-            For questions about programs for students in 6th-12th grade
-          </p>
-          <div class="flex items-center text-gray-700">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
-            <a href="mailto:youth@churchname.org" class="text-primary-600 hover:text-primary-700">
-              youth@churchname.org
-            </a>
-          </div>
-        </div>
-        
-        <div class="bg-white p-6 rounded-lg shadow-sm">
-          <h3 class="text-xl font-bold mb-2">Worship Ministry</h3>
-          <p class="text-gray-700 mb-4">
-            For information about our music and creative arts ministries
-          </p>
-          <div class="flex items-center text-gray-700">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
-            <a href="mailto:worship@churchname.org" class="text-primary-600 hover:text-primary-700">
-              worship@churchname.org
-            </a>
-          </div>
-        </div>
-        
-        <div class="bg-white p-6 rounded-lg shadow-sm">
-          <h3 class="text-xl font-bold mb-2">Outreach & Missions</h3>
-          <p class="text-gray-700 mb-4">
-            For information about our local and global mission initiatives
-          </p>
-          <div class="flex items-center text-gray-700">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
-            <a href="mailto:outreach@churchname.org" class="text-primary-600 hover:text-primary-700">
-              outreach@churchname.org
-            </a>
-          </div>
-        </div>
-        
-        <div class="bg-white p-6 rounded-lg shadow-sm">
-          <h3 class="text-xl font-bold mb-2">Admin & Facilities</h3>
-          <p class="text-gray-700 mb-4">
-            For building use, scheduling, and administrative questions
-          </p>
-          <div class="flex items-center text-gray-700">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
-            <a href="mailto:admin@churchname.org" class="text-primary-600 hover:text-primary-700">
-              admin@churchname.org
-            </a>
-          </div>
+            <div class="form-field">
+              <label for="subject" class="form-label">Topic</label>
+              <select id="subject" name="subject" class="form-input form-select">
+                <option value="">Select a topic</option>
+                <option value="general">General Inquiry</option>
+                <option value="membership">Club Membership</option>
+                <option value="sponsorship">Sponsorship</option>
+                <option value="media">Media / Press</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label for="message" class="form-label">Message</label>
+              <textarea id="message" name="message" rows="5" required placeholder="Tell us what's on your mind…" class="form-input form-textarea"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn--primary">Send Message</button>
+          </form>
         </div>
       </div>
+
     </div>
   </section>
--->
+
 </BaseLayout>
+
+<style>
+  .contact-section { padding-block: var(--space-20) var(--space-28); }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-12);
+  }
+
+  @media (min-width: 1024px) {
+    .contact-grid {
+      grid-template-columns: 2fr 3fr;
+      gap: var(--space-20);
+    }
+  }
+
+  /* ── Info column ── */
+  .contact-info h2 { margin-bottom: var(--space-2); }
+  .contact-info h2 em { font-style: italic; color: var(--color-red); }
+
+  .info-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  .info-item__label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--color-red);
+    margin-bottom: var(--space-2);
+  }
+
+  .info-item__value {
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    color: var(--color-charcoal);
+    transition: color var(--duration-fast) ease;
+  }
+
+  .info-item__value--address {
+    font-style: normal;
+    color: var(--color-gray);
+    font-size: var(--text-sm);
+    line-height: 1.75;
+  }
+
+  a.info-item__value:hover { color: var(--color-red); }
+
+  .info-item__social {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    color: var(--color-gray);
+    transition: color var(--duration-fast) ease;
+  }
+  .info-item__social:hover { color: var(--color-red); }
+
+  /* ── Form ── */
+  .contact-form-box {
+    background: var(--color-cream-light);
+    padding: var(--space-8) var(--space-8) var(--space-10);
+  }
+
+  @media (min-width: 768px) {
+    .contact-form-box { padding: var(--space-10) var(--space-12); }
+  }
+
+  .contact-form-box h3 {
+    font-size: var(--text-2xl);
+    font-weight: 400;
+    margin-bottom: var(--space-8);
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 480px) {
+    .form-row { grid-template-columns: 1fr 1fr; }
+  }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .form-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--color-red);
+  }
+
+  .form-input {
+    background: var(--color-white);
+    border: 1px solid var(--color-cream-dark);
+    padding: 0.75rem 1rem;
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    color: var(--color-charcoal);
+    width: 100%;
+    transition: border-color var(--duration-fast) ease;
+    appearance: none;
+  }
+
+  .form-input::placeholder { color: var(--color-gray-light); }
+  .form-input:focus { outline: none; border-color: var(--color-red); }
+
+  .form-textarea { resize: none; }
+
+  .form-select { cursor: pointer; }
+</style>

@@ -1,21 +1,331 @@
 ---
-import Navigation from "./Navigation.astro";
+/**
+ * Header.astro
+ * ─────────────
+ * Fixed navigation bar with:
+ *  - Logo + wordmark
+ *  - Desktop nav links (with active-state underline)
+ *  - Mobile hamburger menu (animated → X, slide-open drawer)
+ *  - JS for toggle / outside-click / Escape key / resize close
+ *
+ * To add a nav item: edit the `navItems` array below.
+ */
+const navItems = [
+  { text: 'Home',    href: '/' },
+  { text: 'About',   href: '/about-us' },
+  { text: 'News',    href: '/news' },
+  { text: 'Contact', href: '/contact' },
+];
+
+const currentPath = Astro.url.pathname;
 ---
 
-<header class="relative w-full bg-[#650207] text-white">
-  <nav class="flex items-center justify-between px-8 py-6 text-white">
-    <!-- Logo -->
-    <a href="/" class="font-sans text-white text-lg md:text-xl font-medium tracking-wide">
-      TCHS Aero
-    </a>
+<header id="site-header">
+  <div class="header-inner">
+    <div class="container header-row">
 
-    <!-- Links -->
-    <ul class="flex gap-8 text-sm font-medium">
-      <li><a href="/" class="hover:opacity-80">Home</a></li>
-      <li><a href="/about-us" class="hover:opacity-80">About</a></li>
-      <li><a href="/news" class="hover:opacity-80">News</a></li>
-      <li><a href="/contact" class="hover:opacity-80">Contact</a></li>
-      <li><a href="/giving" class="hover:opacity-80">Sponsor</a></li>
-    </ul>
-  </nav>
+      <!-- Logo -->
+      <a href="/" class="logo">
+        <img
+          src="/uploads/aero logo.svg"
+          alt="TCHS Aero logo"
+          class="logo__img"
+          onerror="this.style.display='none'"
+        />
+      </a>
+
+      <!-- Desktop nav -->
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <ul class="desktop-nav__list">
+          {navItems.map(item => {
+            const active = currentPath === item.href ||
+              (item.href !== '/' && currentPath.startsWith(item.href));
+            return (
+              <li>
+                <a
+                  href={item.href}
+                  class={`desktop-nav__link ${active ? 'desktop-nav__link--active' : ''}`}
+                  aria-current={active ? 'page' : undefined}
+                >
+                  {item.text}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+        <a href="/sponsor" class="btn btn--ghost header-cta">Support Us</a>
+      </nav>
+
+      <!-- Mobile toggle -->
+      <button
+        id="mobile-toggle"
+        class="mobile-toggle"
+        aria-label="Toggle navigation"
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+      >
+        <span class="bar bar--top"></span>
+        <span class="bar bar--mid"></span>
+        <span class="bar bar--bot"></span>
+      </button>
+    </div>
+
+    <!-- Mobile nav drawer -->
+    <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation">
+      <div class="container">
+        <ul class="mobile-nav__list">
+          {navItems.map(item => {
+            const active = currentPath === item.href ||
+              (item.href !== '/' && currentPath.startsWith(item.href));
+            return (
+              <li>
+                <a
+                  href={item.href}
+                  class={`mobile-nav__link ${active ? 'mobile-nav__link--active' : ''}`}
+                  aria-current={active ? 'page' : undefined}
+                >
+                  {item.text}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+        <a href="/giving" class="btn btn--ghost mobile-nav__cta">Support Us</a>
+      </div>
+    </nav>
+  </div>
 </header>
+
+<!-- Spacer so page content doesn't hide behind the fixed header -->
+<div class="header-spacer" aria-hidden="true"></div>
+
+<style>
+  /* ── Fixed wrapper ── */
+  #site-header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+  }
+
+  .header-inner {
+    background: var(--color-red);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4rem;
+  }
+
+  .header-spacer {
+    height: 4rem;
+  }
+
+  /* ── Logo ── */
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  .logo__img {
+    height: 2rem;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .logo__text {
+    font-family: var(--font-serif);
+    font-size: 1.125rem;
+    font-weight: 300;
+    color: var(--color-white);
+    letter-spacing: 0.02em;
+    transition: opacity var(--duration-fast) ease;
+  }
+  .logo:hover .logo__text { opacity: 0.8; }
+
+  /* ── Desktop nav ── */
+  .desktop-nav {
+    display: none;
+    align-items: center;
+    gap: 1.75rem;
+  }
+
+  @media (min-width: 768px) {
+    .desktop-nav { display: flex; }
+  }
+
+  .desktop-nav__list {
+    display: flex;
+    gap: 1.75rem;
+  }
+
+  .desktop-nav__link {
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.75);
+    position: relative;
+    padding-bottom: 3px;
+    transition: color var(--duration-fast) ease;
+  }
+
+  .desktop-nav__link::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--color-white);
+    transition: width var(--duration-base) ease;
+  }
+
+  .desktop-nav__link:hover,
+  .desktop-nav__link--active {
+    color: var(--color-white);
+  }
+
+  .desktop-nav__link:hover::after,
+  .desktop-nav__link--active::after {
+    width: calc(86%);
+  }
+
+  .header-cta {
+    margin-left: 0.5rem;
+    padding: 0.5rem 1.25rem;
+    font-size: var(--text-xs);
+  }
+
+  /* ── Mobile toggle button ── */
+  .mobile-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 5px;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .mobile-toggle { display: none; }
+  }
+
+  .bar {
+    display: block;
+    height: 1.5px;
+    background: var(--color-white);
+    transform-origin: center;
+    transition:
+      transform  var(--duration-base) ease,
+      opacity    var(--duration-base) ease,
+      width      var(--duration-base) ease;
+  }
+
+  .bar--top { width: 1.5rem; }
+  .bar--mid { width: 1.5rem; }
+  .bar--bot { width: 1rem;   } /* slightly shorter for visual interest */
+
+  /* Animate to X when open */
+  .mobile-toggle[aria-expanded="true"] .bar--top {
+    transform: rotate(45deg) translate(4px, 4px);
+    width: 1.5rem;
+  }
+  .mobile-toggle[aria-expanded="true"] .bar--mid {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  .mobile-toggle[aria-expanded="true"] .bar--bot {
+    transform: rotate(-45deg) translate(5px, -5px);
+    width: 1.5rem;
+    align-self: unset;
+  }
+
+  /* ── Mobile nav drawer ── */
+  .mobile-nav {
+    overflow: hidden;
+    max-height: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0);
+    transition:
+      max-height   0.4s var(--ease-expo),
+      border-color var(--duration-base) ease;
+  }
+
+  .mobile-nav.is-open {
+    max-height: 32rem;
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .mobile-nav__list {
+    padding: 1rem 0;
+  }
+
+  .mobile-nav__link {
+    display: block;
+    padding: 0.75rem 0;
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: color var(--duration-fast) ease;
+  }
+  .mobile-nav__link:hover,
+  .mobile-nav__link--active {
+    color: var(--color-white);
+  }
+
+  .mobile-nav__cta {
+    margin-top: 1.25rem;
+    margin-bottom: 1.5rem;
+    width: 100%;
+    text-align: center;
+  }
+</style>
+
+<script>
+  const toggle   = document.getElementById('mobile-toggle') as HTMLButtonElement;
+  const nav      = document.getElementById('mobile-nav')    as HTMLElement;
+  const header   = document.getElementById('site-header')   as HTMLElement;
+
+  let isOpen = false;
+
+  function setOpen(value: boolean) {
+    isOpen = value;
+    nav.classList.toggle('is-open', isOpen);
+    toggle.setAttribute('aria-expanded', String(isOpen));
+  }
+
+  toggle.addEventListener('click', e => { e.stopPropagation(); setOpen(!isOpen); });
+
+  // Close when clicking outside the header
+  document.addEventListener('click', e => {
+    if (isOpen && !header.contains(e.target as Node)) setOpen(false);
+  });
+
+  // Close on any nav link click
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => setOpen(false));
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && isOpen) setOpen(false);
+  });
+
+  // Close on desktop resize
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 768 && isOpen) setOpen(false);
+  });
+</script>

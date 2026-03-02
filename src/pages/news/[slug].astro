@@ -1,0 +1,217 @@
+---
+/**
+ * src/pages/news/[slug].astro — Individual article page
+ * ───────────────────────────────────────────────────────
+ * Astro uses this file to generate a page for every .md file in
+ * src/content/news/. No manual registration needed — just drop a
+ * new .md file in that folder and this route handles it automatically.
+ */
+import { getCollection, getEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('news', ({ data }) => !data.draft);
+  return articles.map((article) => ({
+    params: { slug: article.slug },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props;
+const { Content } = await article.render();
+
+function fmt(date: Date) {
+  return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+---
+
+<BaseLayout
+  title={`${article.data.title} — TCHS Aero`}
+  description={article.data.excerpt}
+  image={article.data.image}
+>
+
+  <!-- Article hero -->
+  {article.data.image && (
+    <section class="article-hero">
+      <img src={article.data.image} alt={article.data.title} class="article-hero__img" />
+      <div class="article-hero__overlay"></div>
+      <div class="article-hero__bar"></div>
+    </section>
+  )}
+
+  <div class="article-page">
+    <div class="container container--narrow">
+
+      <!-- Meta -->
+      <header class="article-header">
+        <div class="article-header__meta">
+          <span class="article-header__tag">{article.data.label}</span>
+          <span class="article-header__sep" aria-hidden="true"></span>
+          <time datetime={article.data.date.toISOString()} class="article-header__date">
+            {fmt(article.data.date)}
+          </time>
+        </div>
+        <h1 class="article-header__title">{article.data.title}</h1>
+        <span class="accent-line"></span>
+        <p class="article-header__excerpt">{article.data.excerpt}</p>
+      </header>
+
+      <!-- Body -->
+      <div class="article-body prose">
+        <Content />
+      </div>
+
+      <!-- Back link -->
+      <a href="/news" class="back-link">
+        <span aria-hidden="true">←</span> Back to News
+      </a>
+
+    </div>
+  </div>
+
+</BaseLayout>
+
+<style>
+  /* ── Hero ── */
+  .article-hero {
+    position: relative;
+    height: clamp(240px, 40vh, 480px);
+    overflow: hidden;
+  }
+
+  .article-hero__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .article-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.45) 100%);
+  }
+
+  .article-hero__bar {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--color-red);
+  }
+
+  /* ── Layout ── */
+  .article-page {
+    padding-block: var(--space-16) var(--space-24);
+  }
+
+  .container--narrow {
+    max-width: 720px;
+  }
+
+  /* ── Header ── */
+  .article-header {
+    margin-bottom: var(--space-12);
+  }
+
+  .article-header__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-5);
+  }
+
+  .article-header__tag {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--color-red);
+  }
+
+  .article-header__sep {
+    display: block;
+    width: 1rem; height: 1px;
+    background: var(--color-gray-light);
+  }
+
+  .article-header__date {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-gray);
+  }
+
+  .article-header__title {
+    font-size: var(--text-4xl);
+    font-weight: 300;
+    line-height: 1.15;
+    margin-bottom: var(--space-4);
+  }
+
+  .article-header__excerpt {
+    font-family: var(--font-sans);
+    font-size: var(--text-lg);
+    color: var(--color-gray);
+    line-height: 1.75;
+    margin-top: var(--space-6);
+  }
+
+  /* ── Body prose ── */
+  .article-body {
+    margin-bottom: var(--space-16);
+  }
+
+  .prose :global(h2),
+  .prose :global(h3) {
+    font-weight: 400;
+    margin-top: var(--space-10);
+    margin-bottom: var(--space-4);
+  }
+
+  .prose :global(p) {
+    font-family: var(--font-sans);
+    line-height: 1.8;
+    color: var(--color-ink);
+    margin-bottom: var(--space-5);
+  }
+
+  .prose :global(ul),
+  .prose :global(ol) {
+    padding-left: var(--space-6);
+    margin-bottom: var(--space-5);
+  }
+
+  .prose :global(li) {
+    font-family: var(--font-sans);
+    line-height: 1.75;
+    margin-bottom: var(--space-2);
+  }
+
+  .prose :global(img) {
+    width: 100%;
+    height: auto;
+    margin-block: var(--space-8);
+  }
+
+  .prose :global(blockquote) {
+    border-left: 3px solid var(--color-red);
+    padding-left: var(--space-6);
+    margin-left: 0;
+    color: var(--color-gray);
+    font-style: italic;
+  }
+
+  /* ── Back link ── */
+  .back-link {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-red);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    transition: gap var(--duration-base) ease;
+  }
+
+  .back-link:hover { gap: var(--space-4); }
+</style>
