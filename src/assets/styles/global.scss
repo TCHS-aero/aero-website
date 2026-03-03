@@ -443,6 +443,7 @@ a.link {
 .reveal {
   opacity: 0;
   transform: translateY(1.25rem);
+  will-change: transform, opacity; // promote to GPU layer, prevents forced reflow
   transition:
     opacity   var(--duration-reveal) var(--ease-expo),
     transform var(--duration-reveal) var(--ease-expo);
@@ -450,6 +451,7 @@ a.link {
   &.in-view {
     opacity: 1;
     transform: translateY(0);
+    will-change: auto; // release GPU layer once animation is done
   }
 
   // Stagger siblings

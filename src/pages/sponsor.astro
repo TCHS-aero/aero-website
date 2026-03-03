@@ -50,7 +50,14 @@ import { sponsors } from '../content/sponsors';
 >
 
   <section class="page-hero giving-hero">
-    <picture><source srcset="/uploads/sponsor/5sponsor.webp" type="image/webp" /><img src="/uploads/sponsor/5sponsor.png" alt="" class="page-hero__img" role="presentation" width="1536" height="1024" fetchpriority="high" decoding="sync" /></picture>
+    <picture>
+      <source
+        srcset="/uploads/sponsor/5sponsor-800w.webp 800w, /uploads/sponsor/5sponsor-1200w.webp 1200w"
+        sizes="100vw"
+        type="image/webp"
+      />
+      <img src="/uploads/sponsor/5sponsor.png" alt="" class="page-hero__img" role="presentation" width="1536" height="1024" fetchpriority="high" decoding="async" />
+    </picture>
     <div class="giving-hero__overlay"></div>
     <div class="page-hero__content">
       <div class="container">
@@ -142,7 +149,10 @@ import { sponsors } from '../content/sponsors';
       <div class="sponsors-logos">
         {sponsors.map((s, i) => (
           <div class={`reveal reveal--delay-${i + 1}`}>
-            <img src={s.src} alt={s.alt} class="sponsor-logo" loading="lazy" />
+            <picture>
+              <source srcset={s.src} type="image/webp" />
+              <img src={s.fallback} alt={s.alt} class="sponsor-logo" loading="lazy" decoding="async" width="224" height="128" />
+            </picture>
           </div>
         ))}
       </div>

@@ -18,19 +18,19 @@ export interface Sponsor {
 
 export const sponsors: Sponsor[] = [
   {
-    src:      '/uploads/sponsor/tcsf-logo-transparent.webp',
+    src:      '/uploads/sponsor/tcsf-logo-transparent-opt.webp',
     fallback: '/uploads/sponsor/tcsf-logo-transparent.png',
     alt:      'Temple City Schools Foundation',
     href:     'https://www.tcsf4students.org/',
   },
   {
-    src:      '/uploads/sponsor/frsky.webp',
+    src:      '/uploads/sponsor/frsky-opt.webp',
     fallback: '/uploads/sponsor/frsky.png',
     alt:      'FrSky',
     href:     'https://www.frsky-rc.com/',
   },
   {
-    src:      '/uploads/sponsor/hitec.webp',
+    src:      '/uploads/sponsor/hitec-opt.webp',
     fallback: '/uploads/sponsor/hitec.png',
     alt:      'Hitec',
     href:     'https://hitecrcd.com/',

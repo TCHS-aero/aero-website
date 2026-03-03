@@ -67,27 +67,39 @@ import { sponsors } from '../content/sponsors';
 ---
 
 <BaseLayout>
+  <!-- Preload hero image with responsive hints for LCP -->
   <link
     slot="head"
     rel="preload"
     as="image"
-    href="/uploads/home/1home.webp"
+    href="/uploads/home/1home-1200w.webp"
     type="image/webp"
+    imagesrcset="/uploads/home/1home-800w.webp 800w, /uploads/home/1home-1200w.webp 1200w, /uploads/home/1home-1536w.webp 1536w"
+    imagesizes="100vw"
+    fetchpriority="high"
   />
 
   <!-- ═══ HERO ═══════════════════════════════════════════════════ -->
   <section class="hero">
     <div class="hero__bg">
       <picture>
-        <source srcset="/uploads/home/1home.webp" type="image/webp" />
+        <source
+          srcset="/uploads/home/1home-800w.webp 800w, /uploads/home/1home-1200w.webp 1200w, /uploads/home/1home-1536w.webp 1536w"
+          sizes="100vw"
+          type="image/webp"
+        />
+        <source
+          srcset="/uploads/home/1home.png"
+          type="image/png"
+        />
         <img
-          src="/uploads/home/1home.png"
+          src="/uploads/home/1home-1200w.webp"
           alt="TCHS Aero drone in flight"
           class="hero__photo"
           width="1536"
           height="1024"
           fetchpriority="high"
-          decoding="sync"
+          decoding="async"
         />
       </picture>
       <div class="hero__gradient"></div>
@@ -166,9 +178,13 @@ import { sponsors } from '../content/sponsors';
 
       <div class="about-preview__img-wrap reveal">
         <picture>
-          <source srcset="/uploads/home/our story photo.webp" type="image/webp" />
+          <source
+            srcset="/uploads/home/our-story-photo-480w.webp 480w, /uploads/home/our-story-photo-800w.webp 800w, /uploads/home/our-story-photo-1200w.webp 1200w"
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            type="image/webp"
+          />
           <img
-            src="/uploads/home/our story photo.jpeg"
+            src="/uploads/home/our-story-photo.jpeg"
             alt="TCHS Aero team members"
             class="about-preview__img"
             width="1200"

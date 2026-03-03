@@ -1,0 +1,53 @@
+# netlify.toml — Netlify deployment configuration
+# Supplements public/_headers for cache and security headers.
+
+[build]
+  command   = "npm run build"
+  publish   = "dist"
+
+# Immutable Astro assets (content-hashed filenames)
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Images — immutable (bust cache by renaming file)
+[[headers]]
+  for = "/uploads/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Web fonts
+[[headers]]
+  for = "/*.woff2"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# HTML — revalidate on every request
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control         = "public, max-age=0, must-revalidate"
+    X-Frame-Options       = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy       = "strict-origin-when-cross-origin"
+
+# Root HTML
+[[headers]]
+  for = "/"
+  [headers.values]
+    Cache-Control         = "public, max-age=0, must-revalidate"
+    X-Frame-Options       = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy       = "strict-origin-when-cross-origin"
+
+# Sitemap and robots
+[[headers]]
+  for = "/sitemap*.xml"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/robots.txt"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"

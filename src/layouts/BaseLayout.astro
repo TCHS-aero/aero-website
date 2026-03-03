@@ -15,7 +15,7 @@ interface Props {
 const {
   title       = 'TCHS Aero — Temple City High School Aeronautics',
   description = 'TCHS Aero is Temple City High School\'s competitive aeronautics and drone engineering club. We build, fly, and compete.',
-  image       = '/uploads/home/1home.webp',
+  image       = '/uploads/home/1home-1200w.webp',
 } = Astro.props;
 
 const siteUrl    = Astro.site ?? 'https://tchsaero.org';
@@ -27,7 +27,7 @@ const jsonLd = JSON.stringify({
   "@type": "Organization",
   "name": "TCHS Aero",
   "url": siteUrl.toString(),
-  "logo": new URL('/uploads/aero logo.svg', siteUrl).toString(),
+  "logo": new URL('/uploads/aero-logo.svg', siteUrl).toString(),
   "description": "Temple City High School's competitive aeronautics and drone engineering club.",
   "address": {
     "@type": "PostalAddress",
@@ -53,9 +53,9 @@ const jsonLd = JSON.stringify({
   <meta name="theme-color" content="#650207" />
   <meta name="robots" content="index, follow" />
 
-  <link rel="icon" type="image/svg+xml" href="/uploads/aero logo.svg" />
-  <link rel="icon" type="image/png" href="/uploads/aero logo.PNG" />
-  <link rel="apple-touch-icon" href="/uploads/aero logo.PNG" />
+  <link rel="icon" type="image/svg+xml" href="/uploads/aero-logo.svg" />
+  <link rel="icon" type="image/png" href="/uploads/aero-logo.PNG" />
+  <link rel="apple-touch-icon" href="/uploads/aero-logo.PNG" />
   <link rel="manifest" href="/site.webmanifest" />
   <link rel="canonical" href={canonical} />
 
@@ -74,23 +74,25 @@ const jsonLd = JSON.stringify({
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image"       content={ogImage} />
 
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     rel="preload"
     as="style"
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap&font-display=swap"
   />
   <link
     rel="stylesheet"
     media="print"
     onload="this.media='all'"
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap&font-display=swap"
   />
   <noscript>
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap&font-display=swap"
     />
   </noscript>
 

@@ -7,7 +7,7 @@ export default defineConfig({
   integrations: [sitemap()],
   compressHTML: true,
   build: {
-    inlineStylesheets: 'auto', // inline small CSS to reduce requests
+    inlineStylesheets: 'always', // inline all CSS to eliminate render-blocking requests
   },
   vite: {
     build: {

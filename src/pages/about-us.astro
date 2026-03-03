@@ -32,9 +32,27 @@ const timeline = [
   image="/uploads/about/2about-us.png"
 >
 
+  <link
+    slot="head"
+    rel="preload"
+    as="image"
+    href="/uploads/about/2about-us-1200w.webp"
+    type="image/webp"
+    imagesrcset="/uploads/about/2about-us-800w.webp 800w, /uploads/about/2about-us-1200w.webp 1200w, /uploads/about/2about-us-1536w.webp 1536w"
+    imagesizes="100vw"
+    fetchpriority="high"
+  />
+
   <!-- Page hero -->
   <section class="page-hero">
-    <picture><source srcset="/uploads/about/2about-us.webp" type="image/webp" /><img src="/uploads/about/2about-us.png" alt="About TCHS Aero" class="page-hero__img" width="1536" height="1024" fetchpriority="high" decoding="sync" /></picture>
+    <picture>
+      <source
+        srcset="/uploads/about/2about-us-800w.webp 800w, /uploads/about/2about-us-1200w.webp 1200w, /uploads/about/2about-us-1536w.webp 1536w"
+        sizes="100vw"
+        type="image/webp"
+      />
+      <img src="/uploads/about/2about-us.png" alt="About TCHS Aero" class="page-hero__img" width="1536" height="1024" fetchpriority="high" decoding="async" />
+    </picture>
     <div class="page-hero__overlay"></div>
     <div class="page-hero__content">
       <div class="container">
