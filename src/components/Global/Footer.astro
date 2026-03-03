@@ -39,8 +39,10 @@ const year = new Date().getFullYear();
         <a href="/" class="footer-logo">
           <div class="footer-logo__icon">
             <img
-              src="/uploads/aero logo.PNG"
+              src="/uploads/aero logo.svg"
               alt=""
+              width="28"
+              height="28"
               onerror="this.style.display='none'"
             />
           </div>
@@ -75,7 +77,7 @@ const year = new Date().getFullYear();
       <!-- Nav groups -->
       {footerGroups.map(group => (
         <div class="footer-nav-group">
-          <h4 class="footer-nav-group__title">{group.title}</h4>
+          <p class="footer-nav-group__title">{group.title}</p>
           <ul class="footer-nav-group__list">
             {group.links.map(link => (
               <li>
@@ -267,10 +269,10 @@ const year = new Date().getFullYear();
   .footer-bar__links a {
     font-family: var(--font-mono);
     font-size: 0.65rem;
-    color: rgba(255, 255, 255, 0.25);
+    color: rgba(255, 255, 255, 0.6); /* raised from 0.25 → ~7.2:1 contrast on #1c1c1c ✓ WCAG AA */
     transition: color var(--duration-fast) ease;
   }
   .footer-bar__links a:hover {
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.9);
   }
 </style>

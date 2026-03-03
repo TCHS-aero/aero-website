@@ -13,7 +13,9 @@
 //   9. Focus & Accessibility
 // ================================================================
 
-// Fonts are loaded via <link> tags in BaseLayout.astro for better performance
+// Fonts are loaded asynchronously via preload + media="print" in BaseLayout.astro.
+// `display=swap` in the Google Fonts URL prevents FOIT.
+// System fonts render immediately; web fonts swap in once downloaded.
 
 
 // MIXINS

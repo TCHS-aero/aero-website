@@ -67,6 +67,13 @@ import { sponsors } from '../content/sponsors';
 ---
 
 <BaseLayout>
+  <link
+    slot="head"
+    rel="preload"
+    as="image"
+    href="/uploads/home/1home.webp"
+    type="image/webp"
+  />
 
   <!-- ═══ HERO ═══════════════════════════════════════════════════ -->
   <section class="hero">
@@ -135,13 +142,13 @@ import { sponsors } from '../content/sponsors';
               <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={`Visit ${s.alt} website`}>
                 <picture>
                   <source srcset={s.src} type="image/webp" />
-                  <img src={s.fallback} alt={s.alt} class="sponsor-logo" loading="lazy" decoding="async" width="224" height="128" />
+                  <img src={s.fallback} alt={s.alt} class="sponsor-logo" loading="lazy" decoding="async" width="224" height="128" sizes="224px" />
                 </picture>
               </a>
             ) : (
               <picture>
                 <source srcset={s.src} type="image/webp" />
-                <img src={s.fallback} alt={s.alt} class="sponsor-logo" loading="lazy" decoding="async" width="224" height="128" />
+                <img src={s.fallback} alt={s.alt} class="sponsor-logo" loading="lazy" decoding="async" width="224" height="128" sizes="224px" />
               </picture>
             )}
           </div>
@@ -166,6 +173,7 @@ import { sponsors } from '../content/sponsors';
             class="about-preview__img"
             width="1200"
             height="900"
+            sizes="(min-width: 1024px) 50vw, 100vw"
             loading="lazy"
             decoding="async"
           />
