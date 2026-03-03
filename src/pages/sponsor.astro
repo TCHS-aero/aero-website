@@ -40,12 +40,7 @@ const tiers = [
   },
 ];
 
-// This must be duplicated in index.astro as well!
-const sponsors = [
-  { src: '/uploads/sponsor/tcsf-logo-transparent.webp', alt: 'Temple City Schools Foundation' },
-  { src: '/uploads/sponsor/frsky.webp',                 alt: 'FrSky' },
-  { src: '/uploads/sponsor/hitec.webp',                 alt: 'Hitec' },
-];
+import { sponsors } from '../content/sponsors';
 ---
 
 <BaseLayout
