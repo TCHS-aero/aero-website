@@ -63,11 +63,7 @@ const articles = [
   },
 ];
 
-const sponsors = [
-  { src: '/uploads/sponsor/tcsf-logo-transparent.webp', fallback: '/uploads/sponsor/tcsf-logo-transparent.png', alt: 'Temple City Schools Foundation' },
-  { src: '/uploads/sponsor/frsky.webp',                 fallback: '/uploads/sponsor/frsky.png',                 alt: 'FrSky' },
-  { src: '/uploads/sponsor/hitec.webp',                 fallback: '/uploads/sponsor/hitec.png',                 alt: 'Hitec' },
-];
+import { sponsors } from '../data/sponsors';
 ---
 
 <BaseLayout>
@@ -122,6 +118,38 @@ const sponsors = [
           <span class="stats__label">{stat.label}</span>
         </div>
       ))}
+    </div>
+  </section>
+
+  <!-- ═══ SPONSORS ════════════════════════════════════════════════ -->
+  <section class="sponsors">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Our Partners</span>
+        <h2>Supported By</h2>
+      </div>
+      <div class="sponsors__logos">
+        {sponsors.map(s => (
+          <div class="reveal">
+            {s.href ? (
+              <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={`Visit ${s.alt} website`}>
+                <picture>
+                  <source srcset={s.src} type="image/webp" />
+                  <img src={s.fallback} alt={s.alt} class="sponsor-logo" loading="lazy" decoding="async" width="224" height="128" />
+                </picture>
+              </a>
+            ) : (
+              <picture>
+                <source srcset={s.src} type="image/webp" />
+                <img src={s.fallback} alt={s.alt} class="sponsor-logo" loading="lazy" decoding="async" width="224" height="128" />
+              </picture>
+            )}
+          </div>
+        ))}
+      </div>
+      <div class="sponsors__cta reveal">
+        <a href="/sponsor" class="btn btn--outline">Become a Sponsor</a>
+      </div>
     </div>
   </section>
 
@@ -188,29 +216,6 @@ const sponsors = [
             <p class="programs__desc">{p.desc}</p>
           </div>
         ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ SPONSORS ════════════════════════════════════════════════ -->
-  <section class="sponsors">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-label">Our Partners</span>
-        <h2>Supported By</h2>
-      </div>
-      <div class="sponsors__logos">
-        {sponsors.map(s => (
-          <div class="reveal">
-            <picture>
-              <source srcset={s.src} type="image/webp" />
-              <img src={s.fallback} alt={s.alt} class="sponsor-logo" loading="lazy" decoding="async" width="224" height="128" />
-            </picture>
-          </div>
-        ))}
-      </div>
-      <div class="sponsors__cta reveal">
-        <a href="/sponsor" class="btn btn--outline">Become a Sponsor</a>
       </div>
     </div>
   </section>
@@ -653,21 +658,6 @@ const sponsors = [
   }
 
   @media (min-width: 768px) { .sponsors__logos { gap: var(--space-16); } }
-
-  .sponsor-logo {
-    height: 8rem;
-    width: auto;
-    max-width: 14rem;
-    object-fit: contain;
-    filter: grayscale(0);
-    opacity: 1;
-    transition: filter var(--duration-slow) ease, opacity var(--duration-slow) ease;
-  }
-
-  .sponsor-logo:hover {
-    filter: grayscale(0);
-    opacity: 1;
-  }
 
   .sponsors__cta { text-align: center; }
 

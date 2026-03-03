@@ -10,40 +10,37 @@ const stats = [
 
 const tiers = [
   {
-    name:      'Aviator',
-    amount:    '$250',
+    name:      'Propeller',
+    amount:    '$50+',
     highlight: false,
     perks: [
-      'Name listed on our website',
-      'Shoutout on social media',
-      'Certificate of appreciation',
+      'Instagram feature',
+      'Company logo and hyperlink on website',
     ],
   },
   {
-    name:      'Pilot',
-    amount:    '$500',
+    name:      'Jet Engine',
+    amount:    '$100+',
     highlight: false,
     perks: [
-      'Everything in Aviator',
-      'Logo on team equipment',
-      'Invitation to competitions',
-      'Annual impact report',
+      'Everything in Propeller',
+      'Company logo on competition drone',
+      'Company logo on TCHS Aero Apparel',
     ],
   },
   {
-    name:      'Commander',
-    amount:    '$1,000+',
+    name:      'Orbiter',
+    amount:    '$200+',
     highlight: false,
     perks: [
-      'Everything in Pilot',
-      'Logo on team banner',
-      'Featured in all materials',
-      'Direct team liaison',
-      'Custom partnership options',
+      'Everything in Jet Engine',
+      'Company logo secondary hero page of website',
+      'Pinned large banner instagram feature',
     ],
   },
 ];
 
+// This must be duplicated in index.astro as well!
 const sponsors = [
   { src: '/uploads/sponsor/tcsf-logo-transparent.webp', alt: 'Temple City Schools Foundation' },
   { src: '/uploads/sponsor/frsky.webp',                 alt: 'FrSky' },
@@ -88,6 +85,10 @@ const sponsors = [
         <p class="body-text">
           All donations are tax-deductible through the Temple City Unified School District, a
           501(c)(3) non-profit organization.
+        </p>
+        <p class="body-text">
+          For more information, refer to our <a href="https://drive.google.com/file/d/1DTWesr-XRaIzXfaZ27q7UR55uLS8CHEq/view">
+          sponsorship booklet</a>.
         </p>
       </div>
 
@@ -232,7 +233,7 @@ const sponsors = [
 
   .section-header {
     text-align: center;
-    margin-bottom: var(--space-14);
+    margin-bottom: var(--space-12);
   }
 
   .tiers-grid {
@@ -341,16 +342,6 @@ const sponsors = [
     gap: var(--space-10);
     margin-top: var(--space-16);
     margin-bottom: var(--space-12);
-  }
-
-  .sponsor-logo {
-    height: 8rem;
-    width: auto;
-    max-width: 14rem;
-    object-fit: contain;
-    filter: grayscale(0);
-    opacity: 1;
-    transition: filter var(--duration-slow) ease, opacity var(--duration-slow) ease;
   }
 
   /* ── Giving CTA ── */

@@ -1,86 +1,57 @@
-/* ================================================================
-   TCHS AERO — GLOBAL STYLESHEET
-   ================================================================
-   This file contains the design system foundation:
-     1. Design Tokens   — edit variables here to restyle the site
-     2. Reset           — browser normalization
-     3. Base Typography — default element styles
-     4. Layout          — .container
-     5. Buttons         — .btn, .btn--primary, .btn--outline, etc.
-     6. Shared Patterns — .section-label, .page-hero, .bg-cream, etc.
-     7. Scroll Reveal   — .reveal animation system
-   ================================================================ */
-
-/* Fonts are loaded via <link> tags in BaseLayout.astro for better performance */
-
-/* ────────────────────────────────────────────────────────────────
-   1. DESIGN TOKENS
-   Edit these custom properties to update the entire site at once.
-   ──────────────────────────────────────────────────────────────── */
 :root {
-  /* --- Brand Colors --- */
-  --color-red:         #650207;
-  --color-red-dark:    #4a0105;
-  --color-cream:       #F2EDE3;
-  --color-cream-dark:  #E8E0D0;
+  --color-red: #650207;
+  --color-red-dark: #4a0105;
+  --color-cream: #F2EDE3;
+  --color-cream-dark: #E8E0D0;
   --color-cream-light: #FAF7F2;
-  --color-white:       #ffffff;
-  --color-charcoal:    #1C1C1C;
-  --color-gray:        #6B6B6B;
-  --color-gray-light:  #C4B9A8;
-
-  /* --- Typefaces --- */
+  --color-white: #ffffff;
+  --color-charcoal: #1C1C1C;
+  --color-gray: #6B6B6B;
+  --color-gray-light: #C4B9A8;
+  --color-link: #2E5E8E;
+  --color-link-visited: #5B3A87;
+  --color-link-hover: #1D3F61;
   --font-serif: 'Cormorant Garamond', Georgia, serif;
-  --font-sans:  'DM Sans', system-ui, sans-serif;
-  --font-mono:  'JetBrains Mono', monospace;
-
-  /* --- Font Size Scale --- */
-  --text-xs:   0.6875rem;  /* 11px — mono labels */
-  --text-sm:   0.875rem;   /* 14px — captions, small body */
-  --text-base: 1rem;       /* 16px — body */
-  --text-lg:   1.125rem;   /* 18px — lead text */
-  --text-xl:   1.25rem;    /* 20px — h5 */
-  --text-2xl:  1.5rem;     /* 24px — h4 */
-  --text-3xl:  1.875rem;   /* 30px — h3 */
-  --text-4xl:  2.25rem;    /* 36px — h2 mobile */
-  --text-5xl:  3rem;       /* 48px — h2 desktop, h1 mobile */
-  --text-6xl:  3.75rem;    /* 60px — h1 desktop */
-  --text-7xl:  4.5rem;     /* 72px — h1 large */
-
-  /* --- Spacing --- */
-  --space-1:  0.25rem;
-  --space-2:  0.5rem;
-  --space-3:  0.75rem;
-  --space-4:  1rem;
-  --space-5:  1.25rem;
-  --space-6:  1.5rem;
-  --space-8:  2rem;
+  --font-sans: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --text-xs: 0.6875rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  --text-6xl: 3.75rem;
+  --text-7xl: 4.5rem;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
   --space-10: 2.5rem;
   --space-12: 3rem;
   --space-16: 4rem;
   --space-20: 5rem;
   --space-24: 6rem;
   --space-28: 7rem;
-
-  /* --- Layout --- */
-  --container-max:    80rem;
-  --container-pad:    1.25rem;
+  --container-max: 80rem;
+  --container-pad: 1.25rem;
   --container-pad-md: 2rem;
   --container-pad-lg: 3rem;
-
-  /* --- Motion --- */
-  --ease-expo:      cubic-bezier(0.19, 1, 0.22, 1);
-  --duration-fast:  0.15s;
-  --duration-base:  0.3s;
-  --duration-slow:  0.5s;
+  --ease-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --duration-fast: 0.15s;
+  --duration-base: 0.3s;
+  --duration-slow: 0.5s;
   --duration-reveal: 0.7s;
 }
 
-
-/* ────────────────────────────────────────────────────────────────
-   2. RESET & NORMALIZATION
-   ──────────────────────────────────────────────────────────────── */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -101,25 +72,36 @@ body {
   background: var(--color-white);
 }
 
-img, video {
+img,
+video {
   display: block;
   max-width: 100%;
   height: auto;
 }
 
-input, button, textarea, select { font: inherit; }
-ul, ol { list-style: none; }
-a { color: inherit; text-decoration: none; }
+input, button, textarea, select {
+  font: inherit;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::-moz-selection {
+  background: var(--color-red);
+  color: var(--color-white);
+}
 
 ::selection {
   background: var(--color-red);
   color: var(--color-white);
 }
 
-
-/* ────────────────────────────────────────────────────────────────
-   3. BASE TYPOGRAPHY
-   ──────────────────────────────────────────────────────────────── */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-serif);
   font-weight: 300;
@@ -128,47 +110,115 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-charcoal);
 }
 
-h1 { font-size: var(--text-5xl); }
-h2 { font-size: var(--text-4xl); }
-h3 { font-size: var(--text-2xl); }
-h4 { font-size: var(--text-xl);  }
-h5 { font-size: var(--text-lg);  }
+h1 {
+  font-size: var(--text-5xl);
+}
+
+h2 {
+  font-size: var(--text-4xl);
+}
+
+h3 {
+  font-size: var(--text-2xl);
+}
+
+h4 {
+  font-size: var(--text-xl);
+}
+
+h5 {
+  font-size: var(--text-lg);
+}
 
 @media (min-width: 768px) {
-  h1 { font-size: var(--text-6xl); }
-  h2 { font-size: var(--text-5xl); }
-  h3 { font-size: var(--text-3xl); }
+  h1 {
+    font-size: var(--text-6xl);
+  }
+  h2 {
+    font-size: var(--text-5xl);
+  }
+  h3 {
+    font-size: var(--text-3xl);
+  }
 }
-
 @media (min-width: 1024px) {
-  h1 { font-size: var(--text-7xl); }
+  h1 {
+    font-size: var(--text-7xl);
+  }
+}
+p {
+  line-height: 1.75;
 }
 
-p { line-height: 1.75; }
+p a,
+li a,
+.prose a {
+  color: var(--color-link);
+  text-decoration: underline;
+  text-decoration-color: rgba(46, 94, 142, 0.35);
+  text-underline-offset: 0.2em;
+  transition: color var(--duration-base) ease, text-decoration-color var(--duration-base) ease;
+}
+p a:visited,
+li a:visited,
+.prose a:visited {
+  color: var(--color-link-visited);
+  text-decoration-color: rgba(91, 58, 135, 0.35);
+}
+p a:hover, p a:focus-visible,
+li a:hover,
+li a:focus-visible,
+.prose a:hover,
+.prose a:focus-visible {
+  color: var(--color-link-hover);
+  text-decoration-color: var(--color-link-hover);
+}
 
+a.link {
+  color: var(--color-link);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  transition: color var(--duration-base) ease;
+}
+a.link:hover {
+  color: var(--color-link-hover);
+}
+a.link:visited {
+  color: var(--color-link-visited);
+}
 
-/* ────────────────────────────────────────────────────────────────
-   4. LAYOUT
-   ──────────────────────────────────────────────────────────────── */
+.bg-dark a:not(.btn),
+.page-hero a:not(.btn) {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration-color: rgba(255, 255, 255, 0.4);
+}
+.bg-dark a:not(.btn):hover,
+.page-hero a:not(.btn):hover {
+  color: #ffffff;
+  text-decoration-color: #ffffff;
+}
+
 .container {
   width: 100%;
   max-width: var(--container-max);
   margin-inline: auto;
   padding-inline: var(--container-pad);
 }
+@media (min-width: 768px) {
+  .container {
+    padding-inline: var(--container-pad-md);
+  }
+}
+@media (min-width: 1024px) {
+  .container {
+    padding-inline: var(--container-pad-lg);
+  }
+}
 
 .page-hero__content h1 {
   color: #ffffff;
 }
 
-@media (min-width: 768px)  { .container { padding-inline: var(--container-pad-md); } }
-@media (min-width: 1024px) { .container { padding-inline: var(--container-pad-lg); } }
-
-
-/* ────────────────────────────────────────────────────────────────
-   5. BUTTONS
-   Used across multiple pages, defined here once.
-   ──────────────────────────────────────────────────────────────── */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -182,63 +232,46 @@ p { line-height: 1.75; }
   border: 1px solid transparent;
   cursor: pointer;
   white-space: nowrap;
-  transition:
-    background var(--duration-base) ease,
-    color      var(--duration-base) ease,
-    border-color var(--duration-base) ease;
+  transition: background var(--duration-base) ease, color var(--duration-base) ease, border-color var(--duration-base) ease;
 }
-
-/* Filled red — primary action */
 .btn--primary {
-  background:   var(--color-red);
-  color:        var(--color-white);
+  background: var(--color-red);
+  color: #ffffff;
   border-color: var(--color-red);
 }
 .btn--primary:hover {
-  background:   var(--color-red-dark);
+  background: var(--color-red-dark);
   border-color: var(--color-red-dark);
 }
-
-/* Outlined red — secondary action on light backgrounds */
 .btn--outline {
-  background:   transparent;
-  color:        var(--color-red);
+  background: transparent;
+  color: var(--color-red);
   border-color: var(--color-red);
 }
 .btn--outline:hover {
   background: var(--color-red);
-  color:      var(--color-white);
+  color: #ffffff;
 }
-
-/* Outlined white — action on dark/red backgrounds */
 .btn--ghost {
-  background:   transparent;
-  color:        var(--color-white);
+  background: transparent;
+  color: #ffffff;
   border-color: rgba(255, 255, 255, 0.4);
 }
 .btn--ghost:hover {
-  background:   var(--color-white);
-  color:        var(--color-red);
-  border-color: var(--color-white);
+  background: #ffffff;
+  color: var(--color-red);
+  border-color: #ffffff;
 }
-
-/* Solid white — action on red backgrounds */
 .btn--white {
-  background:   var(--color-white);
-  color:        var(--color-red);
-  border-color: var(--color-white);
+  background: #ffffff;
+  color: var(--color-red);
+  border-color: #ffffff;
 }
 .btn--white:hover {
-  background:   var(--color-cream);
+  background: var(--color-cream);
   border-color: var(--color-cream);
 }
 
-
-/* ────────────────────────────────────────────────────────────────
-   6. SHARED PATTERNS
-   ──────────────────────────────────────────────────────────────── */
-
-/* Small mono tag that appears above section headings */
 .section-label {
   display: inline-block;
   font-family: var(--font-mono);
@@ -249,10 +282,9 @@ p { line-height: 1.75; }
   margin-bottom: var(--space-4);
 }
 .section-label--light {
-  color: rgba(255, 255, 255, 0.82); /* bumped from 0.6 → 0.82 to pass WCAG AA on red bg */
+  color: rgba(255, 255, 255, 0.82);
 }
 
-/* Short red line used below headings as a visual accent */
 .accent-line {
   display: block;
   width: 3rem;
@@ -262,31 +294,37 @@ p { line-height: 1.75; }
   margin-bottom: var(--space-8);
 }
 
-/* Cream background with subtle grain texture overlay */
 .bg-cream {
   background-color: var(--color-cream);
   position: relative;
 }
 .bg-cream::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   opacity: 0.04;
   pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
 }
-.bg-cream > * { position: relative; } /* keep children above the grain layer */
+.bg-cream > * {
+  position: relative;
+}
 
-/* Shared page banner (used on About, News, Contact, Sponsor) */
 .page-hero {
   position: relative;
   height: 14rem;
   overflow: hidden;
 }
+@media (min-width: 768px) {
+  .page-hero {
+    height: 18rem;
+  }
+}
 .page-hero__img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .page-hero__overlay {
   position: absolute;
@@ -302,65 +340,55 @@ p { line-height: 1.75; }
 }
 .page-hero__bar {
   position: absolute;
-  bottom: 0; left: 0; right: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   height: 4px;
   background: var(--color-red);
 }
 
-@media (min-width: 768px) {
-  .page-hero { height: 18rem; }
-}
-
-/* Sponsor logos — grayscale by default, full color on hover */
 .sponsor-logo {
-  height: 3rem;
+  height: 8rem;
   width: auto;
-  object-fit: contain;
-  filter: grayscale(1);
-  opacity: 0.55;
-  transition:
-    filter  var(--duration-slow) ease,
-    opacity var(--duration-slow) ease;
-}
-.sponsor-logo:hover {
+  max-width: 14rem;
+  -o-object-fit: contain;
+     object-fit: contain;
   filter: grayscale(0);
   opacity: 1;
+  transition: filter var(--duration-slow) ease, opacity var(--duration-slow) ease;
 }
-@media (min-width: 768px) { .sponsor-logo { height: 3.5rem; } }
+.sponsor-logo:hover {
+  filter: brightness(0.8);
+  opacity: 1;
+}
 
-
-/* ────────────────────────────────────────────────────────────────
-   7. SCROLL REVEAL ANIMATION
-   Elements with .reveal fade up into view via IntersectionObserver
-   (see BaseLayout.astro for the JS).
-   ──────────────────────────────────────────────────────────────── */
 .reveal {
   opacity: 0;
   transform: translateY(1.25rem);
-  transition:
-    opacity   var(--duration-reveal) var(--ease-expo),
-    transform var(--duration-reveal) var(--ease-expo);
+  transition: opacity var(--duration-reveal) var(--ease-expo), transform var(--duration-reveal) var(--ease-expo);
 }
 .reveal.in-view {
   opacity: 1;
   transform: translateY(0);
 }
-
-/* Stagger siblings by adding these alongside .reveal */
-.reveal--delay-1 { transition-delay: 0.1s; }
-.reveal--delay-2 { transition-delay: 0.2s; }
-.reveal--delay-3 { transition-delay: 0.3s; }
-
-/* Respect user's motion preferences */
-@media (prefers-reduced-motion: reduce) {
-  .reveal { opacity: 1; transform: none; transition: none; }
+.reveal--delay-1 {
+  transition-delay: 0.1s;
+}
+.reveal--delay-2 {
+  transition-delay: 0.2s;
+}
+.reveal--delay-3 {
+  transition-delay: 0.3s;
 }
 
-
-/* ────────────────────────────────────────────────────────────────
-   8. FOCUS & ACCESSIBILITY
-   ──────────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
 :focus-visible {
   outline: 2px solid var(--color-red);
   outline-offset: 3px;
-}
+}/*# sourceMappingURL=global.css.map */
