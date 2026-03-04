@@ -16,13 +16,13 @@
  */
 import { Picture, Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SponsorLogo from '../components/SponsorLogo.astro';
 import { sponsors } from '../content/sponsors';
 
 // ── Image imports ────────────────────────────────────────────────────────────
 import heroImg     from '../assets/uploads/home/1home.png';
 import ourStoryImg from '../assets/uploads/home/our-story-photo.jpeg';
-// Note: no manual getImage() needed — BaseLayout auto-injects the LCP preload
-// when image={heroImg} is passed.
+// Note: no manual getImage() needed 
 
 // ── Page data ────────────────────────────────────────────────────────────────
 interface Stat { value: string; label: string; }
@@ -55,9 +55,9 @@ const programs = [
 ---
 
 <BaseLayout image={heroImg}>
-  <!-- BaseLayout automatically injects the LCP preload hint for heroImg -->
 
-  <!-- ═══ HERO ═══════════════════════════════════════════════════ -->
+
+
   <section class="hero">
     <div class="hero__bg">
       <Picture
@@ -96,7 +96,7 @@ const programs = [
     <div class="hero__bar" aria-hidden="true"></div>
   </section>
 
-  <!-- ═══ STATS ══════════════════════════════════════════════════ -->
+
   <section class="stats">
     <div class="container stats__grid">
       {stats.map(stat => (
@@ -108,7 +108,7 @@ const programs = [
     </div>
   </section>
 
-  <!-- ═══ SPONSORS ════════════════════════════════════════════════ -->
+
   <section class="sponsors">
     <div class="container">
       <div class="section-header reveal">
@@ -118,29 +118,7 @@ const programs = [
       <div class="sponsors__logos">
         {sponsors.map(s => (
           <div class="reveal">
-            {s.href ? (
-              <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={`Visit ${s.alt} website`}>
-                <Image
-                  src={s.src}
-                  alt={s.alt}
-                  class="sponsor-logo"
-                  width={224}
-                  format="webp"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </a>
-            ) : (
-              <Image
-                src={s.src}
-                alt={s.alt}
-                class="sponsor-logo"
-                width={224}
-                format="webp"
-                loading="lazy"
-                decoding="async"
-              />
-            )}
+            <SponsorLogo {...s} />
           </div>
         ))}
       </div>
@@ -150,7 +128,7 @@ const programs = [
     </div>
   </section>
 
-  <!-- ═══ ABOUT PREVIEW ═══════════════════════════════════════════ -->
+
   <section class="about-preview bg-cream">
     <div class="container about-preview__grid">
 
@@ -194,7 +172,7 @@ const programs = [
     </div>
   </section>
 
-  <!-- ═══ PROGRAMS ════════════════════════════════════════════════ -->
+
   <section class="programs">
     <div class="container">
       <div class="section-header reveal">
@@ -215,7 +193,7 @@ const programs = [
     </div>
   </section>
 
-  <!-- ═══ CTA BANNER ══════════════════════════════════════════════ -->
+
   <section class="cta-banner">
     <div class="cta-banner__orbs" aria-hidden="true">
       <div class="cta-banner__orb cta-banner__orb--tr"></div>

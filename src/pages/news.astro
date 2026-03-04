@@ -39,7 +39,7 @@ const [featured, ...rest] = articles;
   <div class="news-page">
     <div class="container">
 
-      <!-- Featured article -->
+
       {featured && (
         <article class="featured reveal">
           <div class="featured__img-wrap">
@@ -76,7 +76,7 @@ const [featured, ...rest] = articles;
         </article>
       )}
 
-      <!-- Article grid -->
+
       {rest.length > 0 && (
         <div class="article-grid">
           {rest.map((article, i) => (

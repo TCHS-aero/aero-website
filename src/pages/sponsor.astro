@@ -2,6 +2,7 @@
 import { Image }  from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero   from '../components/Global/PageHero.astro';
+import SponsorLogo from '../components/SponsorLogo.astro';
 import { sponsors } from '../content/sponsors';
 import heroImg from '../assets/uploads/sponsor/5sponsor.png';
 
@@ -53,7 +54,7 @@ const tiers = [
 
   <PageHero src={heroImg} label="Partnership" heading="Sponsor the Team" variant="red" />
 
-  <!-- Why sponsor -->
+
   <section class="why-sponsor">
     <div class="container why-sponsor__grid">
 
@@ -90,7 +91,7 @@ const tiers = [
     </div>
   </section>
 
-  <!-- Tiers -->
+
   <section class="tiers-section bg-cream">
     <div class="container">
       <div class="section-header reveal">
@@ -124,7 +125,7 @@ const tiers = [
     </div>
   </section>
 
-  <!-- Current sponsors -->
+
   <section class="current-sponsors">
     <div class="container">
       <div class="section-header reveal">
@@ -134,20 +135,14 @@ const tiers = [
       <div class="sponsors-logos">
         {sponsors.map((s, i) => (
           <div class={`reveal reveal--delay-${i + 1}`}>
-            {s.href ? (
-              <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={`Visit ${s.alt} website`}>
-                <Image src={s.src} alt={s.alt} class="sponsor-logo" width={224} format="webp" loading="lazy" decoding="async" />
-              </a>
-            ) : (
-              <Image src={s.src} alt={s.alt} class="sponsor-logo" width={224} format="webp" loading="lazy" decoding="async" />
-            )}
+            <SponsorLogo {...s} />
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
+
   <section class="giving-cta">
     <div class="container giving-cta__inner">
       <h2 class="reveal">Ready to Partner With Us?</h2>

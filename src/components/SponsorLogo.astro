@@ -1,0 +1,43 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  href?: string;
+}
+
+// destructure props so we can refer to them easily below
+const { src, alt, href } = Astro.props as Props;
+
+// common configuration for all sponsor images. keeping it here centralises
+// maintenance and ensures every callsite behaves consistently.
+const imageProps = {
+  // `inferSize:false` disables the width/height requirement in the
+  // typed props. we manage sizes via `widths`/`sizes` above, so the
+  // aspect ratio is not needed here.
+  inferSize: false,
+
+  widths: [224, 448, 672],
+  quality: 90,
+  format: 'webp',
+  sizes: '(max-width: 640px) 50vw, 224px',
+  class: 'sponsor-logo',
+  loading: 'lazy',
+  decoding: 'async',
+};
+---
+
+{href ? (
+  <a
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label={`Visit ${alt} website`}
+  >
+    <Image {...(imageProps as any)} src={src} alt={alt} />
+  </a>
+) : (
+  <Image {...(imageProps as any)} src={src} alt={alt} />
+)}

@@ -419,6 +419,10 @@ a.link {
 
 // Sponsor logos — grayscale by default, full color on hover
 .sponsor-logo {
+  /* let the browser scale images cleanly on high‑density screens */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+
   height: 8rem;
   width: auto;
   max-width: 14rem;

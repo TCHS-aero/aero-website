@@ -20,7 +20,7 @@ const currentPath = Astro.url.pathname;
   <div class="header-inner">
     <div class="container header-row">
 
-      <!-- Logo -->
+
       <a href="/" class="logo">
         <img
           src="/uploads/aero-logo.svg"
@@ -32,7 +32,7 @@ const currentPath = Astro.url.pathname;
         />
       </a>
 
-      <!-- Desktop nav -->
+ 
       <nav class="desktop-nav" aria-label="Main navigation">
         <ul class="desktop-nav__list">
           {NAV_ITEMS.map(item => {
@@ -54,7 +54,7 @@ const currentPath = Astro.url.pathname;
         <a href="/sponsor" class="btn btn--ghost header-cta">Support Us</a>
       </nav>
 
-      <!-- Mobile toggle -->
+
       <button
         id="mobile-toggle"
         class="mobile-toggle"
@@ -68,7 +68,7 @@ const currentPath = Astro.url.pathname;
       </button>
     </div>
 
-    <!-- Mobile nav drawer -->
+
     <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation">
       <div class="container">
         <ul class="mobile-nav__list">
@@ -94,7 +94,7 @@ const currentPath = Astro.url.pathname;
   </div>
 </header>
 
-<!-- Spacer so page content doesn't hide behind the fixed header -->
+
 <div class="header-spacer" aria-hidden="true"></div>
 
 <style>

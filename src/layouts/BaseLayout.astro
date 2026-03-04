@@ -140,11 +140,7 @@ const jsonLd = JSON.stringify({
 
   <script type="application/ld+json" set:html={jsonLd} />
 
-  <!--
-    Responsive LCP preload — injected when `image` prop is ImageMetadata.
-    Uses imagesrcset + imagesizes so the browser downloads only the size it
-    actually needs, not a fixed-width version that would cause a double-download.
-  -->
+
   {heroPreload && (
     <link
       rel="preload"
@@ -156,7 +152,7 @@ const jsonLd = JSON.stringify({
     />
   )}
 
-  <!-- Additional page-level head content -->
+
   <slot name="head" />
 </head>
 

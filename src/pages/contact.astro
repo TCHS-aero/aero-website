@@ -16,7 +16,7 @@ import { CONTACT } from '../config/site';
   <section class="contact-section">
     <div class="container contact-grid">
 
-      <!-- Info column -->
+
       <div class="contact-info reveal">
         <span class="section-label">Contact</span>
         <h2>
@@ -55,15 +55,11 @@ import { CONTACT } from '../config/site';
         </div>
       </div>
 
-      <!-- Form column -->
+
       <div class="contact-form-wrap reveal reveal--delay-1">
         <div class="contact-form-box">
           <h3>Send a Message</h3>
-          <!--
-            Form note: the mailto: action works without a backend.
-            For production, replace with Formspree, Netlify Forms, etc.
-            See: https://formspree.io or https://docs.netlify.com/forms/setup/
-          -->
+
           <form class="contact-form" action={`mailto:${CONTACT.email}`} method="post" enctype="text/plain">
             <div class="form-row">
               <div class="form-field">
