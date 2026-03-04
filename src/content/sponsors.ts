@@ -16,10 +16,8 @@ import frskyLogo from '../assets/uploads/sponsor/frsky.png';
 import hitecLogo from '../assets/uploads/sponsor/hitec.png';
 
 export interface Sponsor {
-  /** Imported image — Astro optimises to WebP at build time. */
   src:   ImageMetadata;
   alt:   string;
-  /** External URL — omit or leave empty to render without a link. */
   href?: string;
 }
 
