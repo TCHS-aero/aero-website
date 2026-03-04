@@ -19,9 +19,7 @@ export default defineConfig({
     service: {
       entrypoint: 'astro/assets/services/sharp',
       config: {
-        // default quality governs all images unless overridden by
-        // individual <Image> components (SponsorLogo already does).
-        quality: 90,
+        quality: 72,
       },
     },
   },
