@@ -2,19 +2,36 @@
 /**
  * index.astro — Homepage
  * ────────────────────────
- * To edit content: update the data arrays below (stats, programs, articles, sponsors).
+ * To edit content: update the data arrays below (stats, programs, sponsors).
  * To change layout or design: edit the <style> block at the bottom.
  * To change colors/fonts: edit src/assets/styles/global.css → :root variables.
+ *
+ * IMAGES
+ * ──────
+ * Hero and about-section images are imported from src/assets/uploads/.
+ * Astro automatically generates WebP variants at build time — no manual
+ * conversion or naming of *-800w.webp files is needed.
+ * To swap an image, replace the file in src/assets/uploads/ and update the
+ * import below.
  */
+import { Picture, Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { sponsors } from '../content/sponsors';
 
+// ── Image imports ────────────────────────────────────────────────────────────
+import heroImg     from '../assets/uploads/home/1home.png';
+import ourStoryImg from '../assets/uploads/home/our-story-photo.jpeg';
+// Note: no manual getImage() needed — BaseLayout auto-injects the LCP preload
+// when image={heroImg} is passed.
+
+// ── Page data ────────────────────────────────────────────────────────────────
 interface Stat { value: string; label: string; }
 
 const stats: Stat[] = [
 /*
-  { value: '2', label: 'Years of Flight'   },
-  { value: '27', label: 'Club Members'      },
-  { value: '2',   label: 'Drones'  }
+  { value: '2',  label: 'Years of Flight' },
+  { value: '27', label: 'Club Members'    },
+  { value: '2',  label: 'Drones'          },
 */
 ];
 
@@ -35,73 +52,24 @@ const programs = [
     desc:  'We explore new flight technologies through rigorous optimization.',
   },
 ];
-
-const articles = [
-  {
-    img:     '/uploads/news/news 1.webp',
-    imgFallback: '/uploads/news/articles/news 1.png',
-    label:   'Competition',
-    date:    '2024',
-    title:   'TCHS Aero Advances to Regional Finals',
-    excerpt: 'The team put in an exceptional performance at the district qualifier, securing a spot at the regional championship.',
-  },
-  {
-    img:     '/uploads/news/news 2.webp',
-    imgFallback: '/uploads/news/news 2.png',
-    label:   'Program Update',
-    date:    '2024',
-    title:   'New FPV Racing Division Launches',
-    excerpt: 'We\'re excited to introduce our new FPV racing division for members interested in high-speed drone piloting.',
-  },
-  {
-    img:     '/uploads/news/news 3.webp',
-    imgFallback: '/uploads/news/news 3.png',
-    label:   'Sponsors',
-    date:    '2024',
-    title:   'Welcoming Our New Partners',
-    excerpt: 'TCHS Aero is proud to announce new partnerships helping fund equipment and travel for the upcoming season.',
-  },
-];
-
-import { sponsors } from '../content/sponsors';
 ---
 
-<BaseLayout>
-  <!-- Preload hero image with responsive hints for LCP -->
-  <link
-    slot="head"
-    rel="preload"
-    as="image"
-    href="/uploads/home/1home-1200w.webp"
-    type="image/webp"
-    imagesrcset="/uploads/home/1home-800w.webp 800w, /uploads/home/1home-1200w.webp 1200w, /uploads/home/1home-1536w.webp 1536w"
-    imagesizes="100vw"
-    fetchpriority="high"
-  />
+<BaseLayout image={heroImg}>
+  <!-- BaseLayout automatically injects the LCP preload hint for heroImg -->
 
   <!-- ═══ HERO ═══════════════════════════════════════════════════ -->
   <section class="hero">
     <div class="hero__bg">
-      <picture>
-        <source
-          srcset="/uploads/home/1home-800w.webp 800w, /uploads/home/1home-1200w.webp 1200w, /uploads/home/1home-1536w.webp 1536w"
-          sizes="100vw"
-          type="image/webp"
-        />
-        <source
-          srcset="/uploads/home/1home.png"
-          type="image/png"
-        />
-        <img
-          src="/uploads/home/1home-1200w.webp"
-          alt="TCHS Aero drone in flight"
-          class="hero__photo"
-          width="1536"
-          height="1024"
-          fetchpriority="high"
-          decoding="async"
-        />
-      </picture>
+      <Picture
+        src={heroImg}
+        widths={[800, 1200, 1536]}
+        formats={['webp', 'png']}
+        sizes="100vw"
+        alt="TCHS Aero drone in flight"
+        class="hero__photo"
+        loading="eager"
+        fetchpriority="high"
+      />
       <div class="hero__gradient"></div>
       <div class="hero__grid" aria-hidden="true"></div>
     </div>
@@ -120,7 +88,7 @@ import { sponsors } from '../content/sponsors';
         </p>
         <div class="hero__actions reveal reveal--delay-3">
           <a href="/about-us" class="btn btn--primary">Discover Our Story</a>
-          <a href="/sponsor"   class="btn btn--ghost">Support the Club</a>
+          <a href="/sponsor"  class="btn btn--ghost">Support the Club</a>
         </div>
       </div>
     </div>
@@ -152,16 +120,26 @@ import { sponsors } from '../content/sponsors';
           <div class="reveal">
             {s.href ? (
               <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={`Visit ${s.alt} website`}>
-                <picture>
-                  <source srcset={s.src} type="image/webp" />
-                  <img src={s.fallback} alt={s.alt} class="sponsor-logo" loading="lazy" decoding="async" width="224" height="128" sizes="224px" />
-                </picture>
+                <Image
+                  src={s.src}
+                  alt={s.alt}
+                  class="sponsor-logo"
+                  width={224}
+                  format="webp"
+                  loading="lazy"
+                  decoding="async"
+                />
               </a>
             ) : (
-              <picture>
-                <source srcset={s.src} type="image/webp" />
-                <img src={s.fallback} alt={s.alt} class="sponsor-logo" loading="lazy" decoding="async" width="224" height="128" sizes="224px" />
-              </picture>
+              <Image
+                src={s.src}
+                alt={s.alt}
+                class="sponsor-logo"
+                width={224}
+                format="webp"
+                loading="lazy"
+                decoding="async"
+              />
             )}
           </div>
         ))}
@@ -177,23 +155,16 @@ import { sponsors } from '../content/sponsors';
     <div class="container about-preview__grid">
 
       <div class="about-preview__img-wrap reveal">
-        <picture>
-          <source
-            srcset="/uploads/home/our-story-photo-480w.webp 480w, /uploads/home/our-story-photo-800w.webp 800w, /uploads/home/our-story-photo-1200w.webp 1200w"
-            sizes="(min-width: 1024px) 50vw, 100vw"
-            type="image/webp"
-          />
-          <img
-            src="/uploads/home/our-story-photo.jpeg"
-            alt="TCHS Aero team members"
-            class="about-preview__img"
-            width="1200"
-            height="900"
-            sizes="(min-width: 1024px) 50vw, 100vw"
-            loading="lazy"
-            decoding="async"
-          />
-        </picture>
+        <Picture
+          src={ourStoryImg}
+          widths={[480, 800, 1200]}
+          formats={['webp', 'jpeg']}
+          sizes="(min-width: 1024px) 50vw, 100vw"
+          alt="TCHS Aero team members"
+          class="about-preview__img"
+          loading="lazy"
+          decoding="async"
+        />
         <div class="about-preview__corner-h" aria-hidden="true"></div>
         <div class="about-preview__corner-v" aria-hidden="true"></div>
         <div class="about-preview__badge" aria-hidden="true">
@@ -269,6 +240,16 @@ import { sponsors } from '../content/sponsors';
 </BaseLayout>
 
 <style>
+  /* ── Picture wrapper fix: Astro's <Picture> wraps <img> in a <picture> element.
+        Setting display:block + full dimensions ensures it behaves like a plain <img>
+        inside positioned containers. ── */
+  .hero__bg :global(picture),
+  .about-preview__img-wrap :global(picture) {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
   /* ── Hero ── */
   .hero {
     position: relative;
@@ -339,7 +320,7 @@ import { sponsors } from '../content/sponsors';
 
   .hero__sub {
     font-family: var(--font-sans);
-    color: rgba(255, 255, 255, 0.88); /* was 0.75 — bumped for WCAG AA */
+    color: rgba(255, 255, 255, 0.88);
     font-size: var(--text-base);
     max-width: 28rem;
     margin-bottom: var(--space-10);
@@ -547,123 +528,6 @@ import { sponsors } from '../content/sponsors';
     color: var(--color-gray);
     line-height: 1.75;
   }
-
-  /* ── News Preview ── */
-  .news-preview {
-    padding-block: var(--space-20);
-  }
-
-  @media (min-width: 768px) { .news-preview { padding-block: var(--space-28); } }
-
-  .news-preview__header {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-6);
-    margin-bottom: var(--space-20); /* ↑ increased from --space-14 */
-  }
-
-  @media (min-width: 768px) {
-    .news-preview__header {
-      flex-direction: row;
-      align-items: flex-end;
-      justify-content: space-between;
-    }
-  }
-
-  .news-preview__grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-6);
-  }
-
-  @media (min-width: 768px) {
-    .news-preview__grid { grid-template-columns: repeat(3, 1fr); gap: var(--space-8); }
-  }
-
-  /* News card */
-  .news-card {
-    background: var(--color-white);
-    transition: transform var(--duration-slow) var(--ease-expo), box-shadow var(--duration-slow) ease;
-  }
-
-  .news-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.09);
-  }
-
-  .news-card__img-wrap {
-    overflow: hidden;
-    aspect-ratio: 16 / 9;
-  }
-
-  .news-card__img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.7s ease;
-  }
-  .news-card:hover .news-card__img { transform: scale(1.05); }
-
-  .news-card__body { padding: var(--space-6) var(--space-6) var(--space-8); }
-
-  .news-card__meta {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-    margin-bottom: var(--space-4);
-  }
-
-  .news-card__tag {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--color-red);
-  }
-
-  .news-card__sep {
-    display: block;
-    width: 1rem;
-    height: 1px;
-    background: var(--color-cream-dark);
-  }
-
-  .news-card__date {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    color: var(--color-gray);
-  }
-
-  .news-card__title {
-    font-family: var(--font-serif);
-    font-size: var(--text-xl);
-    font-weight: 400;
-    line-height: 1.25;
-    margin-bottom: var(--space-3);
-    transition: color var(--duration-fast) ease;
-  }
-  .news-card:hover .news-card__title { color: var(--color-red); }
-
-  .news-card__excerpt {
-    font-family: var(--font-sans);
-    font-size: var(--text-sm);
-    color: var(--color-gray);
-    line-height: 1.75;
-    margin-bottom: var(--space-6);
-  }
-
-  .news-card__more {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--color-red);
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
-    transition: gap var(--duration-base) ease;
-  }
-  .news-card:hover .news-card__more { gap: var(--space-4); }
 
   /* ── Sponsors ── */
   .sponsors {

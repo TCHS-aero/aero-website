@@ -2,30 +2,13 @@
 /**
  * Footer.astro
  * ─────────────
- * Dark footer with:
- *  - Brand info, address, Instagram link
- *  - Two nav link groups
- *  - Copyright bar
+ * Dark footer with brand info, address, Instagram link, nav groups, copyright bar.
  *
- * To add a link group: edit footerGroups below.
+ * To add a nav link:    edit FOOTER_GROUPS in src/config/site.ts
+ * To update contact:    edit CONTACT      in src/config/site.ts
+ * To update site name:  edit SITE         in src/config/site.ts
  */
-const footerGroups = [
-  {
-    title: 'Navigate',
-    links: [
-      { text: 'Home',    href: '/' },
-      { text: 'About',   href: '/about-us' },
-      { text: 'News',    href: '/news' },
-    ],
-  },
-  {
-    title: 'Connect',
-    links: [
-      { text: 'Contact',   href: '/contact' },
-      { text: 'Sponsor Us', href: '/sponsor' },
-    ],
-  },
-];
+import { SITE, CONTACT, FOOTER_GROUPS } from '../../config/site';
 
 const year = new Date().getFullYear();
 ---
@@ -39,7 +22,7 @@ const year = new Date().getFullYear();
         <a href="/" class="footer-logo">
           <div class="footer-logo__icon">
             <img
-              src="/uploads/aero-logo.svg"
+              src={SITE.logoPath}
               alt=""
               width="28"
               height="28"
@@ -49,24 +32,21 @@ const year = new Date().getFullYear();
           <span class="footer-logo__name">TCHS <strong>Aero</strong></span>
         </a>
 
-        <p class="footer-tagline">
-          Temple City High School's competitive aeronautics and drone engineering club — pushing the boundaries of student innovation.
-        </p>
+        <p class="footer-tagline">{SITE.tagline}</p>
 
         <address class="footer-address">
-          <span>9501 Lemon Ave, Temple City, CA 91780</span>
-          <a href="mailto:tchsaero@tcusd.net">tchsaero@tcusd.net</a>
+          <span>{CONTACT.address.oneLine}</span>
+          <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
         </address>
 
         <div class="footer-social">
           <a
-            href="https://www.instagram.com/tchs.aero/"
+            href={CONTACT.instagramUrl}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="TCHS Aero on Instagram"
+            aria-label={`${SITE.name} on Instagram`}
             class="social-icon"
           >
-            <!-- Instagram SVG -->
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
             </svg>
@@ -75,7 +55,7 @@ const year = new Date().getFullYear();
       </div>
 
       <!-- Nav groups -->
-      {footerGroups.map(group => (
+      {FOOTER_GROUPS.map(group => (
         <div class="footer-nav-group">
           <p class="footer-nav-group__title">{group.title}</p>
           <ul class="footer-nav-group__list">
@@ -93,11 +73,7 @@ const year = new Date().getFullYear();
   <!-- Copyright bar -->
   <div class="footer-bar">
     <div class="container footer-bar__inner">
-      <p class="footer-bar__copy">&copy; {year} TCHS Aero. All rights reserved.</p>
-      <div class="footer-bar__links">
-        <a href="/privacy-policy">Privacy</a>
-        <a href="/terms-of-service">Terms</a>
-      </div>
+      <p class="footer-bar__copy">&copy; {year} {SITE.name}. All rights reserved.</p>
     </div>
   </div>
 </footer>
@@ -108,7 +84,6 @@ const year = new Date().getFullYear();
     color: var(--color-white);
   }
 
-  /* Main section */
   .footer-main {
     padding-block: var(--space-16) var(--space-20);
   }
@@ -120,9 +95,7 @@ const year = new Date().getFullYear();
   }
 
   @media (min-width: 640px) {
-    .footer-grid {
-      grid-template-columns: 1fr 1fr;
-    }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
   }
 
   @media (min-width: 1024px) {
@@ -166,7 +139,7 @@ const year = new Date().getFullYear();
   .footer-tagline {
     font-family: var(--font-sans);
     font-size: var(--text-sm);
-    color: rgba(255, 255, 255, 0.72); /* was 0.55 — bumped for WCAG AA */
+    color: rgba(255, 255, 255, 0.72);
     line-height: 1.7;
     max-width: 22rem;
     margin-bottom: var(--space-6);
@@ -178,22 +151,14 @@ const year = new Date().getFullYear();
     flex-direction: column;
     gap: 0.25rem;
     font-size: var(--text-sm);
-    color: rgba(255, 255, 255, 0.65); /* was 0.45 — bumped for WCAG AA */
+    color: rgba(255, 255, 255, 0.65);
     margin-bottom: var(--space-8);
   }
 
-  .footer-address a {
-    transition: color var(--duration-fast) ease;
-  }
-  .footer-address a:hover {
-    color: var(--color-white);
-  }
+  .footer-address a { transition: color var(--duration-fast) ease; }
+  .footer-address a:hover { color: var(--color-white); }
 
-  /* Social icon */
-  .footer-social {
-    display: flex;
-    gap: 1rem;
-  }
+  .footer-social { display: flex; gap: 1rem; }
 
   .social-icon {
     width: 2.25rem;
@@ -204,9 +169,9 @@ const year = new Date().getFullYear();
     justify-content: center;
     color: rgba(255, 255, 255, 0.5);
     transition:
-      background    var(--duration-base) ease,
-      border-color  var(--duration-base) ease,
-      color         var(--duration-base) ease;
+      background   var(--duration-base) ease,
+      border-color var(--duration-base) ease,
+      color        var(--duration-base) ease;
   }
 
   .social-icon:hover {
@@ -221,19 +186,23 @@ const year = new Date().getFullYear();
     font-size: 0.65rem;
     letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.55); /* was 0.35 */
+    color: rgba(255, 255, 255, 0.55);
     margin-bottom: var(--space-5);
+  }
+
+  .footer-nav-group__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
   }
 
   .footer-nav-group__link {
     font-family: var(--font-sans);
     font-size: var(--text-sm);
-    color: rgba(255, 255, 255, 0.72); /* was 0.55 */
+    color: rgba(255, 255, 255, 0.72);
     transition: color var(--duration-fast) ease;
   }
-  .footer-nav-group__link:hover {
-    color: var(--color-white);
-  }
+  .footer-nav-group__link:hover { color: var(--color-white); }
 
   /* Copyright bar */
   .footer-bar {
@@ -242,37 +211,14 @@ const year = new Date().getFullYear();
 
   .footer-bar__inner {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: var(--space-3);
+    justify-content: center;
     padding-block: var(--space-5);
-  }
-
-  @media (min-width: 640px) {
-    .footer-bar__inner {
-      flex-direction: row;
-      justify-content: space-between;
-    }
   }
 
   .footer-bar__copy {
     font-family: var(--font-mono);
     font-size: 0.65rem;
-    color: rgba(255, 255, 255, 0.50); /* was 0.25 */
-  }
-
-  .footer-bar__links {
-    display: flex;
-    gap: var(--space-6);
-  }
-
-  .footer-bar__links a {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    color: rgba(255, 255, 255, 0.6); /* raised from 0.25 → ~7.2:1 contrast on #1c1c1c ✓ WCAG AA */
-    transition: color var(--duration-fast) ease;
-  }
-  .footer-bar__links a:hover {
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.50);
   }
 </style>

@@ -1,48 +1,78 @@
 ---
 /**
  * BaseLayout.astro
+ *
+ * The `image` prop accepts either:
+ *   - An imported ImageMetadata object (from astro:assets) — optimised automatically
+ *   - A plain string path (e.g. '/uploads/aero-logo.svg') — used as-is
+ *
+ * When `image` is ImageMetadata, BaseLayout also injects a <link rel="preload">
+ * hint for the LCP hero image so individual pages don't need to do it manually.
  */
+import { getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import Header from '../components/Global/Header.astro';
 import Footer from '../components/Global/Footer.astro';
 import '../assets/styles/global.css';
+import { SITE, CONTACT } from '../config/site';
+
+// Default OG image — imported so Astro processes it
+import defaultOgSrc from '../assets/uploads/home/1home.png';
 
 interface Props {
   title?:       string;
   description?: string;
-  image?:       string;
+  /** Pass an imported image (ImageMetadata) or a plain URL string. */
+  image?:       ImageMetadata | string;
 }
 
 const {
-  title       = 'TCHS Aero — Temple City High School Aeronautics',
-  description = 'TCHS Aero is Temple City High School\'s competitive aeronautics and drone engineering club. We build, fly, and compete.',
-  image       = '/uploads/home/1home-1200w.webp',
+  title       = SITE.defaultTitle,
+  description = SITE.defaultDescription,
+  image,
 } = Astro.props;
 
-const siteUrl    = Astro.site ?? 'https://tchsaero.org';
-const canonical  = new URL(Astro.url.pathname, siteUrl).toString();
-const ogImage    = new URL(image, siteUrl).toString();
+// Resolve OG image URL (jpeg for best social-card compatibility)
+const ogImageSrc: string = await (async () => {
+  if (!image) {
+    const processed = await getImage({ src: defaultOgSrc, format: 'jpeg', width: 1200 });
+    return processed.src;
+  }
+  if (typeof image === 'string') return image;
+  const processed = await getImage({ src: image, format: 'jpeg', width: 1200 });
+  return processed.src;
+})();
+
+// Generate a WebP preload hint for the hero LCP image (only when ImageMetadata is passed)
+const heroPreloadSrc: string | null = image && typeof image !== 'string'
+  ? (await getImage({ src: image, format: 'webp', width: 1200 })).src
+  : null;
+
+const siteUrl   = Astro.site ?? SITE.url;
+const canonical = new URL(Astro.url.pathname, siteUrl).toString();
+const ogImage   = new URL(ogImageSrc, siteUrl).toString();
 
 const jsonLd = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": "TCHS Aero",
+  "name": SITE.name,
   "url": siteUrl.toString(),
-  "logo": new URL('/uploads/aero-logo.svg', siteUrl).toString(),
-  "description": "Temple City High School's competitive aeronautics and drone engineering club.",
+  "logo": new URL(SITE.logoPath, siteUrl).toString(),
+  "description": SITE.schemaDescription,
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "9501 Lemon Ave",
-    "addressLocality": "Temple City",
-    "addressRegion": "CA",
-    "postalCode": "91780",
-    "addressCountry": "US"
+    "streetAddress": CONTACT.address.street,
+    "addressLocality": CONTACT.address.city,
+    "addressRegion": CONTACT.address.state,
+    "postalCode": CONTACT.address.zip,
+    "addressCountry": CONTACT.address.country,
   },
   "contactPoint": {
     "@type": "ContactPoint",
-    "email": "tchsaero@tcusd.net",
-    "contactType": "general"
+    "email": CONTACT.email,
+    "contactType": "general",
   },
-  "sameAs": ["https://www.instagram.com/tchs.aero/"]
+  "sameAs": [CONTACT.instagramUrl],
 });
 ---
 <!DOCTYPE html>
@@ -67,7 +97,7 @@ const jsonLd = JSON.stringify({
   <meta property="og:title"       content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:image"       content={ogImage} />
-  <meta property="og:site_name"   content="TCHS Aero" />
+  <meta property="og:site_name"   content={SITE.name} />
 
   <meta name="twitter:card"        content="summary_large_image" />
   <meta name="twitter:title"       content={title} />
@@ -98,6 +128,15 @@ const jsonLd = JSON.stringify({
 
   <script type="application/ld+json" set:html={jsonLd} />
 
+  <!--
+    LCP preload — automatically injected when `image` prop is ImageMetadata.
+    Individual pages do NOT need to add their own <link rel="preload"> for the hero.
+  -->
+  {heroPreloadSrc && (
+    <link rel="preload" as="image" href={heroPreloadSrc} type="image/webp" fetchpriority="high" />
+  )}
+
+  <!-- Additional page-level head content (e.g. page-specific meta) -->
   <slot name="head" />
 </head>
 

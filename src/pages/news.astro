@@ -1,60 +1,40 @@
 ---
 /**
  * news.astro — News listing page
- * ─────────────────────────────────
+ *
  * Articles come from src/content/news/*.md — edit those files to update content,
  * or add a new .md file to publish a new article.
  *
  * To write a new article:
  *   1. Duplicate any file in src/content/news/
- *   2. Update the frontmatter fields (title, date, label, image, excerpt)
- *   3. Set hasFullArticle: true if the article has a full page, false to hide the button
- *   4. Write the article body below the frontmatter
- *   5. Save — the article will appear automatically on this page
+ *   2. Drop the article image in the same folder: e.g. ./my-photo.png
+ *   3. Update frontmatter (title, date, label, image, excerpt)
+ *   4. Set hasFullArticle: false to hide the "Read More" button
+ *   5. Save — the article appears automatically
  */
-import { getCollection } from 'astro:content';
-import type { CollectionEntry } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero   from '../components/Global/PageHero.astro';
+import { formatDate } from '../utils/dateUtils';
+import heroImg from '../assets/uploads/news/3news.png';
 
-type Article = CollectionEntry<'news'>; // shorthand for article entries
+type Article = CollectionEntry<'news'>;
 
-// Fetch all non-draft articles, newest first
-const articles: Article[] = ((await getCollection('news', (entry: Article) => !entry.data.draft)) as Article[])
-  .sort((a: Article, b: Article) => b.data.date.getTime() - a.data.date.getTime());
+const articles: Article[] = (
+  (await getCollection('news', (entry: Article) => !entry.data.draft)) as Article[]
+).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
-// The newest article is displayed as the featured hero
-const [featured, ...rest]: Article[] = articles; // type inference for destructuring
-
-// Format a Date object as "April 10, 2024"
-function fmt(date: Date) {
-  return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-}
+const [featured, ...rest] = articles;
 ---
 
 <BaseLayout
   title="News — TCHS Aero"
   description="Stay up to date with the latest news, competition results, and announcements from TCHS Aero."
-  image="/uploads/news/3news.png"
+  image={heroImg}
 >
 
-  <!-- Page hero -->
-  <section class="page-hero">
-    <picture>
-      <source
-        srcset="/uploads/news/3news-800w.webp 800w, /uploads/news/3news-1200w.webp 1200w"
-        sizes="100vw"
-        type="image/webp"
-      />
-      <img src="/uploads/news/3news.png" alt="" class="page-hero__img" role="presentation" width="1536" height="1024" fetchpriority="high" decoding="async" /></picture>
-    <div class="page-hero__overlay"></div>
-    <div class="page-hero__content">
-      <div class="container">
-        <span class="section-label section-label--light">Updates</span>
-        <h1>News &amp; Stories</h1>
-      </div>
-    </div>
-    <div class="page-hero__bar"></div>
-  </section>
+  <PageHero src={heroImg} label="Updates" heading="News & Stories" />
 
   <div class="news-page">
     <div class="container">
@@ -63,14 +43,27 @@ function fmt(date: Date) {
       {featured && (
         <article class="featured reveal">
           <div class="featured__img-wrap">
-            <img src={featured.data.image} alt={featured.data.title} class="featured__img" loading="eager" fetchpriority="high" width="800" height="600" decoding="async" />
+            {featured.data.image ? (
+              <Image
+                src={featured.data.image}
+                alt={featured.data.title}
+                class="featured__img"
+                width={800}
+                format="webp"
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+              />
+            ) : (
+              <div class="featured__img-placeholder" aria-hidden="true"></div>
+            )}
           </div>
           <div class="featured__body bg-cream">
             <div class="featured__meta">
               <span class="featured__tag">{featured.data.label}</span>
               <span class="featured__sep" aria-hidden="true"></span>
               <time datetime={featured.data.date.toISOString()} class="featured__date">
-                {fmt(featured.data.date)}
+                {formatDate(featured.data.date)}
               </time>
             </div>
             <h2 class="featured__title">{featured.data.title}</h2>
@@ -86,11 +79,19 @@ function fmt(date: Date) {
       <!-- Article grid -->
       {rest.length > 0 && (
         <div class="article-grid">
-          {rest.map((article: Article, i: number) => (
+          {rest.map((article, i) => (
             <article class={`article-card reveal reveal--delay-${(i % 3) + 1}`}>
               {article.data.image && (
                 <div class="article-card__img-wrap">
-                  <img src={article.data.image} alt={article.data.title} class="article-card__img" loading="lazy" decoding="async" width="800" height="450" />
+                  <Image
+                    src={article.data.image}
+                    alt={article.data.title}
+                    class="article-card__img"
+                    width={800}
+                    format="webp"
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
               )}
               <div class="article-card__body">
@@ -98,7 +99,7 @@ function fmt(date: Date) {
                   <span class="article-card__tag">{article.data.label}</span>
                   <span class="article-card__sep" aria-hidden="true"></span>
                   <time datetime={article.data.date.toISOString()} class="article-card__date">
-                    {fmt(article.data.date)}
+                    {formatDate(article.data.date)}
                   </time>
                 </div>
                 <h3 class="article-card__title">{article.data.title}</h3>
@@ -139,21 +140,23 @@ function fmt(date: Date) {
 
   .featured__img-wrap {
     overflow: hidden;
-    min-height: 300px; /* floor for mobile stacked layout */
+    min-height: 300px;
   }
 
   @media (min-width: 1024px) {
-    .featured__img-wrap {
-      min-height: unset; /* let it stretch to match the text panel height */
-    }
+    .featured__img-wrap { min-height: unset; }
   }
 
-  .featured__img {
+  .featured__img,
+  .featured__img-placeholder {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.7s ease;
   }
+
+  .featured__img-placeholder { background: var(--color-cream-dark); }
+
   .featured:hover .featured__img { transform: scale(1.04); }
 
   .featured__body {

@@ -11,13 +11,13 @@
   "categories": ["education", "sports"],
   "icons": [
     {
-      "src": "/uploads/aero logo.svg",
+      "src": "/uploads/aero-logo.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any maskable"
     },
     {
-      "src": "/uploads/aero logo.PNG",
+      "src": "/uploads/aero-logo.PNG",
       "sizes": "192x192",
       "type": "image/png"
     }

@@ -1,11 +1,15 @@
 ---
+import { Image }  from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero   from '../components/Global/PageHero.astro';
+import { sponsors } from '../content/sponsors';
+import heroImg from '../assets/uploads/sponsor/5sponsor.png';
 
 const stats = [
-  { value: '100%',      label: 'Student-Run'       },
-  { value: '501(c)(3)', label: 'Tax Deductible'     },
-  { value: 'International',  label: 'Competition Level'  },
-  { value: 'STEM',      label: 'Education Focus'    },
+  { value: '100%',          label: 'Student-Run'       },
+  { value: '501(c)(3)',     label: 'Tax Deductible'     },
+  { value: 'International', label: 'Competition Level'  },
+  { value: 'STEM',          label: 'Education Focus'    },
 ];
 
 const tiers = [
@@ -39,34 +43,15 @@ const tiers = [
     ],
   },
 ];
-
-import { sponsors } from '../content/sponsors';
 ---
 
 <BaseLayout
   title="Sponsor TCHS Aero — Support Student Aviation"
   description="Partner with TCHS Aero and invest in the next generation of aerospace engineers at Temple City High School."
-  image="/uploads/sponsor/5sponsor.png"
+  image={heroImg}
 >
 
-  <section class="page-hero giving-hero">
-    <picture>
-      <source
-        srcset="/uploads/sponsor/5sponsor-800w.webp 800w, /uploads/sponsor/5sponsor-1200w.webp 1200w"
-        sizes="100vw"
-        type="image/webp"
-      />
-      <img src="/uploads/sponsor/5sponsor.png" alt="" class="page-hero__img" role="presentation" width="1536" height="1024" fetchpriority="high" decoding="async" />
-    </picture>
-    <div class="giving-hero__overlay"></div>
-    <div class="page-hero__content">
-      <div class="container">
-        <span class="section-label section-label--light">Partnership</span>
-        <h1>Sponsor the Team</h1>
-      </div>
-    </div>
-    <div class="page-hero__bar giving-hero__bar"></div>
-  </section>
+  <PageHero src={heroImg} label="Partnership" heading="Sponsor the Team" variant="red" />
 
   <!-- Why sponsor -->
   <section class="why-sponsor">
@@ -149,10 +134,13 @@ import { sponsors } from '../content/sponsors';
       <div class="sponsors-logos">
         {sponsors.map((s, i) => (
           <div class={`reveal reveal--delay-${i + 1}`}>
-            <picture>
-              <source srcset={s.src} type="image/webp" />
-              <img src={s.fallback} alt={s.alt} class="sponsor-logo" loading="lazy" decoding="async" width="224" height="128" />
-            </picture>
+            {s.href ? (
+              <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={`Visit ${s.alt} website`}>
+                <Image src={s.src} alt={s.alt} class="sponsor-logo" width={224} format="webp" loading="lazy" decoding="async" />
+              </a>
+            ) : (
+              <Image src={s.src} alt={s.alt} class="sponsor-logo" width={224} format="webp" loading="lazy" decoding="async" />
+            )}
           </div>
         ))}
       </div>
@@ -173,16 +161,6 @@ import { sponsors } from '../content/sponsors';
 </BaseLayout>
 
 <style>
-  /* ── Hero variant ── */
-  .giving-hero__overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(101, 2, 7, 0.8);
-  }
-  .giving-hero__bar {
-    background: rgba(255, 255, 255, 0.25) !important;
-  }
-
   /* ── Why sponsor ── */
   .why-sponsor { padding-block: var(--space-20) var(--space-28); }
 
@@ -275,21 +253,7 @@ import { sponsors } from '../content/sponsors';
     position: relative;
   }
 
-  .tier-card--featured:hover {
-    transform: scale(1.03) translateY(-4px);
-  }
-
-  .tier-card__badge {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    background: var(--color-red);
-    color: var(--color-white);
-    padding: 0.25rem 0.75rem;
-    align-self: flex-start;
-    margin-bottom: var(--space-4);
-  }
+  .tier-card--featured:hover { transform: scale(1.03) translateY(-4px); }
 
   .tier-card__name {
     font-family: var(--font-mono);
@@ -335,9 +299,7 @@ import { sponsors } from '../content/sponsors';
   .tier-card__cta { width: 100%; text-align: center; }
 
   /* ── Current sponsors ── */
-  .current-sponsors {
-    padding-block: var(--space-16) var(--space-20);
-  }
+  .current-sponsors { padding-block: var(--space-16) var(--space-20); }
 
   .sponsors-logos {
     display: flex;

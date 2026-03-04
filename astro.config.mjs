@@ -7,12 +7,17 @@ export default defineConfig({
   integrations: [sitemap()],
   compressHTML: true,
   build: {
-    inlineStylesheets: 'always', // inline all CSS to eliminate render-blocking requests
+    inlineStylesheets: 'always', // eliminate render-blocking requests
   },
   vite: {
     build: {
       cssCodeSplit: true,
       assetsInlineLimit: 4096, // inline assets < 4KB as data URIs
+    },
+  },
+  image: {
+    service: {
+      entrypoint: 'astro/assets/services/sharp',
     },
   },
 });

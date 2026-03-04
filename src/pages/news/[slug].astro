@@ -1,31 +1,29 @@
 ---
 /**
  * src/pages/news/[slug].astro — Individual article page
- * ───────────────────────────────────────────────────────
- * Astro uses this file to generate a page for every .md file in
- * src/content/news/. No manual registration needed — just drop a
- * new .md file in that folder and this route handles it automatically.
+ *
+ * Astro generates a page for every .md in src/content/news/ automatically.
+ * No registration needed — just drop in a new file and this route handles it.
  */
-import { getCollection, getEntry } from 'astro:content';
-import type { CollectionEntry } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatDate } from '../../utils/dateUtils';
 
-type Article = CollectionEntry<'news'>; // entry type from content config
+type Article = CollectionEntry<'news'>;
 
 export async function getStaticPaths() {
-  const articles: Article[] = (await getCollection('news', (entry: Article) => !entry.data.draft)) as Article[];
-  return articles.map((article: Article) => ({
+  const articles = (
+    await getCollection('news', (entry: Article) => !entry.data.draft)
+  ) as Article[];
+  return articles.map((article) => ({
     params: { slug: article.slug },
-    props: { article },
+    props:  { article },
   }));
 }
 
 const { article } = Astro.props as { article: Article };
-const { Content } = await article.render();
-
-function fmt(date: Date) {
-  return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-}
+const { Content }  = await article.render();
 ---
 
 <BaseLayout
@@ -34,10 +32,19 @@ function fmt(date: Date) {
   image={article.data.image}
 >
 
-  <!-- Article hero -->
   {article.data.image && (
     <section class="article-hero">
-      <img src={article.data.image} alt={article.data.title} class="article-hero__img" />
+      <Image
+        src={article.data.image}
+        alt={article.data.title}
+        class="article-hero__img"
+        widths={[800, 1200]}
+        sizes="100vw"
+        format="webp"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+      />
       <div class="article-hero__overlay"></div>
       <div class="article-hero__bar"></div>
     </section>
@@ -46,13 +53,12 @@ function fmt(date: Date) {
   <div class="article-page">
     <div class="container container--narrow">
 
-      <!-- Meta -->
       <header class="article-header">
         <div class="article-header__meta">
           <span class="article-header__tag">{article.data.label}</span>
           <span class="article-header__sep" aria-hidden="true"></span>
           <time datetime={article.data.date.toISOString()} class="article-header__date">
-            {fmt(article.data.date)}
+            {formatDate(article.data.date)}
           </time>
         </div>
         <h1 class="article-header__title">{article.data.title}</h1>
@@ -60,12 +66,10 @@ function fmt(date: Date) {
         <p class="article-header__excerpt">{article.data.excerpt}</p>
       </header>
 
-      <!-- Body -->
       <div class="article-body prose">
         <Content />
       </div>
 
-      <!-- Back link -->
       <a href="/news" class="back-link">
         <span aria-hidden="true">←</span> Back to News
       </a>
@@ -76,7 +80,6 @@ function fmt(date: Date) {
 </BaseLayout>
 
 <style>
-  /* ── Hero ── */
   .article-hero {
     position: relative;
     height: clamp(240px, 40vh, 480px);
@@ -102,19 +105,11 @@ function fmt(date: Date) {
     background: var(--color-red);
   }
 
-  /* ── Layout ── */
-  .article-page {
-    padding-block: var(--space-16) var(--space-24);
-  }
+  .article-page { padding-block: var(--space-16) var(--space-24); }
 
-  .container--narrow {
-    max-width: 720px;
-  }
+  .container--narrow { max-width: 720px; }
 
-  /* ── Header ── */
-  .article-header {
-    margin-bottom: var(--space-12);
-  }
+  .article-header { margin-bottom: var(--space-12); }
 
   .article-header__meta {
     display: flex;
@@ -158,10 +153,7 @@ function fmt(date: Date) {
     margin-top: var(--space-6);
   }
 
-  /* ── Body prose ── */
-  .article-body {
-    margin-bottom: var(--space-16);
-  }
+  .article-body { margin-bottom: var(--space-16); }
 
   .prose :global(h2),
   .prose :global(h3) {
@@ -203,7 +195,6 @@ function fmt(date: Date) {
     font-style: italic;
   }
 
-  /* ── Back link ── */
   .back-link {
     font-family: var(--font-mono);
     font-size: var(--text-xs);

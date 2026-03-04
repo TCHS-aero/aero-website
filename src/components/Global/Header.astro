@@ -8,14 +8,10 @@
  *  - Mobile hamburger menu (animated → X, slide-open drawer)
  *  - JS for toggle / outside-click / Escape key / resize close
  *
- * To add a nav item: edit the `navItems` array below.
+ * To add a nav item: edit NAV_ITEMS in src/config/site.ts — changes
+ * will appear here and in the Footer automatically.
  */
-const navItems = [
-  { text: 'Home',    href: '/' },
-  { text: 'About',   href: '/about-us' },
-  { text: 'News',    href: '/news' },
-  { text: 'Contact', href: '/contact' },
-];
+import { NAV_ITEMS } from '../../config/site';
 
 const currentPath = Astro.url.pathname;
 ---
@@ -39,7 +35,7 @@ const currentPath = Astro.url.pathname;
       <!-- Desktop nav -->
       <nav class="desktop-nav" aria-label="Main navigation">
         <ul class="desktop-nav__list">
-          {navItems.map(item => {
+          {NAV_ITEMS.map(item => {
             const active = currentPath === item.href ||
               (item.href !== '/' && currentPath.startsWith(item.href));
             return (
@@ -76,7 +72,7 @@ const currentPath = Astro.url.pathname;
     <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation">
       <div class="container">
         <ul class="mobile-nav__list">
-          {navItems.map(item => {
+          {NAV_ITEMS.map(item => {
             const active = currentPath === item.href ||
               (item.href !== '/' && currentPath.startsWith(item.href));
             return (
@@ -138,16 +134,6 @@ const currentPath = Astro.url.pathname;
     width: auto;
     object-fit: contain;
   }
-
-  .logo__text {
-    font-family: var(--font-serif);
-    font-size: 1.125rem;
-    font-weight: 300;
-    color: var(--color-white);
-    letter-spacing: 0.02em;
-    transition: opacity var(--duration-fast) ease;
-  }
-  .logo:hover .logo__text { opacity: 0.8; }
 
   /* ── Desktop nav ── */
   .desktop-nav {
@@ -235,7 +221,7 @@ const currentPath = Astro.url.pathname;
 
   .bar--top { width: 1.5rem; }
   .bar--mid { width: 1.5rem; }
-  .bar--bot { width: 1rem;   } /* slightly shorter for visual interest */
+  .bar--bot { width: 1rem; }
 
   /* Animate to X when open */
   .mobile-toggle[aria-expanded="true"] .bar--top {
@@ -312,22 +298,18 @@ const currentPath = Astro.url.pathname;
 
   toggle.addEventListener('click', e => { e.stopPropagation(); setOpen(!isOpen); });
 
-  // Close when clicking outside the header
   document.addEventListener('click', e => {
     if (isOpen && !header.contains(e.target as Node)) setOpen(false);
   });
 
-  // Close on any nav link click
   nav.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => setOpen(false));
   });
 
-  // Close on Escape key
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && isOpen) setOpen(false);
   });
 
-  // Close on desktop resize
   window.addEventListener('resize', () => {
     if (window.innerWidth >= 768 && isOpen) setOpen(false);
   });

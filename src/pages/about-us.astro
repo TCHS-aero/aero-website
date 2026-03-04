@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero   from '../components/Global/PageHero.astro';
+import heroImg    from '../assets/uploads/about/2about-us.png';
 
 const values = [
   {
@@ -16,52 +18,23 @@ const values = [
   },
   {
     title: 'Integrity',
-    desc: 'Hardware either flies or it doesn\'t. We hold ourselves accountable to real outcomes.',
+    desc: "Hardware either flies or it doesn't. We hold ourselves accountable to real outcomes.",
   },
 ];
 
 const timeline = [
   { period: 'The Beginning', desc: 'TCHS Aero was founded in 2024 by a small group of Temple City students who wanted to combine their love of engineering and passion for flight.' },
-  { period: 'Today', desc: 'As word spread, membership grew alongside our ambitions. Now, 2026 is our inaugural year competing at SUAS.' }
+  { period: 'Today',         desc: 'As word spread, membership grew alongside our ambitions. Now, 2026 is our inaugural year competing at SUAS.' },
 ];
 ---
 
 <BaseLayout
   title="About Us — TCHS Aero"
   description="Learn about TCHS Aero's mission, team, and history as Temple City High School's competitive aeronautics club."
-  image="/uploads/about/2about-us.png"
+  image={heroImg}
 >
 
-  <link
-    slot="head"
-    rel="preload"
-    as="image"
-    href="/uploads/about/2about-us-1200w.webp"
-    type="image/webp"
-    imagesrcset="/uploads/about/2about-us-800w.webp 800w, /uploads/about/2about-us-1200w.webp 1200w, /uploads/about/2about-us-1536w.webp 1536w"
-    imagesizes="100vw"
-    fetchpriority="high"
-  />
-
-  <!-- Page hero -->
-  <section class="page-hero">
-    <picture>
-      <source
-        srcset="/uploads/about/2about-us-800w.webp 800w, /uploads/about/2about-us-1200w.webp 1200w, /uploads/about/2about-us-1536w.webp 1536w"
-        sizes="100vw"
-        type="image/webp"
-      />
-      <img src="/uploads/about/2about-us.png" alt="About TCHS Aero" class="page-hero__img" width="1536" height="1024" fetchpriority="high" decoding="async" />
-    </picture>
-    <div class="page-hero__overlay"></div>
-    <div class="page-hero__content">
-      <div class="container">
-        <span class="section-label section-label--light">TCHS Aero</span>
-        <h1>About Us</h1>
-      </div>
-    </div>
-    <div class="page-hero__bar"></div>
-  </section>
+  <PageHero src={heroImg} label="TCHS Aero" heading="About Us" />
 
   <!-- Mission -->
   <section class="mission">
@@ -75,13 +48,13 @@ const timeline = [
         </h2>
         <span class="accent-line"></span>
         <p class="body-text">
-          TCHS Aero builds heavy-lift VTOL drones from the ground up — 
-          designing the frame, wiring the electronics, writing the flight software, 
+          TCHS Aero builds heavy-lift VTOL drones from the ground up —
+          designing the frame, wiring the electronics, writing the flight software,
           and training the computer vision systems that power autonomous search and rescue missions.
         </p>
         <p class="body-text">
-          We compete at Student Unmanned Aerial Systems competition, one of the most demanding collegiate and high school 
-          aeronautics competitions in the world. Our work is organized across three 
+          We compete at Student Unmanned Aerial Systems competition, one of the most demanding collegiate and high school
+          aeronautics competitions in the world. Our work is organized across three
           teams — Mechatronics, Software, and Operations — just like our drone, we're built on precision and speed.
         </p>
       </div>
@@ -159,10 +132,7 @@ const timeline = [
     }
   }
 
-  .mission h2 em {
-    font-style: italic;
-    color: var(--color-red);
-  }
+  .mission h2 em { font-style: italic; color: var(--color-red); }
 
   .body-text {
     font-family: var(--font-sans);
@@ -170,7 +140,6 @@ const timeline = [
     margin-bottom: var(--space-6);
   }
 
-  /* Values card */
   .values {
     padding: var(--space-10) var(--space-12);
     display: flex;
@@ -207,9 +176,7 @@ const timeline = [
   }
 
   /* ── Timeline ── */
-  .timeline {
-    padding-block: var(--space-20) var(--space-24);
-  }
+  .timeline { padding-block: var(--space-20) var(--space-24); }
 
   .section-header {
     text-align: center;
@@ -221,10 +188,7 @@ const timeline = [
     margin-inline: auto;
   }
 
-  .timeline__entry {
-    display: flex;
-    gap: var(--space-6);
-  }
+  .timeline__entry { display: flex; gap: var(--space-6); }
 
   .timeline__marker {
     display: flex;
@@ -248,9 +212,7 @@ const timeline = [
     margin-top: var(--space-2);
   }
 
-  .timeline__body {
-    padding-bottom: var(--space-10);
-  }
+  .timeline__body { padding-bottom: var(--space-10); }
 
   .timeline__period {
     display: block;
