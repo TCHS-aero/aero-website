@@ -4,11 +4,7 @@
  * To add or update a sponsor:
  *   1. Drop the logo into src/assets/uploads/sponsor/ (PNG or JPEG)
  *   2. Import it below and add an entry to the array
- *   3. Astro will automatically generate an optimised WebP on build.
- *      The sponsor pages override the default settings (see
- *      `src/components/SponsorLogo.astro`) so that logos are produced at
- *      higher quality and with multiple width variants for sharp display on
- *      high‑density screens.
+ *   3. Astro will automatically generate an optimised WebP on build
  *   4. Both index.astro and sponsor.astro update automatically
  *
  * Leave `href` as an empty string or omit it to render the logo without a link.
