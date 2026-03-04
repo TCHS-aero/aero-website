@@ -35,17 +35,29 @@ const {
 // Resolve OG image URL (jpeg for best social-card compatibility)
 const ogImageSrc: string = await (async () => {
   if (!image) {
-    const processed = await getImage({ src: defaultOgSrc, format: 'jpeg', width: 1200 });
+    const processed = await getImage({ src: defaultOgSrc, format: 'jpeg', width: 1200, quality: 80 });
     return processed.src;
   }
   if (typeof image === 'string') return image;
-  const processed = await getImage({ src: image, format: 'jpeg', width: 1200 });
+  const processed = await getImage({ src: image, format: 'jpeg', width: 1200, quality: 80 });
   return processed.src;
 })();
 
-// Generate a WebP preload hint for the hero LCP image (only when ImageMetadata is passed)
-const heroPreloadSrc: string | null = image && typeof image !== 'string'
-  ? (await getImage({ src: image, format: 'webp', width: 1200 })).src
+// Widths must match PageHero.astro / index.astro <Picture widths={[800,1200,1536]}>
+const HERO_WIDTHS = [800, 1200, 1536] as const;
+
+interface HeroPreload { srcset: string; sizes: string; }
+
+const heroPreload: HeroPreload | null = image && typeof image !== 'string'
+  ? await (async () => {
+      const variants = await Promise.all(
+        HERO_WIDTHS.map(w => getImage({ src: image as ImageMetadata, format: 'webp', width: w, quality: 72 }))
+      );
+      return {
+        srcset: variants.map((v, i) => `${v.src} ${HERO_WIDTHS[i]}w`).join(', '),
+        sizes:  '100vw',
+      };
+    })()
   : null;
 
 const siteUrl   = Astro.site ?? SITE.url;
@@ -129,14 +141,22 @@ const jsonLd = JSON.stringify({
   <script type="application/ld+json" set:html={jsonLd} />
 
   <!--
-    LCP preload — automatically injected when `image` prop is ImageMetadata.
-    Individual pages do NOT need to add their own <link rel="preload"> for the hero.
+    Responsive LCP preload — injected when `image` prop is ImageMetadata.
+    Uses imagesrcset + imagesizes so the browser downloads only the size it
+    actually needs, not a fixed-width version that would cause a double-download.
   -->
-  {heroPreloadSrc && (
-    <link rel="preload" as="image" href={heroPreloadSrc} type="image/webp" fetchpriority="high" />
+  {heroPreload && (
+    <link
+      rel="preload"
+      as="image"
+      imagesrcset={heroPreload.srcset}
+      imagesizes={heroPreload.sizes}
+      type="image/webp"
+      fetchpriority="high"
+    />
   )}
 
-  <!-- Additional page-level head content (e.g. page-specific meta) -->
+  <!-- Additional page-level head content -->
   <slot name="head" />
 </head>
 
