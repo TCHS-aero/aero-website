@@ -14,15 +14,15 @@
  * To swap an image, replace the file in src/assets/uploads/ and update the
  * import below.
  */
-import { Picture, Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SponsorLogo from '../components/SponsorLogo.astro';
-import { sponsors } from '../content/sponsors';
+import { sponsors, orbiterSponsors } from '../content/sponsors';
+import type { Sponsor } from '../content/sponsors';
 
 // ── Image imports ────────────────────────────────────────────────────────────
 import heroImg     from '../assets/uploads/home/1home.png';
 import ourStoryImg from '../assets/uploads/home/our-story-photo.jpeg';
-// Note: no manual getImage() needed 
 
 // ── Page data ────────────────────────────────────────────────────────────────
 interface Stat { value: string; label: string; }
@@ -78,18 +78,31 @@ const programs = [
       <div class="hero__content">
         <span class="section-label section-label--light reveal">Est. Temple City High School</span>
         <h1 class="hero__heading reveal reveal--delay-1">
-          Where<br/>
-          <em>Engineering</em><br/>
+          Where <em>Engineering</em><br/>
           Takes Flight
         </h1>
         <p class="hero__sub reveal reveal--delay-2">
           TCHS Aero is Temple City High School's competitive aeronautics and drone engineering
-          club — where students design, build, and push the limits of flight.
+          club — where students design, build, and fly aircraft that push the limits of what's
+          possible at the high school level.
         </p>
         <div class="hero__actions reveal reveal--delay-3">
           <a href="/about-us" class="btn btn--primary">Discover Our Story</a>
           <a href="/sponsor"  class="btn btn--ghost">Support the Club</a>
         </div>
+
+        {orbiterSponsors.length > 0 && (
+          <div class="hero__orbiter reveal reveal--delay-4">
+            <p class="hero__orbiter-label">Orbiter Tier Sponsors</p>
+            <ul class="hero__orbiter-logos" role="list">
+              {orbiterSponsors.map((s: Sponsor) => (
+                <li>
+                  <SponsorLogo {...s} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
 
@@ -105,26 +118,6 @@ const programs = [
           <span class="stats__label">{stat.label}</span>
         </div>
       ))}
-    </div>
-  </section>
-
-
-  <section class="sponsors">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-label">Our Partners</span>
-        <h2>Supported By</h2>
-      </div>
-      <div class="sponsors__logos">
-        {sponsors.map(s => (
-          <div class="reveal">
-            <SponsorLogo {...s} />
-          </div>
-        ))}
-      </div>
-      <div class="sponsors__cta reveal">
-        <a href="/sponsor" class="btn btn--outline">Become a Sponsor</a>
-      </div>
     </div>
   </section>
 
@@ -194,6 +187,26 @@ const programs = [
   </section>
 
 
+  <section class="sponsors">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Our Partners</span>
+        <h2>Supported By</h2>
+      </div>
+      <div class="sponsors__logos">
+        {sponsors.map(s => (
+          <div class="reveal">
+            <SponsorLogo {...s} />
+          </div>
+        ))}
+      </div>
+      <div class="sponsors__cta reveal">
+        <a href="/sponsor" class="btn btn--outline">Become a Sponsor</a>
+      </div>
+    </div>
+  </section>
+
+
   <section class="cta-banner">
     <div class="cta-banner__orbs" aria-hidden="true">
       <div class="cta-banner__orb cta-banner__orb--tr"></div>
@@ -231,9 +244,8 @@ const programs = [
   /* ── Hero ── */
   .hero {
     position: relative;
-    height: 90vh;
-    min-height: 36rem;
-    max-height: 56rem;
+    min-height: 44rem;
+    height: auto;
     overflow: hidden;
   }
 
@@ -252,12 +264,18 @@ const programs = [
   .hero__gradient {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      to right,
-      rgba(101, 2, 7, 0.88) 0%,
-      rgba(101, 2, 7, 0.55) 55%,
-      rgba(0, 0, 0, 0.1) 100%
-    );
+    background:
+      linear-gradient(
+        to right,
+        rgba(101, 2, 7, 0.90) 0%,
+        rgba(101, 2, 7, 0.60) 50%,
+        rgba(0, 0, 0, 0.15) 100%
+      ),
+      linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.35) 0%,
+        transparent 30%
+      );
   }
 
   .hero__grid {
@@ -271,21 +289,20 @@ const programs = [
 
   .hero__body {
     position: relative;
-    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-bottom: var(--space-16);
+    padding-block: var(--space-20);
   }
 
-  .hero__content { max-width: 40rem; }
+  .hero__content { max-width: 52rem; }
 
   .hero__heading {
     font-size: var(--text-5xl);
     font-weight: 300;
     color: var(--color-white);
     line-height: 1.0;
-    margin-bottom: var(--space-6);
+    margin-bottom: var(--space-4);
   }
 
   .hero__heading em {
@@ -293,15 +310,16 @@ const programs = [
     font-weight: 300;
   }
 
-  @media (min-width: 768px)  { .hero__heading { font-size: var(--text-6xl); } }
-  @media (min-width: 1024px) { .hero__heading { font-size: var(--text-7xl); } }
+  @media (min-width: 768px)  { .hero__heading { font-size: var(--text-5xl); } }
+  @media (min-width: 1024px) { .hero__heading { font-size: var(--text-6xl); } }
 
   .hero__sub {
     font-family: var(--font-sans);
     color: rgba(255, 255, 255, 0.88);
     font-size: var(--text-base);
-    max-width: 28rem;
-    margin-bottom: var(--space-10);
+    max-width: 38rem;
+    margin-bottom: var(--space-6);
+    line-height: 1.75;
   }
 
   @media (min-width: 768px) { .hero__sub { font-size: var(--text-lg); } }
@@ -313,6 +331,44 @@ const programs = [
   }
 
   @media (min-width: 480px) { .hero__actions { flex-direction: row; } }
+
+  .hero__orbiter {
+    margin-top: var(--space-8);
+    padding-top: var(--space-6);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    max-width: 32rem;
+  }
+
+  .hero__orbiter-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, .9);
+    margin-bottom: var(--space-6);
+    line-height: 1;
+  }
+
+  .hero__orbiter-logos {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-8);
+    list-style: none;
+  }
+
+  .hero__orbiter :global(.sponsor-logo) {
+    height: 2.8rem;
+    width: 6rem;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: 0.65;
+    transition: opacity var(--duration-slow) ease;
+  }
+
+  .hero__orbiter :global(.sponsor-logo):hover {
+    opacity: 1;
+  }
 
   .hero__bar {
     position: absolute;
