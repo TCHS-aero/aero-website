@@ -6,9 +6,9 @@
   --color-cream-dark: #E8E0D0;
   --color-cream-light: #FAF7F2;
   --color-white: #ffffff;
-  --color-charcoal: #28241f;
+  --color-charcoal: #1C1C1C;
   --color-gray: #6B6B6B;
-  --color-gray-light: #c4c4c2;
+  --color-gray-light: #C4B9A8;
   --color-link: #2E5E8E;
   --color-link-visited: #5B3A87;
   --color-link-hover: #1D3F61;
@@ -330,7 +330,7 @@ a.link:visited {
 .page-hero__overlay {
   position: absolute;
   inset: 0;
-  background: rgba(40, 36, 31, 0.65);
+  background: rgba(28, 28, 28, 0.65);
 }
 .page-hero__content {
   position: absolute;
