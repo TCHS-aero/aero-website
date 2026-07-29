@@ -64,8 +64,8 @@ export const DIVISIONS: Division[] = [
     name: 'Leadership',
     description: 'The captains and leads who keep the team coordinated and the project on track.',
     members: [
-      { name: 'Bright Xu', role: 'Mechanical Lead', bio: '', photo: bXu },
-      { name: 'Jasmine Lee',   role: 'Electrical Lead',    bio: '.', photo: jLee },
+      { name: 'Bright Xu', role: 'Co-Mechatronics Lead', bio: '', photo: bXu },
+      { name: 'Jasmine Lee',   role: 'Co-Mechatronics Lead',    bio: '.', photo: jLee },
       { name: 'Hakan Sabol',   role: 'Co-Software Lead',    bio: '.', photo: hSabol },
       { name: 'Liang Zhang', role: 'Co-Software Lead',       bio: '', photo: lZhang },
     { name: 'Yvonne', role: 'Co-Operations Lead', bio: '', photo: yWang },
@@ -93,8 +93,8 @@ export const DIVISIONS: Division[] = [
     name: 'Mechanical - Electrical',
     description: 'Designs the power distribution, wiring harnesses, and avionics that keep everything running.',
     members: [
-      { name: 'Bright Xu', role: 'Mechanical Lead', bio: 'Structural analysis.', photo: bXu },
-      { name: 'Jasmine Lee',   role: 'Electrical Lead',    bio: 'Managed all electrical wiring, oversaw the build process, and coordinated team efforts.', photo: jLee },
+      { name: 'Bright Xu', role: 'Co-Mechatronics Lead', bio: 'Structural analysis.', photo: bXu },
+      { name: 'Jasmine Lee',   role: 'Co-Mechatronics Lead',    bio: 'Managed all electrical wiring, oversaw the build process, and coordinated team efforts.', photo: jLee },
       { name: 'Aston Morgan',   role: '',    bio: 'Assisted with carbon fiber fabrication and payload sack assembly.', photo: null },
       { name: 'Colin Morales',   role: '',    bio: '', photo: cMorales },
 
