@@ -1,0 +1,193 @@
+---
+import BaseLayout  from '../layouts/BaseLayout.astro';
+import PageHero    from '../components/Global/PageHero.astro';
+import { DIVISIONS } from '../content/team';
+
+import heroImg from '../assets/uploads/the-team/the-team-hero.jpg';
+---
+
+<BaseLayout
+  title="The Team — TCHS Aero"
+  description="Meet the students behind TCHS Aero — software, electrical, mechanical, and operations."
+  image={heroImg}
+>
+
+  <PageHero src={heroImg} label="TCHS Aero" heading="The Team" />
+
+  <!-- Intro -->
+  <section class="tm-intro">
+    <div class="container tm-intro__inner reveal">
+      <span class="section-label">Thinkers. Engineers. Pilots.</span>
+      <h2>Here's who makes it<em> happen.</em></h2>
+    </div>
+  </section>
+
+  <!-- Divisions -->
+  {DIVISIONS.map((div, di) => (
+    <section class:list={['tm-div', di % 2 !== 0 && 'bg-cream']}>
+      <div class="container">
+
+        <div class="tm-div__header reveal">
+          <div>
+            <span class="section-label">{div.name}</span>
+            <h2>{div.name}</h2>
+            <span class="accent-line"></span>
+            <p class="body-text tm-div__desc">{div.description}</p>
+          </div>
+        </div>
+
+        <div class="tm-grid">
+          {div.members.map((m, mi) => (
+            <article class:list={['tm-card', 'reveal', `reveal--delay-${(mi % 3) + 1}`]}>
+              <div class="tm-card__avatar">
+                {m.photo ? (
+                  <img src={m.photo.src} alt={m.name} class="tm-card__photo" />
+                ) : (
+                  <div class="tm-card__placeholder" aria-hidden="true">
+                    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="24" cy="18" r="9" fill="currentColor" opacity=".25"/>
+                      <path d="M6 42c0-9.941 8.059-18 18-18s18 8.059 18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".25"/>
+                    </svg>
+                  </div>
+                )}
+              </div>
+              <div class="tm-card__body">
+                <h3 class="tm-card__name">{m.name}</h3>
+                <span class="tm-card__role">{m.role}</span>
+                {m.bio && <p class="tm-card__bio">{m.bio}</p>}
+              </div>
+            </article>
+          ))}
+        </div>
+
+      </div>
+    </section>
+  ))}
+
+</BaseLayout>
+
+<style>
+  /* ── Intro ──────────────────────────────────────────────── */
+  .tm-intro { padding: var(--space-20) 0 var(--space-6); }
+  .tm-intro__inner { max-width: 42rem; }
+  .tm-intro__inner .accent-line { margin: var(--space-5) 0; }
+  .tm-intro__inner h2 em { font-style: italic; color: var(--color-red); }
+
+  /* ── Division sections ──────────────────────────────────── */
+  .tm-div { padding: var(--space-16) 0 var(--space-20); }
+
+  .tm-div__header {
+    margin-bottom: var(--space-12);
+  }
+  .tm-div__header h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    margin: 0.3rem 0 0;
+    color: var(--color-charcoal);
+  }
+  .tm-div__header .accent-line { margin: var(--space-5) 0; }
+  .tm-div__desc { max-width: 36rem; }
+
+  /* ── Member grid ────────────────────────────────────────── */
+  .tm-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: var(--space-8);
+  }
+
+  /* ── Member card ────────────────────────────────────────── */
+  .tm-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-cream-dark);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .tm-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px color-mix(in srgb, var(--color-red) 10%, transparent);
+  }
+
+  /* Photo / placeholder */
+  .tm-card__avatar {
+    aspect-ratio: 1 / 1;
+    background: var(--color-cream);
+    overflow: hidden;
+  }
+  .tm-card__photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+  }
+  .tm-card__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-gray);
+  }
+  .tm-card__placeholder svg {
+    width: 60%;
+    height: 60%;
+  }
+
+  /* Text */
+  .tm-card__body {
+    padding: var(--space-5) var(--space-6) var(--space-6);
+  }
+  .tm-card__name {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin: 0 0 var(--space-1);
+    color: var(--color-charcoal);
+  }
+  .tm-card__role {
+    display: block;
+    font-size: var(--text-xs);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-red);
+    font-weight: 600;
+    margin-bottom: var(--space-3);
+  }
+  .tm-card__bio {
+    font-size: var(--text-sm);
+    color: var(--color-gray);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* ── CTA ────────────────────────────────────────────────── */
+  .tm-cta {
+    background: var(--color-charcoal);
+    padding: var(--space-20) 0;
+    color: var(--color-white);
+    text-align: center;
+  }
+  .tm-cta__inner { max-width: 38rem; margin: 0 auto; }
+  .tm-cta__inner h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: var(--color-white);
+    margin-bottom: var(--space-4);
+  }
+  .tm-cta__inner p {
+    color: rgba(255,255,255,0.6);
+    margin-bottom: var(--space-8);
+    line-height: 1.7;
+  }
+  .tm-cta__actions { display: flex; justify-content: center; }
+
+  /* ── Mobile ─────────────────────────────────────────────── */
+  @media (max-width: 40rem) {
+    .tm-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tm-card { transition: none; }
+  }
+</style>

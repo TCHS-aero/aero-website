@@ -1,0 +1,296 @@
+---
+import { Picture } from 'astro:assets';
+import BaseLayout  from '../layouts/BaseLayout.astro';
+import PageHero    from '../components/Global/PageHero.astro';
+import { JOURNEY } from '../content/journey';
+
+import heroImg from '../assets/uploads/our-journey/drone.jpg';
+---
+
+<BaseLayout
+  title="Our Journey — TCHS Aero"
+  description="How TCHS Aero takes a drone from CAD to the competition flight line — design, prototype, test, and build again."
+  image={heroImg}
+>
+
+  <PageHero src={heroImg} label="TCHS Aero" heading="Our Journey" />
+
+  <section class="jrn-intro">
+    <div class="container">
+      <div class="jrn-intro__inner reveal">
+        <span class="section-label">25-26 Build Cycle</span>
+        <h2>
+          Design It. Build It.<br/>
+          <em>Build It Better.</em>
+        </h2>
+        <span class="accent-line"></span>
+        <p class="body-text">
+          Every aircraft we fly are fully student lead.
+          Designed, Built, and Flown. Every part of the drone belongs to a hardwork from the students.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="jrn-phases">
+    <div class="container">
+      {JOURNEY.map((phase, i) => (
+        <article class:list={['jrn-phase', 'reveal', i % 2 !== 0 && 'jrn-phase--flip']}>
+
+          <!-- Image + video side -->
+          <div class:list={['jrn-phase__media', `jrn-phase__media--${Array.isArray(phase.image) ? phase.image.length : (phase.image ? 1 : 0)}`]}>
+            {!phase.image || (Array.isArray(phase.image) && phase.image.length === 0) ? (
+              <div class="jrn-phase__placeholder" aria-label={phase.alt}>
+                <span>Photo coming soon</span>
+              </div>
+            ) : Array.isArray(phase.image) ? (
+              phase.image.map((img, idx) => (
+                <Picture
+                  src={img}
+                  widths={[600, 900]}
+                  formats={['webp', 'png']}
+                  sizes="(max-width: 56rem) 100vw, 45vw"
+                  alt={`${phase.alt}${phase.image.length > 1 ? ` ${idx + 1}` : ''}`}
+                  class="jrn-phase__img"
+                />
+              ))
+            ) : (
+              <Picture
+                src={phase.image}
+                widths={[600, 900]}
+                formats={['webp', 'png']}
+                sizes="(max-width: 56rem) 100vw, 45vw"
+                alt={phase.alt}
+                class="jrn-phase__img"
+              />
+            )}
+
+            {phase.video && (
+              <video
+                class="jrn-phase__video"
+                src={phase.video}
+                controls
+                muted
+                playsinline
+                preload="metadata"
+              />
+            )}
+          </div>
+
+          <!-- Text side -->
+          <div class="jrn-phase__body">
+            <h3>{phase.title}</h3>
+            <span class="accent-line"></span>
+            {phase.body.map(para => (
+              <p class="body-text">{para}</p>
+            ))}
+          </div>
+
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="jrn-cta bg-cream">
+    <div class="container jrn-cta__inner">
+      <h2 class="reveal">Want to Support the Build?</h2>
+      <p class="reveal reveal--delay-1">
+        Our sponsors make it possible to buy the materials, tools, and
+        components that turn sketches into flying aircraft.
+      </p>
+      <div class="jrn-cta__actions reveal reveal--delay-2">
+        <a href="/contact" class="btn btn--white">Get in Touch</a>
+        <a href="/sponsor"  class="btn btn--primary">Sponsor the Team</a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  /* ── Intro ──────────────────────────────────────────────── */
+  .jrn-intro { padding: var(--space-20) 0 var(--space-8); }
+  .jrn-intro__inner { max-width: 42rem; }
+  .jrn-intro__inner .accent-line { margin: var(--space-5) 0; }
+
+  /* ── Phase rows ─────────────────────────────────────────── */
+  .jrn-phases { padding-bottom: var(--space-20); }
+
+  .jrn-phase {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-12);
+    align-items: center;
+    padding: var(--space-16) 0;
+    border-bottom: 1px solid var(--color-cream-dark);
+  }
+  .jrn-phase:last-child { border-bottom: none; }
+
+  :global(.page-hero__img) {
+    object-position: center 55%;
+  }
+
+  .jrn-phase--flip .jrn-phase__media { order: 2; }
+  .jrn-phase--flip .jrn-phase__body  { order: 1; }
+
+  /* ── Base image style ───────────────────────────────────── */
+  .jrn-phase__img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    display: block;
+  }
+
+  /* ── Image grid variants ────────────────────────────────── */
+
+  /* 1 image */
+  .jrn-phase__media--1 { display: block; }
+
+  /* 2 images — side by side */
+  .jrn-phase__media--2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  /* 3 images — 2 top, 1 full width bottom */
+  .jrn-phase__media--3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+  .jrn-phase__media--3 .jrn-phase__img:last-child {
+    grid-column: 1 / -1;
+  }
+
+  /* 4 images — 2×2 grid */
+  .jrn-phase__media--4 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+  .jrn-phase__media--4 .jrn-phase__img {
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  /* 5 images — 3 top, 2 bottom */
+  .jrn-phase__media--5 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.75rem;
+    align-items: start;
+  }
+  .jrn-phase__media--5 .jrn-phase__img {
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    width: 100%;
+  }
+  .jrn-phase__media--5 .jrn-phase__img:nth-child(4) {
+    grid-column: 1 / span 2;
+  }
+  .jrn-phase__media--5 .jrn-phase__img:nth-child(5) {
+    grid-column: 3;
+  }
+
+  /* 6 images — 3×2 grid */
+  .jrn-phase__media--6 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.75rem;
+  }
+  .jrn-phase__media--6 .jrn-phase__img {
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  /* ── Video ──────────────────────────────────────────────── */
+  .jrn-phase__video {
+    width: 100%;
+    border-radius: 8px;
+    margin-top: 0.75rem;
+    display: block;
+  }
+
+  /* ── Placeholder ────────────────────────────────────────── */
+  .jrn-phase__placeholder {
+    aspect-ratio: 4 / 3;
+    border-radius: 8px;
+    background: var(--color-cream);
+    border: 2px dashed var(--color-cream-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .jrn-phase__placeholder span {
+    font-size: var(--text-sm);
+    color: var(--color-gray);
+    font-family: var(--font-mono);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── Text side ──────────────────────────────────────────── */
+  .jrn-phase__body h3 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    line-height: 1.15;
+    margin: 0.3rem 0 0;
+    color: var(--color-charcoal);
+  }
+  .jrn-phase__body .accent-line { margin: var(--space-5) 0; }
+  .jrn-phase__body .body-text + .body-text { margin-top: var(--space-4); }
+
+  /* ── CTA ────────────────────────────────────────────────── */
+  .jrn-cta { padding: var(--space-20) 0; }
+  .jrn-cta__inner {
+    text-align: center;
+    max-width: 42rem;
+    margin: 0 auto;
+  }
+  .jrn-cta__inner h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+  }
+  .jrn-cta__inner p { margin: var(--space-4) 0 var(--space-8); }
+  .jrn-cta__actions {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* ── Mobile ─────────────────────────────────────────────── */
+  @media (max-width: 48rem) {
+    .jrn-phase {
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+      padding: var(--space-12) 0;
+    }
+    .jrn-phase--flip .jrn-phase__media { order: 0; }
+    .jrn-phase--flip .jrn-phase__body  { order: 0; }
+
+    .jrn-phase__media--2,
+    .jrn-phase__media--3 {
+      grid-template-columns: 1fr;
+    }
+    .jrn-phase__media--3 .jrn-phase__img:last-child {
+      grid-column: 1;
+    }
+    .jrn-phase__media--5,
+    .jrn-phase__media--6 {
+      grid-template-columns: 1fr 1fr;
+    }
+    .jrn-phase__media--5 .jrn-phase__img:nth-child(4),
+    .jrn-phase__media--5 .jrn-phase__img:nth-child(5) {
+      grid-column: auto;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .jrn-phase { transition: none; }
+  }
+</style>

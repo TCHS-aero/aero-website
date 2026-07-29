@@ -51,10 +51,12 @@ export const CONTACT = {
 
 /** Primary nav links — used in both Header and Footer. */
 export const NAV_ITEMS = [
-  { text: 'Home',    href: '/'         },
-  { text: 'About',   href: '/about-us' },
-  { text: 'News',    href: '/news'     },
-  { text: 'Contact', href: '/contact'  },
+  { text: 'Home',          href: '/'              },
+  { text: 'About',         href: '/about-us'      },
+  { text: 'Our Journey',   href: '/our-journey'   },
+  { text: 'The Team',      href: '/the-team'      },
+  { text: 'News',          href: '/news'          },
+  { text: 'Contact',       href: '/contact'       },
 ] as const;
 
 /** Footer link columns — derived from NAV_ITEMS + extras. */
