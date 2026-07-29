@@ -36,6 +36,10 @@ export const CONTACT = {
   email:           'tchsaero@tcusd.net',
   instagramUrl:    'https://www.instagram.com/tchs.aero/',
   instagramHandle: '@tchs.aero',
+  youtubeUrl:      'https://www.youtube.com/@aeroTCHS',
+  youtubeHandle:   '@AeroTCHS',
+  githubUrl:       'https://github.com/TCHS-aero',
+  githubHandle:    'TCHS-aero',
   address: {
     street:   '9501 Lemon Ave',
     city:     'Temple City',
