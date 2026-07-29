@@ -42,7 +42,6 @@ import wWei from '../assets/uploads/the-team/winter.jpg';
 
 import yWang from '../assets/uploads/the-team/yvonne.jpg';
 import gGuan from '../assets/uploads/the-team/gracie.jpg';
-import { gunzip } from 'three/examples/jsm/libs/fflate.module.js';
 
 
 // ── Types ──────────────────────────────────────────────────────────────────────
