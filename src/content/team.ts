@@ -65,8 +65,8 @@ export const DIVISIONS: Division[] = [
     description: 'The captains and leads who keep the team coordinated and the project on track.',
     members: [
       { name: 'Bright Xu', role: 'Co-Mechatronics Lead', bio: '', photo: bXu },
-      { name: 'Jasmine Lee',   role: 'Co-Mechatronics Lead',    bio: '.', photo: jLee },
-      { name: 'Hakan Sabol',   role: 'Co-Software Lead',    bio: '.', photo: hSabol },
+      { name: 'Jasmine Lee',   role: 'Co-Mechatronics Lead',    bio: '', photo: jLee },
+      { name: 'Hakan Sabol',   role: 'Co-Software Lead',    bio: '', photo: hSabol },
       { name: 'Liang Zhang', role: 'Co-Software Lead',       bio: '', photo: lZhang },
     { name: 'Yvonne', role: 'Co-Operations Lead', bio: '', photo: yWang },
       { name: 'Gracie', role: 'Co-Operations Lead', bio: '', photo: gGuan },
@@ -77,10 +77,10 @@ export const DIVISIONS: Division[] = [
     name: 'Software',
     description: 'Writes the flight stack, autonomy pipeline, and computer vision systems that give our drone its brain.',
     members: [
-      { name: 'Hakan Sabol',   role: 'Co-Software Lead',    bio: '.', photo: hSabol },
+      { name: 'Hakan Sabol',   role: 'Co-Software Lead',    bio: '', photo: hSabol },
       { name: 'Liang Zhang', role: 'Co-Software Lead & Computer Vision',       bio: '', photo: lZhang },
       { name: 'Timonthy Chen', role: 'Computer Vision',bio: '', photo: tChen },
-      { name: 'Matthew Hannon', role: 'Lead Developer',bio: ' ', photo: mHannon },
+      { name: 'Matthew Hannon', role: 'Lead Developer',bio: '', photo: mHannon },
       { name: 'Thu Htet Myat', role: 'Telemetry Dashboard & Pilot',bio: '', photo: tMyat },
       { name: 'Zibo Zhang', role: 'Helped with Computer Vision',bio: '', photo: zZhang },
       { name: 'Zonglei Sun', role: 'Mission Mode Code and App Development',bio: '', photo: zSun },
