@@ -1,30 +1,30 @@
-import design1 from '../assets/uploads/our-Journey/drone mechanism.png';
-import design2 from '../assets/uploads/our-Journey/3d modle drone.png';
-import design3 from '../assets/uploads/our-Journey/designing.JPG';
-import design4 from '../assets/uploads/our-Journey/bracket-cad.png';
+import design1 from '../assets/uploads/our-journey/drone mechanism.png';
+import design2 from '../assets/uploads/our-journey/3d modle drone.png';
+import design3 from '../assets/uploads/our-journey/designing.JPG';
+import design4 from '../assets/uploads/our-journey/bracket-cad.png';
 
-import wiring from '../assets/uploads/our-Journey/build 1/wiring.JPG';
-import threeD_print from '../assets/uploads/our-Journey/build 1/3d print cad.JPG';
-import battery_holder from '../assets/uploads/our-Journey/build 1/battery holder.JPG';
-import motor_holder from '../assets/uploads/our-Journey/build 1/motor holder.JPG';
-import soldering from '../assets/uploads/our-Journey/build 1/soldering.JPG';
-import wiring_2 from '../assets/uploads/our-Journey/build 1/wiring_2.JPG';
-
-
-
-import battery_pack from '../assets/uploads/our-Journey/build 2/battery-pack.JPG';
-import drone_assemble from '../assets/uploads/our-Journey/build 2/drone-assembleStage.JPG';
-import motor_assemble from '../assets/uploads/our-Journey/build 2/motor-assemble.JPG';
-import motor_assembled from '../assets/uploads/our-Journey/build 2/motor_assembled.JPG';
-
-import test_map from '../assets/uploads/our-Journey/test-laps.png';
-import test_ppl from '../assets/uploads/our-Journey/test_ppl.JPG';
-import test from '../assets/uploads/our-Journey/test.JPG';
+import wiring from '../assets/uploads/our-journey/build 1/wiring.JPG';
+import threeD_print from '../assets/uploads/our-journey/build 1/3d print cad.JPG';
+import battery_holder from '../assets/uploads/our-journey/build 1/battery holder.JPG';
+import motor_holder from '../assets/uploads/our-journey/build 1/motor holder.JPG';
+import soldering from '../assets/uploads/our-journey/build 1/soldering.JPG';
+import wiring_2 from '../assets/uploads/our-journey/build 1/wiring_2.JPG';
 
 
 
-// ── Journey data ──────────────────────────────────────────────────────────────
-export interface JourneyPhase {
+import battery_pack from '../assets/uploads/our-journey/build 2/battery-pack.JPG';
+import drone_assemble from '../assets/uploads/our-journey/build 2/drone-assembleStage.JPG';
+import motor_assemble from '../assets/uploads/our-journey/build 2/motor-assemble.JPG';
+import motor_assembled from '../assets/uploads/our-journey/build 2/motor_assembled.JPG';
+
+import test_map from '../assets/uploads/our-journey/test-laps.png';
+import test_ppl from '../assets/uploads/our-journey/test_ppl.JPG';
+import test from '../assets/uploads/our-journey/test.JPG';
+
+
+
+// ── journey data ──────────────────────────────────────────────────────────────
+export interface journeyPhase {
   title:   string;
   image:   any[];
   video?: string | null;
@@ -32,7 +32,7 @@ export interface JourneyPhase {
   body:    string[];   
 }
 
-export const JOURNEY: JourneyPhase[] = [
+export const journey: journeyPhase[] = [
   {
     title: 'Design',
     image: [design1,design2,design3,design4],
