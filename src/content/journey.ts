@@ -1,25 +1,25 @@
 import design1 from '../assets/uploads/our-Journey/drone mechanism.png';
 import design2 from '../assets/uploads/our-Journey/3d modle drone.png';
-import design3 from '../assets/uploads/our-Journey/designing.jpg';
+import design3 from '../assets/uploads/our-Journey/designing.JPG';
 import design4 from '../assets/uploads/our-Journey/bracket-cad.png';
 
-import wiring from '../assets/uploads/our-Journey/build 1/wiring.jpg';
-import threeD_print from '../assets/uploads/our-Journey/build 1/3d print cad.jpg';
-import battery_holder from '../assets/uploads/our-Journey/build 1/battery holder.jpg';
-import motor_holder from '../assets/uploads/our-Journey/build 1/motor holder.jpg';
-import soldering from '../assets/uploads/our-Journey/build 1/soldering.jpg';
-import wiring_2 from '../assets/uploads/our-Journey/build 1/wiring_2.jpg';
+import wiring from '../assets/uploads/our-Journey/build 1/wiring.JPG';
+import threeD_print from '../assets/uploads/our-Journey/build 1/3d print cad.JPG';
+import battery_holder from '../assets/uploads/our-Journey/build 1/battery holder.JPG';
+import motor_holder from '../assets/uploads/our-Journey/build 1/motor holder.JPG';
+import soldering from '../assets/uploads/our-Journey/build 1/soldering.JPG';
+import wiring_2 from '../assets/uploads/our-Journey/build 1/wiring_2.JPG';
 
 
 
-import battery_pack from '../assets/uploads/our-Journey/build 2/battery-pack.jpg';
-import drone_assemble from '../assets/uploads/our-Journey/build 2/drone-assembleStage.jpg';
-import motor_assemble from '../assets/uploads/our-Journey/build 2/motor-assemble.jpg';
-import motor_assembled from '../assets/uploads/our-Journey/build 2/motor_assembled.jpg';
+import battery_pack from '../assets/uploads/our-Journey/build 2/battery-pack.JPG';
+import drone_assemble from '../assets/uploads/our-Journey/build 2/drone-assembleStage.JPG';
+import motor_assemble from '../assets/uploads/our-Journey/build 2/motor-assemble.JPG';
+import motor_assembled from '../assets/uploads/our-Journey/build 2/motor_assembled.JPG';
 
 import test_map from '../assets/uploads/our-Journey/test-laps.png';
-import test_ppl from '../assets/uploads/our-Journey/test_ppl.jpg';
-import test from '../assets/uploads/our-Journey/test.jpg';
+import test_ppl from '../assets/uploads/our-Journey/test_ppl.JPG';
+import test from '../assets/uploads/our-Journey/test.JPG';
 
 
 

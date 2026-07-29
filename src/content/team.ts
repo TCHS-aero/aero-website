@@ -17,7 +17,7 @@ import jLee from '../assets/uploads/the-team/jasmine_lee.jpg';
 import wLee from '../assets/uploads/the-team/wynston.jpg';
 import jYoung from '../assets/uploads/the-team/joseph.png';
 import aWen from '../assets/uploads/the-team/anson.jpg';
-import bBarrios from '../assets/uploads/the-team/bryan.jpg';
+import bBarrios from '../assets/uploads/the-team/bryan.JPG';
 import kMolina from '../assets/uploads/the-team/keilah_molina.jpg';
 import jMa from '../assets/uploads/the-team/jesslyn.jpg';
 import hHan from '../assets/uploads/the-team/haley.png';
@@ -26,7 +26,7 @@ import cMorales from '../assets/uploads/the-team/colin.jpg';
 
 
 import iPan from '../assets/uploads/the-team/ian_pan.jpg';
-import aChong from '../assets/uploads/the-team/alex_chong.jpg';
+import aChong from '../assets/uploads/the-team/alex_chong.JPG';
 
 
 import hSabol from '../assets/uploads/the-team/hakan.png';
