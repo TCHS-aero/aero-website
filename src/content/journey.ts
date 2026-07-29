@@ -1,6 +1,6 @@
 import design1 from '../assets/uploads/our-journey/drone mechanism.png';
 import design2 from '../assets/uploads/our-journey/3d modle drone.png';
-import design3 from '../assets/uploads/our-journey/designing.JPG';
+import design3 from '../assets/uploads/our-journey/designing.jpg';
 import design4 from '../assets/uploads/our-journey/bracket-cad.png';
 
 import wiring from '../assets/uploads/our-journey/build 1/wiring.JPG';
