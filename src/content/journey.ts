@@ -32,7 +32,7 @@ export interface journeyPhase {
   body:    string[];   
 }
 
-export const journey: journeyPhase[] = [
+export const JOURNEY: journeyPhase[] = [
   {
     title: 'Design',
     image: [design1,design2,design3,design4],
