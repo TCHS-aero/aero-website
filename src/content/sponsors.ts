@@ -19,6 +19,7 @@ import type { ImageMetadata } from 'astro';
 import tcsfLogo  from '../assets/uploads/sponsor/tcsf-logo-transparent.png';
 import frskyLogo from '../assets/uploads/sponsor/frsky.png';
 import hitecLogo from '../assets/uploads/sponsor/hitec.png';
+import elevatedLogo from '../assets/uploads/sponsor/elevated-materials.png';
 
 export type SponsorTier = 'propeller' | 'jet-engine' | 'orbiter';
 
@@ -46,6 +47,12 @@ export const sponsors: Sponsor[] = [
     src:  hitecLogo,
     alt:  'Hitec',
     href: 'https://hitecrcd.com/',
+    tier: 'orbiter',
+  },
+  {
+    src:  elevatedLogo,
+    alt:  'Elevated Materials',
+    href: 'https://elevatedmaterials.com/',
     tier: 'orbiter',
   },
 ];
