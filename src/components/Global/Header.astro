@@ -195,31 +195,33 @@ const currentPath = Astro.url.pathname;
   /* ── Dropdown ── */
   .search-dropdown {
     position: absolute;
-    top: calc(100% + 6px);
-    right: 0;
-    min-width: 180px;
-    background: var(--color-white);
-    border-radius: 8px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+    top: calc(100% + 8px);
+    left: 0;
+    min-width: 160px;
+    background: var(--color-red);
+    border-radius: 0;
+    border: none;
     overflow: hidden;
     display: none;
   }
   .search-dropdown.is-open { display: block; }
 
-  .search-result {
+  .search-result,
+  .search-result:visited,
+  .search-result:link {
     display: block;
-    padding: 0.65rem 1rem;
-    font-size: 0.88rem;
+    padding: 0.6rem 0.9rem;
+    font-size: 0.82rem;
     font-weight: 500;
-    color: var(--color-charcoal);
+    color: #ffffff !important;
     text-decoration: none;
-    border-bottom: 1px solid var(--color-cream-dark);
+    border-bottom: 1px solid rgba(255,255,255,0.12);
     transition: background 0.12s ease;
     white-space: nowrap;
   }
   .search-result:last-child { border-bottom: none; }
   .search-result:hover,
-  .search-result.is-active { background: var(--color-cream); color: var(--color-red); }
+  .search-result.is-active { background: rgba(255,255,255,0.15); }
 
   /* ── Mobile toggle ── */
   .mobile-toggle {
@@ -334,6 +336,12 @@ const currentPath = Astro.url.pathname;
       a.href      = p.href;
       a.className = 'search-result';
       a.textContent = p.title;
+      a.style.color = '#ffffff';
+      a.style.fontFamily = 'var(--font-sans)';
+      a.style.fontSize = 'var(--text-xs)';
+      a.style.fontWeight = '500';
+      a.style.letterSpacing = '0.18em';
+      a.style.textTransform = 'uppercase';
       a.addEventListener('mousedown', e => e.preventDefault()); // keep focus on input
       a.addEventListener('click', () => { closeDropdown(); searchInput.value = ''; });
       li.appendChild(a);
