@@ -13,7 +13,7 @@
 // Example:
 import bXu from '../assets/uploads/the-team/bright.jpg';
 import jLee from '../assets/uploads/the-team/jasmine_lee.jpg';
-// import aMorgan from '../assets/uploads/the-team/';
+import aMorgan from '../assets/uploads/the-team/aston.jpg';
 import wLee from '../assets/uploads/the-team/wynston.jpg';
 import jYoung from '../assets/uploads/the-team/joseph.png';
 import aWen from '../assets/uploads/the-team/anson.jpg';
@@ -95,7 +95,7 @@ export const DIVISIONS: Division[] = [
     members: [
       { name: 'Bright Xu', role: 'Co-Mechatronics Lead', bio: 'Structural analysis.', photo: bXu },
       { name: 'Jasmine Lee',   role: 'Co-Mechatronics Lead',    bio: 'Managed all electrical wiring, oversaw the build process, and coordinated team efforts.', photo: jLee },
-      { name: 'Aston Morgan',   role: '',    bio: 'Assisted with carbon fiber fabrication and payload sack assembly.', photo: null },
+      { name: 'Aston Morgan',   role: '',    bio: 'Assisted with carbon fiber fabrication and payload sack assembly.', photo: aMorgan },
       { name: 'Colin Morales',   role: '',    bio: '', photo: cMorales },
 
       { name: 'Anson Wen',   role: '',    bio: 'Led overall assembly CAD, designed clamps and detachable leg mounts, and supported carbon fiber and metal fabrication.', photo: aWen },
