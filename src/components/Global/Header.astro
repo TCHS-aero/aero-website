@@ -39,23 +39,24 @@ const currentPath = Astro.url.pathname;
 
         <a href="/sponsor" class="btn btn--ghost header-cta">Support Us</a>
 
-        <!-- Pagefind search -->
-        <div class="header-search" id="header-search">
-          <svg class="header-search__icon" id="search-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true" style="cursor:pointer">
-            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-          </svg>
-          <input
-            id="search-input"
-            type="search"
-            placeholder="Search..."
-            class="header-search__input"
-            autocomplete="off"
-            spellcheck="false"
-            aria-label="Search site content"
-          />
-          <ul id="search-results" class="search-dropdown" role="listbox"></ul>
-        </div>
       </nav>
+
+      <!-- Search — shown on all screen sizes -->
+      <div class="header-search" id="header-search">
+        <svg class="header-search__icon" id="search-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true" style="cursor:pointer">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+        <input
+          id="search-input"
+          type="search"
+          placeholder="Search..."
+          class="header-search__input"
+          autocomplete="off"
+          spellcheck="false"
+          aria-label="Search site content"
+        />
+        <ul id="search-results" class="search-dropdown" role="listbox"></ul>
+      </div>
 
       <button
         id="mobile-toggle"
@@ -91,22 +92,6 @@ const currentPath = Astro.url.pathname;
         </ul>
         <a href="/sponsor" class="btn btn--ghost mobile-nav__cta">Support Us</a>
 
-        <!-- Mobile search -->
-        <div class="mobile-search">
-          <svg class="mobile-search__icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
-            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-          </svg>
-          <input
-            id="mobile-search-input"
-            type="search"
-            placeholder="Search..."
-            class="mobile-search__input"
-            autocomplete="off"
-            spellcheck="false"
-            aria-label="Search site content"
-          />
-        </div>
-        <ul id="mobile-search-results" class="mobile-search-dropdown" role="listbox"></ul>
       </div>
     </nav>
   </div>
@@ -432,39 +417,4 @@ const currentPath = Astro.url.pathname;
     if (e.key === 'Escape') { collapseSearch(); }
   });
 
-  // ── Mobile search ────────────────────────────────────────
-  const mobileSearchInput   = document.getElementById('mobile-search-input')   as HTMLInputElement;
-  const mobileSearchResults = document.getElementById('mobile-search-results') as HTMLUListElement;
-
-  mobileSearchInput.addEventListener('input', async (e) => {
-    const q = (e.target as HTMLInputElement).value.trim();
-    mobileSearchResults.innerHTML = '';
-
-    if (!q || !pagefind) { mobileSearchResults.classList.remove('is-open'); return; }
-
-    const results = await pagefind.search(q);
-    const top = await Promise.all(results.results.slice(0, 6).map((r: any) => r.data()));
-
-    if (!top.length) { mobileSearchResults.classList.remove('is-open'); return; }
-
-    top.forEach((r: any) => {
-      const li = document.createElement('li');
-      const a  = document.createElement('a');
-      a.href      = r.url;
-      a.className = 'search-result';
-      a.style.color = '#ffffff';
-      a.textContent = r.meta?.title || r.url;
-      a.addEventListener('click', () => {
-        mobileSearchResults.classList.remove('is-open');
-        mobileSearchInput.value = '';
-        setOpen(false);
-      });
-      li.appendChild(a);
-      mobileSearchResults.appendChild(li);
-    });
-
-    mobileSearchResults.classList.add('is-open');
-    // ensure pagefind is loaded when mobile nav opens
-    loadPagefind();
-  });
 </script>
