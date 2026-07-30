@@ -24,7 +24,6 @@ import jMa from '../assets/uploads/the-team/jesslyn.jpg';
 import hHan from '../assets/uploads/the-team/haley.png';
 import tChu from '../assets/uploads/the-team/tyler.jpg';
 import cMorales from '../assets/uploads/the-team/colin.jpg';
-import aMorgan from '../assets/uploads/the-team/ashton.jpg';
 
 
 import iPan from '../assets/uploads/the-team/ian_pan.jpg';
