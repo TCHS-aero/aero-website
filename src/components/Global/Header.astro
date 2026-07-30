@@ -39,9 +39,9 @@ const currentPath = Astro.url.pathname;
 
         <a href="/sponsor" class="btn btn--ghost header-cta">Support Us</a>
 
-        <!-- Inline search -->
+        <!-- Pagefind search -->
         <div class="header-search" id="header-search">
-          <svg class="header-search__icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+          <svg class="header-search__icon" id="search-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true" style="cursor:pointer">
             <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
           </svg>
           <input
@@ -51,11 +51,9 @@ const currentPath = Astro.url.pathname;
             class="header-search__input"
             autocomplete="off"
             spellcheck="false"
-            aria-label="Search pages"
-            aria-expanded="false"
-            aria-haspopup="listbox"
+            aria-label="Search site content"
           />
-          <ul id="search-results" class="search-dropdown" role="listbox" aria-label="Search results"></ul>
+          <ul id="search-results" class="search-dropdown" role="listbox"></ul>
         </div>
       </nav>
 
@@ -92,6 +90,23 @@ const currentPath = Astro.url.pathname;
           })}
         </ul>
         <a href="/sponsor" class="btn btn--ghost mobile-nav__cta">Support Us</a>
+
+        <!-- Mobile search -->
+        <div class="mobile-search">
+          <svg class="mobile-search__icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+          <input
+            id="mobile-search-input"
+            type="search"
+            placeholder="Search..."
+            class="mobile-search__input"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search site content"
+          />
+        </div>
+        <ul id="mobile-search-results" class="mobile-search-dropdown" role="listbox"></ul>
       </div>
     </nav>
   </div>
@@ -299,79 +314,106 @@ const currentPath = Astro.url.pathname;
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && isOpen) setOpen(false); });
   window.addEventListener('resize', () => { if (window.innerWidth >= 768 && isOpen) setOpen(false); });
 
-  // ── Inline search ────────────────────────────────────────
-  const PAGES = [
-    { title: 'Home',        href: '/'            },
-    { title: 'About Us',    href: '/about-us'    },
-    { title: 'Our Journey', href: '/our-journey' },
-    { title: 'The Team',    href: '/the-team'    },
-    { title: 'News',        href: '/news'        },
-    { title: 'Contact',     href: '/contact'     },
-    { title: 'Sponsor Us',  href: '/sponsor'     },
-  ];
-
-  const searchInput   = document.getElementById('search-input')   as HTMLInputElement;
+  // ── Pagefind search ─────────────────────────────────────
+  const searchWrap  = document.getElementById('header-search') as HTMLElement;
+  const searchIcon  = document.getElementById('search-icon')   as HTMLElement;
+  const searchInput = document.getElementById('search-input')  as HTMLInputElement;
   const searchResults = document.getElementById('search-results') as HTMLUListElement;
+  let pagefind: any = null;
   let activeIdx = -1;
 
-  function openDropdown() { searchResults.classList.add('is-open'); }
-  function closeDropdown() {
-    searchResults.classList.remove('is-open');
-    activeIdx = -1;
+  async function loadPagefind() {
+    if (pagefind) return;
+    try {
+      // @ts-ignore
+      const pf = '/pagefind/pagefind.js';
+      pagefind = await import(/* @vite-ignore */ pf);
+      await pagefind.init();
+    } catch (e) {
+      console.warn('Pagefind not available in dev mode');
+    }
   }
-
-  function renderResults(query: string) {
-    const q = query.trim().toLowerCase();
-    searchResults.innerHTML = '';
-    activeIdx = -1;
-
-    if (!q) { closeDropdown(); return; }
-
-    const matches = PAGES.filter(p => p.title.toLowerCase().includes(q));
-    if (!matches.length) { closeDropdown(); return; }
-
-    matches.forEach(p => {
-      const li = document.createElement('li');
-      const a  = document.createElement('a');
-      a.href      = p.href;
-      a.className = 'search-result';
-      a.textContent = p.title;
-      a.style.color = '#ffffff';
-      a.style.fontFamily = 'var(--font-sans)';
-      a.style.fontSize = 'var(--text-xs)';
-      a.style.fontWeight = '500';
-      a.style.letterSpacing = '0.18em';
-      a.style.textTransform = 'uppercase';
-      a.addEventListener('mousedown', e => e.preventDefault()); // keep focus on input
-      a.addEventListener('click', () => { closeDropdown(); searchInput.value = ''; });
-      li.appendChild(a);
-      searchResults.appendChild(li);
-    });
-
-    openDropdown();
-  }
-
-  const searchWrap = document.getElementById('header-search') as HTMLElement;
 
   function expandSearch() {
     searchWrap.classList.add('is-expanded');
     searchInput.focus();
+    loadPagefind();
   }
   function collapseSearch() {
     searchWrap.classList.remove('is-expanded');
     searchInput.value = '';
     closeDropdown();
   }
+  function closeDropdown() {
+    searchResults.classList.remove('is-open');
+    searchResults.innerHTML = '';
+    activeIdx = -1;
+  }
 
-  searchWrap.addEventListener('click', e => {
+  searchWrap.addEventListener('click', () => {
     if (!searchWrap.classList.contains('is-expanded')) expandSearch();
   });
 
-  searchInput.addEventListener('input', e => renderResults((e.target as HTMLInputElement).value));
   searchInput.addEventListener('blur', () => setTimeout(() => {
     if (!searchInput.value) collapseSearch();
     else closeDropdown();
-  }, 150));
+  }, 200));
+
+  searchInput.addEventListener('input', async (e) => {
+    const q = (e.target as HTMLInputElement).value.trim();
+    searchResults.innerHTML = '';
+    activeIdx = -1;
+
+    if (!q || !pagefind) { closeDropdown(); return; }
+
+    const results = await pagefind.search(q);
+    const top = await Promise.all(results.results.slice(0, 6).map((r: any) => r.data()));
+
+    if (!top.length) { closeDropdown(); return; }
+
+    top.forEach((r: any) => {
+      const li = document.createElement('li');
+      const a  = document.createElement('a');
+      a.href      = r.url;
+      a.className = 'search-result';
+      a.style.color = '#ffffff';
+      a.style.fontFamily = 'var(--font-sans)';
+      a.style.fontSize = 'var(--text-xs)';
+      a.style.fontWeight = '500';
+      a.style.letterSpacing = '0.18em';
+      a.style.textTransform = 'uppercase';
+
+      const title = document.createElement('span');
+      title.className = 'search-result__title';
+      title.style.color = '#ffffff';
+      title.textContent = r.meta?.title || r.url;
+
+      const excerpt = document.createElement('span');
+      excerpt.className = 'search-result__excerpt';
+      excerpt.style.color = 'rgba(255,255,255,0.65)';
+      excerpt.style.fontSize = '0.72rem';
+      excerpt.style.letterSpacing = '0';
+      excerpt.style.textTransform = 'none';
+      excerpt.style.fontWeight = '400';
+      excerpt.style.display = 'block';
+      excerpt.style.marginTop = '2px';
+      excerpt.style.whiteSpace = 'normal';
+      excerpt.style.lineHeight = '1.4';
+      // strip html tags from excerpt
+      const tmp = document.createElement('div');
+      tmp.innerHTML = r.excerpt || '';
+      excerpt.textContent = tmp.textContent || '';
+
+      a.appendChild(title);
+      a.appendChild(excerpt);
+      a.addEventListener('mousedown', e => e.preventDefault());
+      a.addEventListener('click', () => { closeDropdown(); searchInput.value = ''; collapseSearch(); });
+      li.appendChild(a);
+      searchResults.appendChild(li);
+    });
+
+    searchResults.classList.add('is-open');
+  });
 
   document.addEventListener('keydown', e => {
     if (!searchResults.classList.contains('is-open')) return;
@@ -387,6 +429,42 @@ const currentPath = Astro.url.pathname;
       items.forEach((el, i) => el.classList.toggle('is-active', i === activeIdx));
     }
     if (e.key === 'Enter' && activeIdx >= 0) items[activeIdx]?.click();
-    if (e.key === 'Escape') { closeDropdown(); searchInput.blur(); }
+    if (e.key === 'Escape') { collapseSearch(); }
+  });
+
+  // ── Mobile search ────────────────────────────────────────
+  const mobileSearchInput   = document.getElementById('mobile-search-input')   as HTMLInputElement;
+  const mobileSearchResults = document.getElementById('mobile-search-results') as HTMLUListElement;
+
+  mobileSearchInput.addEventListener('input', async (e) => {
+    const q = (e.target as HTMLInputElement).value.trim();
+    mobileSearchResults.innerHTML = '';
+
+    if (!q || !pagefind) { mobileSearchResults.classList.remove('is-open'); return; }
+
+    const results = await pagefind.search(q);
+    const top = await Promise.all(results.results.slice(0, 6).map((r: any) => r.data()));
+
+    if (!top.length) { mobileSearchResults.classList.remove('is-open'); return; }
+
+    top.forEach((r: any) => {
+      const li = document.createElement('li');
+      const a  = document.createElement('a');
+      a.href      = r.url;
+      a.className = 'search-result';
+      a.style.color = '#ffffff';
+      a.textContent = r.meta?.title || r.url;
+      a.addEventListener('click', () => {
+        mobileSearchResults.classList.remove('is-open');
+        mobileSearchInput.value = '';
+        setOpen(false);
+      });
+      li.appendChild(a);
+      mobileSearchResults.appendChild(li);
+    });
+
+    mobileSearchResults.classList.add('is-open');
+    // ensure pagefind is loaded when mobile nav opens
+    loadPagefind();
   });
 </script>
