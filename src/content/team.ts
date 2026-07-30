@@ -13,12 +13,13 @@
 // Example:
 import bXu from '../assets/uploads/the-team/bright.jpg';
 import jLee from '../assets/uploads/the-team/jasmine_lee.jpg';
-// import aMorgan from '../assets/uploads/the-team/';
+import aMorgan from '../assets/uploads/the-team/aston.jpg';
 import wLee from '../assets/uploads/the-team/wynston.jpg';
 import jYoung from '../assets/uploads/the-team/joseph.png';
 import aWen from '../assets/uploads/the-team/anson.jpg';
 import bBarrios from '../assets/uploads/the-team/bryan.JPG';
 import kMolina from '../assets/uploads/the-team/keilah_molina.jpg';
+
 import jMa from '../assets/uploads/the-team/jesslyn.jpg';
 import hHan from '../assets/uploads/the-team/haley.png';
 import tChu from '../assets/uploads/the-team/tyler.jpg';
@@ -65,9 +66,9 @@ export const DIVISIONS: Division[] = [
     name: 'Leadership',
     description: 'The captains and leads who keep the team coordinated and the project on track.',
     members: [
-      { name: 'Bright Xu', role: 'Mechanical Lead', bio: '', photo: bXu },
-      { name: 'Jasmine Lee',   role: 'Electrical Lead',    bio: '.', photo: jLee },
-      { name: 'Hakan Sabol',   role: 'Co-Software Lead',    bio: '.', photo: hSabol },
+      { name: 'Bright Xu', role: 'Co-Mechatronics Lead', bio: '', photo: bXu },
+      { name: 'Jasmine Lee',   role: 'Co-Mechatronics Lead',    bio: '', photo: jLee },
+      { name: 'Hakan Sabol',   role: 'Co-Software Lead',    bio: '', photo: hSabol },
       { name: 'Liang Zhang', role: 'Co-Software Lead',       bio: '', photo: lZhang },
     { name: 'Yvonne', role: 'Co-Operations Lead', bio: '', photo: yWang },
       { name: 'Gracie', role: 'Co-Operations Lead', bio: '', photo: gGuan },
@@ -78,10 +79,10 @@ export const DIVISIONS: Division[] = [
     name: 'Software',
     description: 'Writes the flight stack, autonomy pipeline, and computer vision systems that give our drone its brain.',
     members: [
-      { name: 'Hakan Sabol',   role: 'Co-Software Lead',    bio: '.', photo: hSabol },
+      { name: 'Hakan Sabol',   role: 'Co-Software Lead',    bio: '', photo: hSabol },
       { name: 'Liang Zhang', role: 'Co-Software Lead & Computer Vision',       bio: '', photo: lZhang },
       { name: 'Timonthy Chen', role: 'Computer Vision',bio: '', photo: tChen },
-      { name: 'Matthew Hannon', role: 'Lead Developer',bio: ' ', photo: mHannon },
+      { name: 'Matthew Hannon', role: 'Lead Developer',bio: '', photo: mHannon },
       { name: 'Thu Htet Myat', role: 'Telemetry Dashboard & Pilot',bio: '', photo: tMyat },
       { name: 'Zibo Zhang', role: 'Helped with Computer Vision',bio: '', photo: zZhang },
       { name: 'Zonglei Sun', role: 'Mission Mode Code and App Development',bio: '', photo: zSun },
@@ -93,9 +94,9 @@ export const DIVISIONS: Division[] = [
   {
     name: 'Mechanical - Electrical',
     description: 'Designs the power distribution, wiring harnesses, and avionics that keep everything running.',
-    members: [
-      { name: 'Bright Xu', role: 'Mechanical Lead', bio: 'Structural analysis.', photo: bXu },
-      { name: 'Jasmine Lee',   role: 'Electrical Lead',    bio: 'Managed all electrical wiring, oversaw the build process, and coordinated team efforts.', photo: jLee },
+    members: [      
+      { name: 'Bright Xu', role: 'Co-Mechatronics Lead', bio: 'Structural analysis.', photo: bXu },
+      { name: 'Jasmine Lee',   role: 'Co-Mechatronics Lead',    bio: 'Managed all electrical wiring, oversaw the build process, and coordinated team efforts.', photo: jLee },
       { name: 'Aston Morgan',   role: '',    bio: 'Assisted with carbon fiber fabrication and payload sack assembly.', photo: aMorgan },
       { name: 'Colin Morales',   role: '',    bio: '', photo: cMorales },
 
