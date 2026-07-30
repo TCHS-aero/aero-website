@@ -12,7 +12,13 @@ export default defineConfig({
   vite: {
     build: {
       cssCodeSplit: true,
-      assetsInlineLimit: 4096, // inline assets < 4KB as data URIs
+      assetsInlineLimit: 4096,
+    },
+    optimizeDeps: {
+      exclude: ['@pagefind/default-ui'],
+    },
+    ssr: {
+      noExternal: [],
     },
   },
   image: {
