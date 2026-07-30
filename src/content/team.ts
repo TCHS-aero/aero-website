@@ -23,6 +23,7 @@ import jMa from '../assets/uploads/the-team/jesslyn.jpg';
 import hHan from '../assets/uploads/the-team/haley.png';
 import tChu from '../assets/uploads/the-team/tyler.jpg';
 import cMorales from '../assets/uploads/the-team/colin.jpg';
+import aMorgan from '../assets/uploads/the-team/ashton.png';
 
 
 import iPan from '../assets/uploads/the-team/ian_pan.jpg';
@@ -95,7 +96,7 @@ export const DIVISIONS: Division[] = [
     members: [
       { name: 'Bright Xu', role: 'Mechanical Lead', bio: 'Structural analysis.', photo: bXu },
       { name: 'Jasmine Lee',   role: 'Electrical Lead',    bio: 'Managed all electrical wiring, oversaw the build process, and coordinated team efforts.', photo: jLee },
-      { name: 'Aston Morgan',   role: '',    bio: 'Assisted with carbon fiber fabrication and payload sack assembly.', photo: null },
+      { name: 'Aston Morgan',   role: '',    bio: 'Assisted with carbon fiber fabrication and payload sack assembly.', photo: aMorgan },
       { name: 'Colin Morales',   role: '',    bio: '', photo: cMorales },
 
       { name: 'Anson Wen',   role: '',    bio: 'Led overall assembly CAD, designed clamps and detachable leg mounts, and supported carbon fiber and metal fabrication.', photo: aWen },
