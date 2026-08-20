@@ -2,7 +2,7 @@
 title:   "Welcoming Our New Partners"
 date:    2026-05-02
 label:   "Sponsors"
-image:   ./new-partners.png
+image:   ./thumbnails/new-partners.png
 excerpt: "TCHS Aero is proud to announce new partnerships that will help fund equipment for the upcoming season."
 draft:   false
 hasFullArticle: true
