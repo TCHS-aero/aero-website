@@ -133,7 +133,7 @@ export const DIVISIONS: Division[] = [
   },
   {
     name: 'Operations',
-    description: '',
+    description: 'Manages papers, sponsorhips, team bonding, and fundraising events; organizing ways for Aero to take part in the community.',
     members: [
       { name: 'Emily He',   role: '',    bio: '', photo: eHe },
       { name: 'Howard Bai',   role: '',    bio: '', photo: hBai },
