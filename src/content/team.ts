@@ -65,12 +65,12 @@ export const DIVISIONS: Division[] = [
     name: 'Leadership',
     description: 'The captains and leads who keep the team coordinated and the project on track.',
     members: [
-      { name: 'Bright Xu', role: 'Co-Mechatronics Lead', bio: '', photo: bXu },
       { name: 'Jasmine Lee',   role: 'Co-Mechatronics Lead',    bio: '', photo: jLee },
-      { name: 'Hakan Sabol',   role: 'Co-Software Lead',    bio: '', photo: hSabol },
-      { name: 'Liang Zhang', role: 'Co-Software Lead',       bio: '', photo: lZhang },
-    { name: 'Yvonne', role: 'Co-Operations Lead', bio: '', photo: yWang },
-      { name: 'Gracie', role: 'Co-Operations Lead', bio: '', photo: gGuan },
+      { name: 'Ian Pan',   role: 'Co-Mechatronics Lead',    bio: '', photo: iaPan },
+      { name: 'Yvonne Wang', role: 'Co-Operations Lead', bio: '', photo: yWang },
+      { name: 'Gracie Guan', role: 'Co-Operations Lead', bio: '', photo: gGuan },
+      { name: 'Thu Htet Myat', role: 'Co-Software Lead', bio: '', photo: tMyat },
+      { name: 'Matthew Hannon', role: 'Co-Software Lead', bio: '', photo: mHannon },
   
     ],
   },
@@ -78,47 +78,22 @@ export const DIVISIONS: Division[] = [
     name: 'Software',
     description: 'Writes the flight stack, autonomy pipeline, and computer vision systems that give our drone its brain.',
     members: [
-      { name: 'Hakan Sabol',   role: 'Co-Software Lead',    bio: '', photo: hSabol },
-      { name: 'Liang Zhang', role: 'Co-Software Lead & Computer Vision',       bio: '', photo: lZhang },
-      { name: 'Timonthy Chen', role: 'Computer Vision',bio: '', photo: tChen },
-      { name: 'Matthew Hannon', role: 'Lead Developer',bio: '', photo: mHannon },
-      { name: 'Thu Htet Myat', role: 'Telemetry Dashboard & Pilot',bio: '', photo: tMyat },
-      { name: 'Zibo Zhang', role: 'Helped with Computer Vision',bio: '', photo: zZhang },
-      { name: 'Zonglei Sun', role: 'Mission Mode Code and App Development',bio: '', photo: zSun },
-      { name: 'Winter Wei', role: 'Website Building',bio: '', photo: wWei },
-      
 
     ],
   },
   {
-    name: 'Mechanical - Electrical',
+    name: 'Mechatronics',
     description: 'Designs the power distribution, wiring harnesses, and avionics that keep everything running.',
     members: [      
-      { name: 'Bright Xu', role: 'Co-Mechatronics Lead', bio: 'Structural analysis.', photo: bXu },
-      { name: 'Jasmine Lee',   role: 'Co-Mechatronics Lead',    bio: 'Managed all electrical wiring, oversaw the build process, and coordinated team efforts.', photo: jLee },
-      { name: 'Aston Morgan',   role: '',    bio: 'Assisted with carbon fiber fabrication and payload sack assembly.', photo: aMorgan },
-      { name: 'Colin Morales',   role: '',    bio: '', photo: cMorales },
 
-      { name: 'Anson Wen',   role: '',    bio: 'Led overall assembly CAD, designed clamps and detachable leg mounts, and supported carbon fiber and metal fabrication.', photo: aWen },
-
-      { name: 'Bryan Barrios',   role: '',    bio: 'Supported battery mount fabrication, drone assembly, carbon fiber work, and payload sack production.', photo: bBarrios },
-      { name: 'Wynston Lee',   role: '',    bio: 'Conducted initial design research and assisted with carbon fiber fabrication and payload sacks.', photo: wLee },
-      { name: 'Joseph Young',   role: '',    bio: 'Contributed to payload design and developed the first battery mount for the new batteries.', photo: jYoung },
-      { name: 'Tyler Chu',   role: '',    bio: 'Supported payload design and fabricated the leg covers.', photo: tChu },
-      { name: 'Haley Han',   role: '',    bio: '', photo: hHan },
-      { name: 'Keilah Molina',   role: '',    bio: 'Conducted initial design research and co-designed the original battery mount.', photo: kMolina },
-      { name: 'Jesslyn Ma',   role: '',    bio: 'Co-designed the original battery mount and assisted with initial wiring.', photo: jMa },
-
-      { name: 'Ian Pan', role: '',        bio: 'Designed motor mounts, initial leg mounts, and the current battery mount; performed flight testing with software and supported full drone assembly and fabrication.', photo: iPan },
-      { name: 'Alex Chong', role: '',        bio: 'Assisted with carbon fiber fabrication and payload sack assembly.', photo: aChong },
     ],
   },
   {
     name: 'Operations',
     description: '',
     members: [
-      { name: 'Yvonne', role: 'Co-Operations Lead', bio: 'Outreach and cold emailing for sponsorships.', photo: yWang },
-      { name: 'Gracie', role: 'Co-Operations Lead', bio: 'Manages social media of Aero.', photo: gGuan },],
+
+    ],
   },
   
 ];
