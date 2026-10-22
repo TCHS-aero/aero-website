@@ -6,7 +6,6 @@ const currentPath = Astro.url.pathname;
 <header id="site-header">
   <div class="header-inner">
     <div class="container header-row">
-
       <a href="/" class="logo">
         <img
           src="/uploads/aero-logo.svg"
@@ -21,8 +20,10 @@ const currentPath = Astro.url.pathname;
       <nav class="desktop-nav" aria-label="Main navigation">
         <ul class="desktop-nav__list">
           {NAV_ITEMS.map(item => {
-            const active = currentPath === item.href ||
+            const active =
+              currentPath === item.href ||
               (item.href !== '/' && currentPath.startsWith(item.href));
+
             return (
               <li>
                 <a
@@ -37,26 +38,41 @@ const currentPath = Astro.url.pathname;
           })}
         </ul>
 
+        <div class="header-search" id="header-search">
+          <svg
+            class="header-search__icon"
+            id="search-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            width="14"
+            height="14"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            style="cursor:pointer"
+          >
+            <circle cx="11" cy="11" r="8" />
+            <path d="m21 21-4.35-4.35" />
+          </svg>
+
+          <input
+            id="search-input"
+            type="search"
+            placeholder="Search..."
+            class="header-search__input"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search site content"
+          />
+
+          <ul id="search-results" class="search-dropdown" role="listbox"></ul>
+        </div>
+
         <a href="/sponsor" class="btn btn--ghost header-cta">Support Us</a>
-
       </nav>
-
-      <!-- Search — shown on all screen sizes -->
-      <div class="header-search" id="header-search">
-        <svg class="header-search__icon" id="search-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true" style="cursor:pointer">
-          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-        </svg>
-        <input
-          id="search-input"
-          type="search"
-          placeholder="Search..."
-          class="header-search__input"
-          autocomplete="off"
-          spellcheck="false"
-          aria-label="Search site content"
-        />
-        <ul id="search-results" class="search-dropdown" role="listbox"></ul>
-      </div>
 
       <button
         id="mobile-toggle"
@@ -75,8 +91,10 @@ const currentPath = Astro.url.pathname;
       <div class="container">
         <ul class="mobile-nav__list">
           {NAV_ITEMS.map(item => {
-            const active = currentPath === item.href ||
+            const active =
+              currentPath === item.href ||
               (item.href !== '/' && currentPath.startsWith(item.href));
+
             return (
               <li>
                 <a
@@ -90,8 +108,8 @@ const currentPath = Astro.url.pathname;
             );
           })}
         </ul>
-        <a href="/sponsor" class="btn btn--ghost mobile-nav__cta">Support Us</a>
 
+        <a href="/sponsor" class="btn btn--ghost mobile-nav__cta">Support Us</a>
       </div>
     </nav>
   </div>
@@ -102,219 +120,361 @@ const currentPath = Astro.url.pathname;
 <style>
   #site-header {
     position: fixed;
-    top: 0; left: 0; right: 0;
+    top: 0;
+    left: 0;
+    right: 0;
     z-index: 100;
   }
+
   .header-inner {
     background: var(--color-red);
-    box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
   }
+
   .header-row {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     height: 4rem;
   }
-  .header-spacer { height: 4rem; }
 
-  /* ── Logo ── */
-  .logo { display: flex; align-items: center; gap: 0.75rem; flex-shrink: 0; }
-  .logo__img { height: 2rem; width: auto; object-fit: contain; }
-
-  /* ── Desktop nav ── */
-  .desktop-nav { display: none; align-items: center; gap: 1.5rem; }
-  @media (min-width: 1000px) { .desktop-nav { display: flex; } }
-
-  .desktop-nav__list { display: flex; gap: 1.75rem; }
-
-  .desktop-nav__link {
-    font-family: var(--font-sans);
-    font-size: var(--text-xs);
-    font-weight: 500;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.75);
-    position: relative;
-    padding-bottom: 3px;
-    transition: color var(--duration-fast) ease;
+  .header-spacer {
+    height: 4rem;
   }
-  .desktop-nav__link::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0;
-    width: 0; height: 1px;
-    background: var(--color-white);
-    transition: width var(--duration-base) ease;
+
+  /* Logo */
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
   }
-  .desktop-nav__link:hover,
-  .desktop-nav__link--active { color: var(--color-white); }
-  .desktop-nav__link:hover::after,
-  .desktop-nav__link--active::after { width: 86%; }
 
-  .header-cta { padding: 0.5rem 1.25rem; font-size: var(--text-xs); }
+  .logo__img {
+    height: 2rem;
+    width: auto;
+    object-fit: contain;
+  }
 
-  /* ── Inline search ── */
+  /* Desktop navigation.
+     On mobile, display: contents lets the search sit beside the toggle. */
+  .desktop-nav {
+    display: contents;
+  }
+
+  .desktop-nav__list,
+  .header-cta {
+    display: none;
+  }
+
+  /* Search */
   .header-search {
     position: relative;
     display: flex;
     align-items: center;
     gap: 0.4rem;
+    margin-left: auto;
+    margin-right: 0.75rem;
     cursor: pointer;
   }
+
   .header-search__icon {
-    color: rgba(255,255,255,0.75);
+    color: rgba(255, 255, 255, 0.75);
     flex-shrink: 0;
     transition: color 0.2s ease;
   }
-  .header-search:hover .header-search__icon { color: var(--color-white); }
+
+  .header-search:hover .header-search__icon {
+    color: var(--color-white);
+  }
 
   .header-search__input {
+    width: 0;
+    opacity: 0;
+    padding: 0;
     border: none;
-    border-bottom: 1px solid rgba(255,255,255,0.6);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.6);
     outline: none;
     background: transparent;
     color: var(--color-white);
     font-size: 0.78rem;
     font-family: var(--font-sans);
-    width: 0;
-    opacity: 0;
-    padding: 0;
-    transition: width 0.25s ease, opacity 0.25s ease, padding 0.25s ease;
     cursor: text;
+    transition: width 0.25s ease, opacity 0.25s ease, padding 0.25s ease;
   }
-  .header-search__input::placeholder { color: rgba(255,255,255,0.5); }
-  .header-search__input::-webkit-search-cancel-button { display: none; }
 
-  /* when expanded */
+  .header-search__input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .header-search__input::-webkit-search-cancel-button {
+    display: none;
+  }
+
   .header-search.is-expanded .header-search__input {
     width: 130px;
     opacity: 1;
     padding: 0.1rem 0;
   }
 
-  /* ── Dropdown ── */
+  /* Search results dropdown */
   .search-dropdown {
     position: absolute;
     top: calc(100% + 8px);
     left: 0;
-    min-width: 160px;
-    background: var(--color-red);
-    border-radius: 0;
-    border: none;
-    overflow: hidden;
     display: none;
+    min-width: 160px;
+    overflow: hidden;
+    background: var(--color-red);
+    border: none;
+    border-radius: 0;
   }
-  .search-dropdown.is-open { display: block; }
+
+  .search-dropdown.is-open {
+    display: block;
+  }
 
   .search-result,
   .search-result:visited,
   .search-result:link {
     display: block;
     padding: 0.6rem 0.9rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    color: #fff !important;
     font-size: 0.82rem;
     font-weight: 500;
-    color: #ffffff !important;
     text-decoration: none;
-    border-bottom: 1px solid rgba(255,255,255,0.12);
     transition: background 0.12s ease;
     white-space: nowrap;
   }
-  .search-result:last-child { border-bottom: none; }
-  .search-result:hover,
-  .search-result.is-active { background: rgba(255,255,255,0.15); }
 
-  /* ── Mobile toggle ── */
+  .search-result:last-child {
+    border-bottom: none;
+  }
+
+  .search-result:hover,
+  .search-result.is-active {
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  /* Mobile menu toggle */
   .mobile-toggle {
     display: flex;
+    flex-shrink: 0;
     flex-direction: column;
-    justify-content: center;
     align-items: flex-end;
+    justify-content: center;
     gap: 5px;
     width: 2.5rem;
     height: 2.5rem;
-    background: none;
-    border: none;
-    cursor: pointer;
     padding: 0.25rem;
+    border: none;
+    background: none;
+    cursor: pointer;
   }
-  @media (min-width: 1000px) { .mobile-toggle { display: none; } }
 
   .bar {
     display: block;
     height: 1.5px;
     background: var(--color-white);
     transform-origin: center;
-    transition: transform var(--duration-base) ease, opacity var(--duration-base) ease, width var(--duration-base) ease;
+    transition:
+      transform var(--duration-base) ease,
+      opacity var(--duration-base) ease,
+      width var(--duration-base) ease;
   }
-  .bar--top { width: 1.5rem; }
-  .bar--mid { width: 1.5rem; }
-  .bar--bot { width: 1rem; }
-  .mobile-toggle[aria-expanded="true"] .bar--top { transform: rotate(45deg) translate(4px,4px); width: 1.5rem; }
-  .mobile-toggle[aria-expanded="true"] .bar--mid { opacity: 0; transform: scaleX(0); }
-  .mobile-toggle[aria-expanded="true"] .bar--bot { transform: rotate(-45deg) translate(5px,-5px); width: 1.5rem; align-self: unset; }
 
-  /* ── Mobile nav ── */
-  .mobile-nav {
-    overflow: hidden;
-    max-height: 0;
-    border-top: 1px solid rgba(255,255,255,0);
-    transition: max-height 0.4s var(--ease-expo), border-color var(--duration-base) ease;
+  .bar--top,
+  .bar--mid {
+    width: 1.5rem;
   }
-  .mobile-nav.is-open { max-height: 32rem; border-color: rgba(255,255,255,0.12); }
-  .mobile-nav__list { padding: 1rem 0; }
+
+  .bar--bot {
+    width: 1rem;
+  }
+
+  .mobile-toggle[aria-expanded='true'] .bar--top {
+    width: 1.5rem;
+    transform: rotate(45deg) translate(4px, 4px);
+  }
+
+  .mobile-toggle[aria-expanded='true'] .bar--mid {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  .mobile-toggle[aria-expanded='true'] .bar--bot {
+    width: 1.5rem;
+    align-self: unset;
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+
+  /* Mobile navigation panel */
+  .mobile-nav {
+    max-height: 0;
+    overflow: hidden;
+    border-top: 1px solid rgba(255, 255, 255, 0);
+    transition:
+      max-height 0.4s var(--ease-expo),
+      border-color var(--duration-base) ease;
+  }
+
+  .mobile-nav.is-open {
+    max-height: 32rem;
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .mobile-nav__list {
+    padding: 1rem 0;
+  }
+
   .mobile-nav__link {
     display: block;
     padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
     font-family: var(--font-sans);
     font-size: var(--text-xs);
     font-weight: 500;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.7);
-    border-bottom: 1px solid rgba(255,255,255,0.1);
     transition: color var(--duration-fast) ease;
   }
+
   .mobile-nav__link:hover,
-  .mobile-nav__link--active { color: var(--color-white); }
-  .mobile-nav__cta { margin-top: 1.25rem; margin-bottom: 1.5rem; width: 100%; text-align: center; }
+  .mobile-nav__link--active {
+    color: var(--color-white);
+  }
+
+  .mobile-nav__cta {
+    width: 100%;
+    margin-top: 1.25rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  /* Desktop layout */
+  @media (min-width: 1000px) {
+    .desktop-nav {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-left: auto;
+    }
+
+    .desktop-nav__list {
+      display: flex;
+      gap: 1.75rem;
+    }
+
+    .header-cta {
+      display: inline-flex;
+      padding: 0.5rem 1.25rem;
+      font-size: var(--text-xs);
+    }
+
+    .header-search {
+      margin: 0;
+    }
+
+    .mobile-toggle {
+      display: none;
+    }
+  }
+
+  .desktop-nav__link {
+    position: relative;
+    padding-bottom: 3px;
+    color: rgba(255, 255, 255, 0.75);
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transition: color var(--duration-fast) ease;
+  }
+
+  .desktop-nav__link::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--color-white);
+    content: '';
+    transition: width var(--duration-base) ease;
+  }
+
+  .desktop-nav__link:hover,
+  .desktop-nav__link--active {
+    color: var(--color-white);
+  }
+
+  .desktop-nav__link:hover::after,
+  .desktop-nav__link--active::after {
+    width: 86%;
+  }
 </style>
 
 <script>
-  // ── Mobile nav ──────────────────────────────────────────
+  // Mobile navigation
   const toggle = document.getElementById('mobile-toggle') as HTMLButtonElement;
-  const nav    = document.getElementById('mobile-nav')    as HTMLElement;
-  const header = document.getElementById('site-header')   as HTMLElement;
-  let isOpen   = false;
+  const nav = document.getElementById('mobile-nav') as HTMLElement;
+  const header = document.getElementById('site-header') as HTMLElement;
+  let isOpen = false;
 
   function setOpen(value: boolean) {
     isOpen = value;
     nav.classList.toggle('is-open', isOpen);
     toggle.setAttribute('aria-expanded', String(isOpen));
-    toggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+    toggle.setAttribute(
+      'aria-label',
+      isOpen ? 'Close navigation menu' : 'Open navigation menu'
+    );
   }
 
-  toggle.addEventListener('click', e => { e.stopPropagation(); setOpen(!isOpen); });
-  document.addEventListener('click', e => { if (isOpen && !header.contains(e.target as Node)) setOpen(false); });
-  nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setOpen(false)));
-  document.addEventListener('keydown', e => { if (e.key === 'Escape' && isOpen) setOpen(false); });
-  window.addEventListener('resize', () => { if (window.innerWidth >= 768 && isOpen) setOpen(false); });
+  toggle.addEventListener('click', event => {
+    event.stopPropagation();
+    setOpen(!isOpen);
+  });
 
-  // ── Pagefind search ─────────────────────────────────────
-  const searchWrap  = document.getElementById('header-search') as HTMLElement;
-  const searchIcon  = document.getElementById('search-icon')   as HTMLElement;
-  const searchInput = document.getElementById('search-input')  as HTMLInputElement;
+  document.addEventListener('click', event => {
+    if (isOpen && !header.contains(event.target as Node)) {
+      setOpen(false);
+    }
+  });
+
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => setOpen(false));
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && isOpen) {
+      setOpen(false);
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 1000 && isOpen) {
+      setOpen(false);
+    }
+  });
+
+  // Pagefind search
+  const searchWrap = document.getElementById('header-search') as HTMLElement;
+  const searchInput = document.getElementById('search-input') as HTMLInputElement;
   const searchResults = document.getElementById('search-results') as HTMLUListElement;
   let pagefind: any = null;
   let activeIdx = -1;
 
   async function loadPagefind() {
     if (pagefind) return;
+
     try {
       // @ts-ignore
-      const pf = '/pagefind/pagefind.js';
-      pagefind = await import(/* @vite-ignore */ pf);
+      const pagefindPath = '/pagefind/pagefind.js';
+      pagefind = await import(/* @vite-ignore */ pagefindPath);
       await pagefind.init();
-    } catch (e) {
+    } catch (error) {
       console.warn('Pagefind not available in dev mode');
     }
   }
@@ -324,54 +484,72 @@ const currentPath = Astro.url.pathname;
     searchInput.focus();
     loadPagefind();
   }
-  function collapseSearch() {
-    searchWrap.classList.remove('is-expanded');
-    searchInput.value = '';
-    closeDropdown();
-  }
+
   function closeDropdown() {
     searchResults.classList.remove('is-open');
     searchResults.innerHTML = '';
     activeIdx = -1;
   }
 
+  function collapseSearch() {
+    searchWrap.classList.remove('is-expanded');
+    searchInput.value = '';
+    closeDropdown();
+  }
+
   searchWrap.addEventListener('click', () => {
-    if (!searchWrap.classList.contains('is-expanded')) expandSearch();
+    if (!searchWrap.classList.contains('is-expanded')) {
+      expandSearch();
+    }
   });
 
-  searchInput.addEventListener('blur', () => setTimeout(() => {
-    if (!searchInput.value) collapseSearch();
-    else closeDropdown();
-  }, 200));
+  searchInput.addEventListener('blur', () => {
+    setTimeout(() => {
+      if (!searchInput.value) {
+        collapseSearch();
+      } else {
+        closeDropdown();
+      }
+    }, 200);
+  });
 
-  searchInput.addEventListener('input', async (e) => {
-    const q = (e.target as HTMLInputElement).value.trim();
+  searchInput.addEventListener('input', async event => {
+    const query = (event.target as HTMLInputElement).value.trim();
     searchResults.innerHTML = '';
     activeIdx = -1;
 
-    if (!q || !pagefind) { closeDropdown(); return; }
+    if (!query || !pagefind) {
+      closeDropdown();
+      return;
+    }
 
-    const results = await pagefind.search(q);
-    const top = await Promise.all(results.results.slice(0, 6).map((r: any) => r.data()));
+    const results = await pagefind.search(query);
+    const topResults = await Promise.all(
+      results.results.slice(0, 6).map((result: any) => result.data())
+    );
 
-    if (!top.length) { closeDropdown(); return; }
+    if (!topResults.length) {
+      closeDropdown();
+      return;
+    }
 
-    top.forEach((r: any) => {
+    topResults.forEach((result: any) => {
       const li = document.createElement('li');
-      const a  = document.createElement('a');
-      a.href      = r.url;
-      a.className = 'search-result';
-      a.style.color = '#ffffff';
-      a.style.fontFamily = 'var(--font-sans)';
-      a.style.fontSize = 'var(--text-xs)';
-      a.style.fontWeight = '500';
-      a.style.letterSpacing = '0.18em';
-      a.style.textTransform = 'uppercase';
+      const link = document.createElement('a');
+
+      link.href = result.url;
+      link.className = 'search-result';
+      link.style.color = '#ffffff';
+      link.style.fontFamily = 'var(--font-sans)';
+      link.style.fontSize = 'var(--text-xs)';
+      link.style.fontWeight = '500';
+      link.style.letterSpacing = '0.18em';
+      link.style.textTransform = 'uppercase';
 
       const title = document.createElement('span');
       title.className = 'search-result__title';
       title.style.color = '#ffffff';
-      title.textContent = r.meta?.title || r.url;
+      title.textContent = result.meta?.title || result.url;
 
       const excerpt = document.createElement('span');
       excerpt.className = 'search-result__excerpt';
@@ -384,37 +562,56 @@ const currentPath = Astro.url.pathname;
       excerpt.style.marginTop = '2px';
       excerpt.style.whiteSpace = 'normal';
       excerpt.style.lineHeight = '1.4';
-      // strip html tags from excerpt
-      const tmp = document.createElement('div');
-      tmp.innerHTML = r.excerpt || '';
-      excerpt.textContent = tmp.textContent || '';
 
-      a.appendChild(title);
-      a.appendChild(excerpt);
-      a.addEventListener('mousedown', e => e.preventDefault());
-      a.addEventListener('click', () => { closeDropdown(); searchInput.value = ''; collapseSearch(); });
-      li.appendChild(a);
+      const temp = document.createElement('div');
+      temp.innerHTML = result.excerpt || '';
+      excerpt.textContent = temp.textContent || '';
+
+      link.appendChild(title);
+      link.appendChild(excerpt);
+
+      link.addEventListener('mousedown', event => event.preventDefault());
+      link.addEventListener('click', () => {
+        closeDropdown();
+        searchInput.value = '';
+        collapseSearch();
+      });
+
+      li.appendChild(link);
       searchResults.appendChild(li);
     });
 
     searchResults.classList.add('is-open');
   });
 
-  document.addEventListener('keydown', e => {
+  document.addEventListener('keydown', event => {
     if (!searchResults.classList.contains('is-open')) return;
-    const items = searchResults.querySelectorAll<HTMLAnchorElement>('.search-result');
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      activeIdx = Math.min(activeIdx + 1, items.length - 1);
-      items.forEach((el, i) => el.classList.toggle('is-active', i === activeIdx));
-    }
-    if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      activeIdx = Math.max(activeIdx - 1, 0);
-      items.forEach((el, i) => el.classList.toggle('is-active', i === activeIdx));
-    }
-    if (e.key === 'Enter' && activeIdx >= 0) items[activeIdx]?.click();
-    if (e.key === 'Escape') { collapseSearch(); }
-  });
 
+    const items =
+      searchResults.querySelectorAll<HTMLAnchorElement>('.search-result');
+
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      activeIdx = Math.min(activeIdx + 1, items.length - 1);
+      items.forEach((item, index) => {
+        item.classList.toggle('is-active', index === activeIdx);
+      });
+    }
+
+    if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      activeIdx = Math.max(activeIdx - 1, 0);
+      items.forEach((item, index) => {
+        item.classList.toggle('is-active', index === activeIdx);
+      });
+    }
+
+    if (event.key === 'Enter' && activeIdx >= 0) {
+      items[activeIdx]?.click();
+    }
+
+    if (event.key === 'Escape') {
+      collapseSearch();
+    }
+  });
 </script>
