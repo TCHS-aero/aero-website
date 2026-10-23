@@ -34,7 +34,7 @@ import jWong from '../assets/uploads/the-team/jWong.jpg';
 import jDiep from '../assets/uploads/the-team/jDiep.jpg';
 import jTang from '../assets/uploads/the-team/jTang.png';
 import pTo from '../assets/uploads/the-team/pTo.jpg';
-// import zWu from '../assets/uploads/the-team/zWu.jpg';
+import zWu from '../assets/uploads/the-team/zWu.jpeg';
 import zSun from '../assets/uploads/the-team/zSun.jpg';
 
 // Mechatronics
@@ -107,7 +107,7 @@ export const DIVISIONS: Division[] = [
       { name: 'John Diep', role: '', bio: '', photo: jDiep },
       { name: 'Julien Tang', role: '', bio: '', photo: jTang },
       { name: 'Priscilla To', role: '', bio: '', photo: pTo },
-      { name: 'Zacheus Wu', role: '', bio: '', photo: '' },
+      { name: 'Zacheus Wu', role: '', bio: '', photo: zWu },
       { name: 'Zonglei Sun', role: '', bio: '', photo: zSun },
     ],
   },
