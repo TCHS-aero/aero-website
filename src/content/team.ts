@@ -48,7 +48,7 @@ import ivPan from '../assets/uploads/the-team/ivPan.jpg';
 import jChen from '../assets/uploads/the-team/jChen.jpg';
 import jTamashiro from '../assets/uploads/the-team/jTamashiro.jpg';
 import jHuang from '../assets/uploads/the-team/jHuang.jpeg';
-// import kChien from '../assets/uploads/the-team/kChien';
+import kChien from '../assets/uploads/the-team/kChien.jpg';
 import nLam from '../assets/uploads/the-team/nLam.jpg';
 import sWang from '../assets/uploads/the-team/sWang.png';
 import wLee from '../assets/uploads/the-team/wLee.jpg';
@@ -125,7 +125,7 @@ export const DIVISIONS: Division[] = [
       { name: 'Jackson Chen',   role: '',    bio: '', photo: jChen },
       { name: 'Jon Tamashiro',   role: '',    bio: '', photo: jTamashiro },
       { name: 'Joseph Huang', role: '', bio: '', photo: jHuang },
-      { name: 'Kaden Chien', role: '', bio: '', photo: '' },
+      { name: 'Kaden Chien', role: '', bio: '', photo: kChien },
       { name: 'Nicholas Lam', role: '', bio: '', photo: nLam },
       { name: 'Skyler Wang', role: '', bio: '', photo: sWang },
       { name: 'Wynston Lee', role: '', bio: '', photo: wLee },
