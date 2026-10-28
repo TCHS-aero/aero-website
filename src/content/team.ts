@@ -29,7 +29,7 @@ import dDu from '../assets/uploads/the-team/dDu.png';
 import dFong from '../assets/uploads/the-team/dFong.jpg';
 import dKim from '../assets/uploads/the-team/dKim.jpg';
 import eWu from '../assets/uploads/the-team/eWu.jpg';
-// import iZuo from '../assets/uploads/the-team/iZuo.jpg';
+import iZuo from '../assets/uploads/the-team/iZuo.jpg';
 import jWong from '../assets/uploads/the-team/jWong.jpg';
 import jDiep from '../assets/uploads/the-team/jDiep.jpg';
 import jTang from '../assets/uploads/the-team/jTang.png';
@@ -41,7 +41,7 @@ import zSun from '../assets/uploads/the-team/zSun.jpg';
 import aTeng from '../assets/uploads/the-team/aTeng.jpg';
 import aHoang from '../assets/uploads/the-team/aHoang.jpg';
 import aChoi from '../assets/uploads/the-team/aChoi.png';
-// import eLee from '../assets/uploads/the-team/eLee.jpg';
+import eLee from '../assets/uploads/the-team/eLee.webp';
 import fTran from '../assets/uploads/the-team/fTran.png';
 import hMau from '../assets/uploads/the-team/hMau.jpg';
 import ivPan from '../assets/uploads/the-team/ivPan.jpg';
@@ -102,7 +102,7 @@ export const DIVISIONS: Division[] = [
       { name: 'Duke Fong', role: '', bio: '', photo: dFong },
       { name: 'Dustin Kim', role: '', bio: '', photo: dKim },
       { name: 'Ethan Wu', role: '', bio: '', photo: eWu },
-      { name: 'Isabella Zuo',   role: '',    bio: '', photo: '' },
+      { name: 'Isabella Zuo',   role: '',    bio: '', photo: iZuo },
       { name: 'Jayden Wong',   role: '',    bio: '', photo: jWong },
       { name: 'John Diep', role: '', bio: '', photo: jDiep },
       { name: 'Julien Tang', role: '', bio: '', photo: jTang },
@@ -118,7 +118,7 @@ export const DIVISIONS: Division[] = [
       { name: 'Aaron Teng',   role: '',    bio: '', photo: aTeng },
       { name: 'Andy Hoang',   role: '',    bio: '', photo: aHoang },
       { name: 'Annie Choi', role: '', bio: '', photo: aChoi },
-      { name: 'Ethan Y. Lee', role: '', bio: '', photo: '' },
+      { name: 'Ethan Y. Lee', role: '', bio: '', photo: eLee },
       { name: 'Felix Tran', role: '', bio: '', photo: fTran },
       { name: 'Holly Mau', role: '', bio: '', photo: hMau },
       { name: 'Ivan Pan', role: '', bio: '', photo: ivPan },
